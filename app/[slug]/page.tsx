@@ -1,6 +1,7 @@
 import fs from "fs";
-import convertMarkdownToJSON from "@/services/convertMarkdownToJSON";
+import parseMarkdown from "@/services/parseMarkdown";
 import getProperName from "@/services/getProperName";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 export async function generateStaticParams() {
     const files = fs.readdirSync("./markdown");
@@ -19,7 +20,7 @@ export async function generateMetadata({
 
 export default function Page({ params }: { params: { slug: string } }) {
     const { slug } = params;
-    const cards = convertMarkdownToJSON(slug);
+    const cards = parseMarkdown(slug);
 
     return (
         <div>
@@ -29,9 +30,12 @@ export default function Page({ params }: { params: { slug: string } }) {
                     return (
                         <div key={i}>
                             <h1>{i + 1}.</h1>
-                            <p>{card.question}</p>
-                            <p>{card.answer}</p>
-                            <br />
+                            <div>
+                                <MarkdownRenderer markdown={card.question} />
+                            </div>
+                            <div>
+                                <MarkdownRenderer markdown={card.answer} />
+                            </div>
                         </div>
                     );
                 })}
