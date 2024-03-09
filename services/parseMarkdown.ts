@@ -1,6 +1,5 @@
 import fs from "fs";
-
-type CardFormat = { question: string; answer: string };
+import type { CardFormat } from "@/custom-types";
 
 /**
  * Convert markdown file to list of objects

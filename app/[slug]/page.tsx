@@ -1,8 +1,9 @@
 import fs from "fs";
 import parseMarkdown from "@/services/parseMarkdown";
 import getProperName from "@/services/getProperName";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
+import Card from "@/components/Card";
 
+// Routes are generated at build time based on files in the markdown directory
 export async function generateStaticParams() {
     const files = fs.readdirSync("./markdown");
     return files.map((file) => {
@@ -27,17 +28,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <h1>{slug}</h1>
             <div>
                 {cards.map((card, i) => {
-                    return (
-                        <div key={i}>
-                            <h1>{i + 1}.</h1>
-                            <div>
-                                <MarkdownRenderer markdown={card.question} />
-                            </div>
-                            <div>
-                                <MarkdownRenderer markdown={card.answer} />
-                            </div>
-                        </div>
-                    );
+                    return <Card key={i} content={card} number={i + 1} />;
                 })}
             </div>
         </div>
