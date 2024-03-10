@@ -20,15 +20,17 @@ export default function RootLayout({
 
     return (
         <html lang="en">
-            <body>
-                <div className="flex flex-nowrap justify-between p-4">
-                    <Link href="/">WebDevStudy</Link>
+            <body className="bg-neutral-900 text-neutral-200">
+                <div className="flex flex-nowrap items-center justify-between max-w-7xl mx-auto px-4 py-2 sticky top-0 bg-neutral-900">
+                    <Link href="/" className="font-mono">
+                        WebDevStudy
+                    </Link>
                     <NavbarDropdown
                         fileNames={fileNames}
                         properNames={properNames}
                     />
                 </div>
-                {children}
+                <div className="p-4">{children}</div>
             </body>
         </html>
     );

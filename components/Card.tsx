@@ -55,21 +55,26 @@ export default function Card({ content, number }: CardProps) {
     };
 
     return (
-        <div>
+        <div className="p-3 rounded-md bg-neutral-800 border border-neutral-700">
             <div className="flex flex-row flex-nowrap gap-2 items-start">
                 <h3>{number}.</h3>
-                <div>
+                <div className="grow overflow-hidden">
                     <MarkdownRenderer markdown={content.question} />
+                    {showAnswer ? (
+                        <div className="mt-6">
+                            <p className="">Answer:</p>
+                            <MarkdownRenderer markdown={content.answer} />
+                        </div>
+                    ) : null}
                 </div>
-                <button onClick={toggleShowAnswer}>
+                <button
+                    onClick={toggleShowAnswer}
+                    className="rounded-md p-4 hover:bg-neutral-700 transition-colors"
+                    title={showAnswer ? "Hide Answer" : "Show Answer"}
+                >
                     {showAnswer ? <MinusSVG /> : <PlusSVG />}
                 </button>
             </div>
-            {showAnswer ? (
-                <div>
-                    <MarkdownRenderer markdown={content.answer} />
-                </div>
-            ) : null}
         </div>
     );
 }

@@ -6,13 +6,17 @@ export default function Home() {
     const fileNames = getMarkdownFileNames();
 
     return (
-        <main>
-            <h1>Choose A Topic</h1>
-            <div className="flex flex-col">
+        <main className="max-w-6xl mx-auto flex flex-col gap-4">
+            <h1 className="text-4xl">Choose A Topic</h1>
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
                 {fileNames.map((name, i) => {
                     const title = getProperName(name);
                     return (
-                        <Link key={i} href={`/${name}`}>
+                        <Link
+                            key={i}
+                            href={`/${name}`}
+                            className="bg-neutral-800 rounded-md p-2 text-center font-mono transition-colors hover:bg-neutral-700"
+                        >
                             {title}
                         </Link>
                     );

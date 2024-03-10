@@ -2,7 +2,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 export default function MarkdownRenderer({ markdown }: { markdown: string }) {
     return (
@@ -16,10 +16,11 @@ export default function MarkdownRenderer({ markdown }: { markdown: string }) {
                     if (!inline && match) {
                         return (
                             <SyntaxHighlighter
-                                style={atomDark}
+                                style={vscDarkPlus}
                                 PreTag="div"
                                 language={match[1]}
                                 {...props}
+                                className="rounded-md p-4 border-2 border-neutral-900"
                             >
                                 {String(children).replace(/\n$/, "")}
                             </SyntaxHighlighter>
