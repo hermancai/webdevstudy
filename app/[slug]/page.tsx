@@ -2,12 +2,13 @@ import fs from "fs";
 import parseMarkdown from "@/services/parseMarkdown";
 import getProperName from "@/services/getProperName";
 import Card from "@/components/Card";
+import getMarkdownFileNames from "@/services/getMarkdownFileNames";
 
 // Routes are generated at build time based on files in the markdown directory
 export async function generateStaticParams() {
-    const files = fs.readdirSync("./markdown");
-    return files.map((file) => {
-        return { slug: file.replace(".md", "") };
+    const fileNames = getMarkdownFileNames();
+    return fileNames.map((file) => {
+        return { slug: file };
     });
 }
 

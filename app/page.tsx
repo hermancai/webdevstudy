@@ -1,19 +1,18 @@
-import fs from "fs";
 import Link from "next/link";
 import getProperName from "@/services/getProperName";
+import getMarkdownFileNames from "@/services/getMarkdownFileNames";
 
 export default function Home() {
-    const files = fs.readdirSync("./markdown");
+    const fileNames = getMarkdownFileNames();
 
     return (
         <main>
             <h1>Choose A Topic</h1>
             <div className="flex flex-col">
-                {files.map((file, i) => {
-                    const fileName = file.replace(".md", "");
-                    const title = getProperName(fileName);
+                {fileNames.map((name, i) => {
+                    const title = getProperName(name);
                     return (
-                        <Link key={i} href={`/${title}`}>
+                        <Link key={i} href={`/${name}`}>
                             {title}
                         </Link>
                     );

@@ -1,5 +1,9 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import type { Metadata } from "next";
+import Link from "next/link";
+import getMarkdownFileNames from "@/services/getMarkdownFileNames";
+import NavbarDropdown from "@/components/NavbarDropdown";
+import getProperName from "@/services/getProperName";
 
 export const metadata: Metadata = {
     title: "WebDevStudy",
@@ -11,9 +15,21 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const fileNames = getMarkdownFileNames();
+    const properNames = fileNames.map((fileName) => getProperName(fileName));
+
     return (
         <html lang="en">
-            <body>{children}</body>
+            <body>
+                <div className="flex flex-nowrap justify-between p-4">
+                    <Link href="/">WebDevStudy</Link>
+                    <NavbarDropdown
+                        fileNames={fileNames}
+                        properNames={properNames}
+                    />
+                </div>
+                {children}
+            </body>
         </html>
     );
 }
