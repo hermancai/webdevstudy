@@ -8,6 +8,7 @@ import getProperName from "@/services/getProperName";
 export const metadata: Metadata = {
     title: "WebDevStudy",
     description: "Technical questions for web development topics",
+    authors: [{ name: "Herman Cai", url: "hermancai.dev" }],
 };
 
 export default function RootLayout({
