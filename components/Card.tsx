@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import MarkdownRenderer from "./MarkdownRenderer";
-import type { CardFormat } from "@/custom-types";
+import { ReactNode, useState } from "react";
 
 type CardProps = {
-    content: CardFormat;
     number: number;
+    question: ReactNode;
+    answer: ReactNode;
 };
 
 function PlusSVG() {
@@ -47,7 +46,7 @@ function MinusSVG() {
     );
 }
 
-export default function Card({ content, number }: CardProps) {
+export default function Card({ question, answer, number }: CardProps) {
     const [showAnswer, setShowAnswer] = useState(false);
 
     const toggleShowAnswer = () => {
@@ -59,13 +58,8 @@ export default function Card({ content, number }: CardProps) {
             <div className="flex flex-row flex-nowrap gap-2 items-start">
                 <h3>{number}.</h3>
                 <div className="grow overflow-hidden">
-                    <MarkdownRenderer markdown={content.question} />
-                    {showAnswer ? (
-                        <div className="mt-6">
-                            <p className="">Answer:</p>
-                            <MarkdownRenderer markdown={content.answer} />
-                        </div>
-                    ) : null}
+                    {question}
+                    {showAnswer ? <div className="mt-4">{answer}</div> : null}
                 </div>
                 <button
                     onClick={toggleShowAnswer}
