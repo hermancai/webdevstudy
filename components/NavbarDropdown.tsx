@@ -39,7 +39,10 @@ export default function NavbarDropdown({
 
     return (
         <Menu as="div" className="relative [display:inherit]">
-            <Menu.Button className="rounded-md hover:bg-neutral-700 transition-colors p-2">
+            <Menu.Button
+                className="rounded-md hover:bg-neutral-700 transition-colors p-2"
+                aria-label="Navigation"
+            >
                 <BarsSVG />
             </Menu.Button>
             <Transition
