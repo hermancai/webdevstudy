@@ -7,6 +7,7 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 export default function MarkdownRenderer({ markdown }: { markdown: string }) {
     return (
         <Markdown
+            className={"markdown"}
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeRaw]}
             components={{
