@@ -56,12 +56,14 @@ export default function Card({ question, answer, number }: CardProps) {
     return (
         <div className="p-3 rounded-md bg-neutral-800 border border-neutral-700">
             <div className="flex flex-row flex-nowrap gap-2 items-start pl-1">
-                <h3>{number}.</h3>
-                <div className="grow overflow-hidden">
-                    {question}
-                    {showAnswer ? (
-                        <div className="mt-3 mb-2">{answer}</div>
-                    ) : null}
+                <div className="grow overflow-hidden flex items-baseline gap-2">
+                    <p>{number}.</p>
+                    <div className="flex flex-col overflow-hidden">
+                        {question}
+                        {showAnswer ? (
+                            <div className="mt-3 mb-2">{answer}</div>
+                        ) : null}
+                    </div>
                 </div>
                 <button
                     onClick={toggleShowAnswer}
