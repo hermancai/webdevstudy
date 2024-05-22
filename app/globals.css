@@ -2,10 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-.markdown > * {
-    all: revert;
+.break {
+    @apply block h-4;
 }
 
-.markdown > p {
-    margin: 0;
+.markdown {
+    @apply leading-relaxed;
+}
+
+.markdown ol, .markdown ul {
+    all: revert;
+    padding-left: 2rem;
+}
+
+.markdown ol:not(:last-child), .markdown ul:not(:last-child) {
+    padding-bottom: 0.75rem;
+}
+
+.markdown ul, .markdown ol {
+    @apply m-0;
+}
+
+.markdown a {
+    @apply underline text-blue-500;
+}
+
+code:not(pre code) {
+   @apply bg-neutral-700 rounded-md py-[0.125rem] px-[0.25rem] text-neutral-100;
 }

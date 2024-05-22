@@ -5,6 +5,12 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 export default function MarkdownRenderer({ markdown }: { markdown: string }) {
+    // <br/> tags are replaced with a span element to allow for custom styling
+    const replacedMarkdown = markdown.replaceAll(
+        "<br/>",
+        "<span class='break'></span>"
+    );
+
     return (
         <Markdown
             className={"markdown"}
@@ -36,7 +42,7 @@ export default function MarkdownRenderer({ markdown }: { markdown: string }) {
                 },
             }}
         >
-            {markdown}
+            {replacedMarkdown}
         </Markdown>
     );
 }

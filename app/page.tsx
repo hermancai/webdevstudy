@@ -6,8 +6,11 @@ export default function Home() {
     const fileNames = getMarkdownFileNames();
 
     return (
-        <main className="max-w-6xl mx-auto flex flex-col gap-4">
-            <h1 className="text-4xl">Choose A Topic</h1>
+        <main className="max-w-6xl mx-auto flex flex-col gap-4 grow w-full">
+            <h1 className="text-xl text-gray-400">
+                Common Technical Interview Questions
+            </h1>
+            <h1 className="text-4xl mb-2">Choose A Topic</h1>
             <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
                 {fileNames.map((name, i) => {
                     const title = getProperName(name);
@@ -22,6 +25,9 @@ export default function Home() {
                     );
                 })}
             </div>
+            <p className="mt-auto self-center text-gray-400 text-sm">
+                Content is updated regularly.
+            </p>
         </main>
     );
 }

@@ -18,7 +18,7 @@ export async function generateMetadata({
 }: {
     params: { slug: string };
 }) {
-    return { title: "WebDevStudy - " + getProperName(params.slug) };
+    return { title: getProperName(params.slug) + " - WebDevStudy" };
 }
 
 export default function Page({ params }: { params: { slug: string } }) {
@@ -27,7 +27,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     try {
         const cards = parseMarkdown(slug);
         return (
-            <div className="max-w-6xl mx-auto flex flex-col gap-4">
+            <div className="max-w-6xl mx-auto flex flex-col gap-4 w-full">
                 <h1 className="font-mono text-2xl">{getProperName(slug)}</h1>
                 <div className="flex flex-col gap-6">
                     {cards.map((card, i) => {

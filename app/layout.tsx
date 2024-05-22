@@ -21,8 +21,8 @@ export default function RootLayout({
 
     return (
         <html lang="en">
-            <body className="bg-neutral-900 text-neutral-200">
-                <div className="flex flex-nowrap items-center justify-between max-w-7xl mx-auto px-4 py-2 sticky top-0 bg-neutral-900">
+            <body className="bg-neutral-900 text-neutral-200 flex flex-col min-h-screen">
+                <div className="flex flex-nowrap items-center justify-between max-w-7xl mx-auto px-4 py-2 sticky top-0 bg-neutral-900 w-full">
                     <Link href="/" className="font-mono">
                         WebDevStudy
                     </Link>
@@ -31,7 +31,7 @@ export default function RootLayout({
                         properNames={properNames}
                     />
                 </div>
-                <div className="p-4">{children}</div>
+                <div className="flex flex-col p-4 grow">{children}</div>
             </body>
         </html>
     );
