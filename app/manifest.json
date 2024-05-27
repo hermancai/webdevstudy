@@ -1,0 +1,7 @@
+{
+    "name": "WebDevStudy",
+    "short_name": "WebDevStudy",
+    "theme_color": "#171717",
+    "background_color": "#171717",
+    "display": "standalone"
+}

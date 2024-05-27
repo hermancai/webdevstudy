@@ -1,5 +1,5 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import getMarkdownFileNames from "@/services/getMarkdownFileNames";
 import NavbarDropdown from "@/components/NavbarDropdown";
@@ -9,6 +9,13 @@ export const metadata: Metadata = {
     title: "WebDevStudy",
     description: "Technical questions for web development topics",
     authors: [{ name: "Herman Cai", url: "hermancai.dev" }],
+    robots: "follow, index",
+    keywords: ["web development", "technical", "interview"],
+    manifest: "manifest.json",
+};
+
+export const viewport: Viewport = {
+    themeColor: "#171717",
 };
 
 export default function RootLayout({
