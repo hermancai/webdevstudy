@@ -7,7 +7,7 @@ import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 // Routes are generated at build time based on files in the markdown directory
 export async function generateStaticParams() {
-    const fileNames = getMarkdownFileNames();
+    const fileNames = getMarkdownFileNames("./markdown/");
     return fileNames.map((file) => {
         return { slug: file };
     });
@@ -25,7 +25,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     const { slug } = params;
 
     try {
-        const cards = parseMarkdown(slug);
+        const cards = parseMarkdown("./markdown/", slug);
         return (
             <div className="max-w-6xl mx-auto flex flex-col gap-4 w-full">
                 <h1 className="font-mono text-2xl">{getProperName(slug)}</h1>

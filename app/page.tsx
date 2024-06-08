@@ -3,7 +3,9 @@ import getProperName from "@/services/getProperName";
 import getMarkdownFileNames from "@/services/getMarkdownFileNames";
 
 export default function Home() {
-    const fileNames = getMarkdownFileNames();
+    const fileNames = getMarkdownFileNames("./markdown");
+    fileNames.push("algorithms");
+    fileNames.sort();
 
     return (
         <main className="max-w-6xl mx-auto flex flex-col gap-4 grow w-full">

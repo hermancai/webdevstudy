@@ -23,7 +23,9 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const fileNames = getMarkdownFileNames();
+    const fileNames = getMarkdownFileNames("./markdown/");
+    fileNames.push("algorithms");
+    fileNames.sort();
     const properNames = fileNames.map((fileName) => getProperName(fileName));
 
     return (

@@ -10,11 +10,15 @@ import type { CardFormat } from "@/custom-types";
  *  **answer**
  *  answer text
  *
+ * @param folder path to markdown folder
  * @param fileName name of markdown file without extension
  * @returns list of objects with question and answer properties
  */
-export default function parseMarkdown(fileName: string): CardFormat[] {
-    const markdown = fs.readFileSync(`./markdown/${fileName}.md`, "utf-8");
+export default function parseMarkdown(
+    folder: string,
+    fileName: string
+): CardFormat[] {
+    const markdown = fs.readFileSync(`${folder}${fileName}.md`, "utf-8");
 
     const objectList: CardFormat[] = [];
     markdown.split("**question**").map((text) => {
