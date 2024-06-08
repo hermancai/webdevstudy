@@ -23,7 +23,9 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const fileNames = getMarkdownFileNames();
+    const fileNames = getMarkdownFileNames("./markdown/");
+    fileNames.push("algorithms");
+    fileNames.sort();
     const properNames = fileNames.map((fileName) => getProperName(fileName));
 
     return (
@@ -38,7 +40,12 @@ export default function RootLayout({
                         properNames={properNames}
                     />
                 </div>
-                <div className="flex flex-col p-4 grow">{children}</div>
+                <div className="p-4 max-w-6xl mx-auto flex flex-col gap-4 w-full">
+                    {children}
+                </div>
+                <p className="mt-auto self-center text-gray-400 text-sm py-4">
+                    Content is regularly updated.
+                </p>
             </body>
         </html>
     );

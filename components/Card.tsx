@@ -58,7 +58,7 @@ export default function Card({ question, answer, number }: CardProps) {
             <div className="flex flex-row flex-nowrap gap-2 items-start pl-1">
                 <div className="grow overflow-hidden flex items-baseline gap-2">
                     <p>{number}.</p>
-                    <div className="flex flex-col overflow-hidden">
+                    <div className="flex flex-col overflow-hidden grow">
                         {question}
                         {showAnswer ? (
                             <div className="mt-3 mb-2">{answer}</div>

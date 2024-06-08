@@ -1,13 +1,16 @@
 import fs from "fs";
 
 /**
- * Gets list of markdown file names without the .md extension
- * Files are located in the markdown directory at the root of the project
+ * Gets list of markdown file names in given folder without the .md extension
  *
+ * @param folder - folder to search for markdown files
  * @returns list of markdown file names
  */
-export default function getMarkdownFileNames() {
-    const files = fs.readdirSync("./markdown");
+export default function getMarkdownFileNames(folder: string) {
+    const folderContents = fs.readdirSync(folder);
+    const files = folderContents.filter((file) => {
+        return file.endsWith(".md");
+    });
 
     return files.map((file) => {
         return file.replace(".md", "");

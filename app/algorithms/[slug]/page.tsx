@@ -7,7 +7,7 @@ import CardsContainer from "@/components/CardsContainer";
 
 // Routes are generated at build time based on files in the markdown directory
 export async function generateStaticParams() {
-    const fileNames = getMarkdownFileNames("./markdown/");
+    const fileNames = getMarkdownFileNames("./markdown/algorithms/");
     return fileNames.map((file) => {
         return { slug: file };
     });
@@ -25,10 +25,10 @@ export default function Page({ params }: { params: { slug: string } }) {
     const { slug } = params;
 
     try {
-        const cards = parseMarkdown("./markdown/", slug);
+        const cards = parseMarkdown("./markdown/algorithms/", slug);
         return (
             <>
-                <PageTitle title={getProperName(slug)} backLink="/" />
+                <PageTitle title={getProperName(slug)} backLink="/algorithms" />
                 <CardsContainer cards={cards} />
             </>
         );
