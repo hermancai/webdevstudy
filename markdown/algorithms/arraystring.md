@@ -19,4 +19,4 @@ def maxSubarray(nums: List[int]) -> int:
     return bestSum
 ```
 
-[121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description)
+<a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description" target="_blank">121. Best Time to Buy and Sell Stock</a>

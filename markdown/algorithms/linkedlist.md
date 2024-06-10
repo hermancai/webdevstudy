@@ -42,4 +42,4 @@ def hasCycle(head: Node) -> bool:
     return False
 ```
 
-[141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/description)
+<a href="https://leetcode.com/problems/linked-list-cycle/description" target="_blank">141. Linked List Cycle</a>
