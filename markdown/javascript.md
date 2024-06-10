@@ -798,7 +798,7 @@ The promise constructor takes a callback that is passed resolve/reject functions
 `Promise` has three instance methods for handling the result after a promise is settled: `then()`, `catch()`, and `finally()`.
 All three methods take callbacks and return promises, which allows chaining promises.
 These promises depend on the callback's return value.
-[More Info](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#syntax)
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#syntax" target="_blank">More Info</a>
 
 ```js
 function promiseCallback(resolve, reject) {

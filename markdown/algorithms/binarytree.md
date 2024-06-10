@@ -77,7 +77,7 @@ def invertTree(root: Node) -> Node:
     return root
 ```
 
-[226. Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/description)
+<a href="https://leetcode.com/problems/invert-binary-tree/description" target="_blank">226. Invert Binary Tree</a>
 
 **question**
 
@@ -131,7 +131,7 @@ def isSymmetric(root:Node) -> bool:
     return True
 ```
 
-[101. Symmetric Tree](https://leetcode.com/problems/symmetric-tree/description)
+<a href="https://leetcode.com/problems/symmetric-tree/description" target="_blank">101. Symmetric Tree</a>
 
 **question**
 
@@ -162,4 +162,4 @@ def countNodes(root) -> int:
         return countNodes(root.left) + 2**right
 ```
 
-[222. Count Complete Tree Nodes](https://leetcode.com/problems/count-complete-tree-nodes/description)
+<a href="https://leetcode.com/problems/count-complete-tree-nodes/description" target="_blank">222. Count Complete Tree Nodes</a>

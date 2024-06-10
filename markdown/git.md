@@ -192,7 +192,7 @@ git log --oneline
 git log --pretty=format:"%h %ad | %s%d [%an]" --date=short
 ```
 
-[More Options](https://git-scm.com/docs/git-log)
+<a href="https://git-scm.com/docs/git-log" target="_blank">More Options</a>
 
 **question**
 

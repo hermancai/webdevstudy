@@ -25,6 +25,6 @@ def stringPattern(s: str) -> List[int]:
     return result
 ```
 
-[205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/description)
+<a href="https://leetcode.com/problems/isomorphic-strings/description" target="_blank">205. Isomorphic Strings</a>
 
-[290. Word Pattern](https://leetcode.com/problems/word-pattern/description)
+<a href="https://leetcode.com/problems/word-pattern/description" target="_blank">290. Word Pattern</a>
