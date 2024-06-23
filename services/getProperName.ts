@@ -11,6 +11,7 @@ const dictionary: { [key: string]: string } = {
     divideconquer: "Divide & Conquer",
     hashmap: "Hashmap",
     linkedlist: "Linked List",
+    twopointers: "Two Pointers",
 };
 
 /**
