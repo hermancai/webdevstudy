@@ -103,3 +103,115 @@ def convertWordsToTuple(words: str) -> tuple:
 def wordPattern(pattern: str, s: str) -> bool:
     return convertPatternToTuple(pattern) == convertWordsToTuple(s)
 ```
+
+**question**
+
+<a href="https://leetcode.com/problems/valid-anagram/description" target="_blank">Valid Anagram</a> (Easy)
+
+Given two strings `s` and `t`, return `true` if `t` is an anagram of `s`, and `false` otherwise.
+
+An anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def isAnagram(s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+
+    m = {}
+    for c in s:
+        m[c] = m.get(c, 0) + 1
+
+    for c in t:
+        if c not in m or m[c] == 0:
+            return False
+        m[c] -= 1
+    return True
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/two-sum/description" target="_blank">Two Sum</a> (Easy)
+
+Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def twoSum(nums: List[int], target: int) -> List[int]:
+    m = {}
+    for i in range(len(nums)):
+        comp = target - nums[i]
+        if comp in m:
+            return [i, m[comp]]
+        m[nums[i]] = i
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/happy-number/description" target="_blank">Happy Number</a> (Easy)
+
+Write an algorithm to determine if a number `n` is happy.
+
+A happy number is a number defined by the following process:
+
+-   Starting with any positive integer, replace the number by the sum of the squares of its digits.
+-   Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+-   Those numbers for which this process ends in 1 are happy.
+
+Return `true` if `n` is a happy number, and `false` if not.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def isHappy(n: int) -> bool:
+    m = set()
+
+    while True:
+        if n in m:
+            return False
+        else:
+            m.add(n)
+
+        li = list(str(n))
+        sum = 0
+        for c in li:
+            sum += int(c) ** 2
+        if sum == 1:
+            return True
+        n = sum
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/contains-duplicate-ii/description" target="_blank">Contains Duplicate II</a> (Easy)
+
+Given an integer array `nums` and an integer `k`, return `true` if there are two distinct indices `i` and `j` in the array such that `nums[i] == nums[j]` and `abs(i - j) <= k`.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def containsNearbyDuplicate(nums: List[int], k: int) -> bool:
+    m = {}
+    for i in range(len(nums)):
+        if nums[i] not in m:
+            m[nums[i]] = i
+        else:
+            if abs(i - m[nums[i]]) <= k:
+                return True
+            m[nums[i]] = i
+    return False
+```
