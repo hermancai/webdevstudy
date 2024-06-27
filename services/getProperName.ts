@@ -9,9 +9,11 @@ const dictionary: { [key: string]: string } = {
     binarysearch: "Binary Search",
     binarytree: "Binary Tree",
     divideconquer: "Divide & Conquer",
+    dynamicprogramming: "Dynamic Programming",
     hashmap: "Hashmap",
     intervals: "Intervals",
     linkedlist: "Linked List",
+    math: "Math",
     stack: "Stack",
     twopointers: "Two Pointers",
 };
