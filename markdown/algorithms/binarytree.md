@@ -52,7 +52,35 @@ def maxDepth(root: Optional[TreeNode]) -> int:
 
 **question**
 
-Invert binary tree
+<a href="https://leetcode.com/problems/same-tree/description" target="_blank">Same Tree</a> (Easy)
+
+Given the roots of two binary trees `p` and `q`, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+
+**answer**
+
+```py
+# Time complexity: O(n), n = number of nodes
+# Space complexity: O(h), h = height of tree
+def isSameTree(p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+    if not p and not q: return True
+    if not p or not q: return False
+    if p.val != q.val: return False
+
+    left = self.isSameTree(p.left, q.left)
+    if not left: return False
+    right = self.isSameTree(p.right, q.right)
+    if not right: return False
+
+    return p.val == q.val
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/invert-binary-tree/description" target="_blank">Invert Binary Tree</a> (Easy)
+
+Given the `root` of a binary tree, invert the tree, and return its root.
 
 **answer**
 
@@ -94,11 +122,11 @@ def invertTree(root: Node) -> Node:
     return root
 ```
 
-<a href="https://leetcode.com/problems/invert-binary-tree/description" target="_blank">226. Invert Binary Tree</a>
-
 **question**
 
-Check if a binary tree is symmetric
+<a href="https://leetcode.com/problems/symmetric-tree/description" target="_blank">Symmetric Tree</a> (Easy)
+
+Given the `root` of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
 
 **answer**
 
@@ -148,25 +176,55 @@ def isSymmetric(root:Node) -> bool:
     return True
 ```
 
-<a href="https://leetcode.com/problems/symmetric-tree/description" target="_blank">101. Symmetric Tree</a>
+**question**
+
+<a href="https://leetcode.com/problems/path-sum/description" target="_blank">Path Sum</a> (Easy)
+
+Given the `root` of a binary tree and an integer `targetSum`, return `true` if the tree has a root-to-leaf path such that adding up all the values along the path equals `targetSum`.
+
+A leaf is a node with no children.
+
+**answer**
+
+```py
+def hasPathSum(root: Optional[TreeNode], targetSum: int) -> bool:
+    return self.helper(root, 0, targetSum)
+
+# Time complexity: O(n), n = number of nodes
+# Space complexity: O(h), h = height of tree
+def helper(root, total, targetSum):
+    if not root: return False
+    if not root.left and not root.right:
+        return total + root.val == targetSum
+
+    left = self.helper(root.left, total + root.val, targetSum)
+    if left: return True
+
+    right = self.helper(root.right, total + root.val, targetSum)
+    return right
+```
 
 **question**
 
-Count nodes in a complete binary tree
+<a href="https://leetcode.com/problems/count-complete-tree-nodes/description" target="_blank">Count Complete Tree Nodes</a> (Easy)
+
+Given the `root` of a complete binary tree, return the number of the nodes in the tree.
+
+In a complete binary tree, every level, except possibly the last, is completely filled in a complete binary tree, and all nodes in the last level are as far left as possible. It can have between 1 and 2<sup>h</sup> nodes inclusive at the last level `h`.
+
+Design an algorithm that runs in less than `O(n)` time complexity.
 
 **answer**
 
 ```py
 # Time complexity: O((log n)^2)
-# Space complexity: O(h) where h = height of tree
+# Space complexity: O(h), h = height of tree
 def getHeight(root) -> int:
-    if not root:
-        return 0
+    if not root: return 0
     return getHeight(root.left) + 1
 
 def countNodes(root) -> int:
-    if not root:
-        return 0
+    if not root: return 0
 
     left = getHeight(root.left)
     right = getHeight(root.right)
@@ -179,4 +237,59 @@ def countNodes(root) -> int:
         return countNodes(root.left) + 2**right
 ```
 
-<a href="https://leetcode.com/problems/count-complete-tree-nodes/description" target="_blank">222. Count Complete Tree Nodes</a>
+**question**
+
+<a href="https://leetcode.com/problems/average-of-levels-in-binary-tree/description" target="_blank">Average of Levels in Binary Tree</a> (Easy)
+
+Given the `root` of a binary tree, return the average value of the nodes on each level in the form of an array.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def averageOfLevels(root: Optional[TreeNode]) -> List[float]:
+    answer = []
+    q = [root]
+    while q:
+        nextLevel = []
+        currentLevelSum = 0
+        for node in q:
+            currentLevelSum += node.val
+            if node.left:
+                nextLevel.append(node.left)
+            if node.right:
+                nextLevel.append(node.right)
+        answer.append(currentLevelSum / len(q))
+        q = nextLevel
+    return answer
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/minimum-absolute-difference-in-bst/description" target="_blank">Minimum Absolute Difference in BST</a> (Easy)
+
+Given the `root` of a Binary Search Tree (BST), return the minimum absolute difference between the values of any two different nodes in the tree.
+
+**answer**
+
+```py
+# Inorder traversal using global variable to track answer
+# Time complexity: O(n), n = number of nodes
+# Space complexity: O(h), h = height of tree
+class Solution:
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        self.answer = float("inf")
+        self.prev = None
+
+        def inorder(root):
+            if not root: return
+            inorder(root.left)
+            if self.prev != None:
+                self.answer = min(self.answer, root.val - self.prev)
+            self.prev = root.val
+            inorder(root.right)
+
+        inorder(root)
+        return self.answer
+```
