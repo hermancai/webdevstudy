@@ -543,3 +543,209 @@ def productExceptSelf(nums: List[int]) -> List[int]:
 
     return answer
 ```
+
+**question**
+
+<a href="https://leetcode.com/problems/gas-station/description" target="_blank">Gas Station</a> (Medium)
+
+There are `n` gas stations along a circular route, where the amount of gas at the `i`<sup>th</sup> station is `gas[i]`.
+
+You have a car with an unlimited gas tank and it costs `cost[i]` of gas to travel from the `i`<sup>th</sup> station to its next `(i + 1)`<sup>th</sup> station. You begin the journey with an empty tank at one of the gas stations.
+
+Given two integer arrays `gas` and `cost`, return the starting gas station's index if you can travel around the circuit once in the clockwise direction, otherwise return `-1`. If there exists a solution, it is guaranteed to be unique.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(1)
+def canCompleteCircuit(gas: List[int], cost: List[int]) -> int:
+    if sum(gas) < sum(cost): return -1
+
+    # An answer is guaranteed at this point
+    net = idx = 0
+    for i in range(len(gas)):
+        net += gas[i] - cost[i]
+        # If net becomes negative, the answer must be at least after i
+        # Essentially looking for largest net positive subarray
+        #   that includes last element
+        if net < 0:
+            net = 0
+            idx = i + 1
+    return idx
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/integer-to-roman/description" target="_blank">Integer to Roman</a> (Medium)
+
+Seven different symbols represent Roman numerals with the following values:
+
+I -> 1, V -> 5, X -> 10, L -> 50, C -> 100, D -> 500, M -> 1000
+
+Roman numerals are formed by appending the conversions of decimal place values from highest to lowest. Converting a decimal place value into a Roman numeral has the following rules:
+
+-   If the value does not start with 4 or 9, select the symbol of the maximal value that can be subtracted from the input, append that symbol to the result, subtract its value, and convert the remainder to a Roman numeral.
+-   If the value starts with 4 or 9 use the subtractive form representing one symbol subtracted from the following symbol, for example, 4 is 1 (I) less than 5 (V): IV and 9 is 1 (I) less than 10 (X): IX. Only the following subtractive forms are used: 4 (IV), 9 (IX), 40 (XL), 90 (XC), 400 (CD) and 900 (CM).
+-   Only powers of 10 (I, X, C, M) can be appended consecutively at most 3 times to represent multiples of 10. You cannot append 5 (V), 50 (L), or 500 (D) multiple times. If you need to append a symbol 4 times use the subtractive form.
+
+Given an integer, convert it to a Roman numeral.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(1)
+def intToRoman(num: int) -> str:
+    pairs = [
+        (1000, "M"),
+        (900, "CM"),
+        (500, "D"),
+        (400, "CD"),
+        (100, "C"),
+        (90, "XC"),
+        (50, "L"),
+        (40, "XL"),
+        (10, "X"),
+        (9, "IX"),
+        (5, "V"),
+        (4, "IV"),
+        (1, "I")
+    ]
+    answer = []
+
+    for pair in pairs:
+        while num >= pair[0]:
+            answer.append(pair[1])
+            num -= pair[0]
+
+    return "".join(answer)
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/reverse-words-in-a-string/description" target="_blank">Reverse Words in a String</a> (Medium)
+
+Given an input string `s`, reverse the order of the words.
+
+A word is defined as a sequence of non-space characters. The words in `s` will be separated by at least one space.
+
+Return a string of the words in reverse order concatenated by a single space.
+
+Note that `s` may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def reverseWords(s: str) -> str:
+    answer = []
+    start = end = len(s) - 1
+
+    while start >= 0:
+        # Skip whitespace
+        while s[start] == " ":
+            start -= 1
+            end -= 1
+        # In case string starts with whitespace
+        if start < 0:
+            break
+        # Find next word
+        while start >= 1 and s[start - 1] != " ":
+            start -= 1
+        answer.append(s[start:end + 1])
+        start -= 1
+        end = start
+
+    return " ".join(answer)
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/zigzag-conversion/description" target="_blank">Zigzag Conversion</a> (Medium)
+
+The string `"PAYPALISHIRING"` is written in a zigzag pattern on a given number of rows like this:
+
+```py
+# P   A   H   N
+# A P L S I I G
+# Y   I   R
+```
+
+And then read line by line: `"PAHNAPLSIIGYIR"`
+
+Write the code that will take a string and make this conversion given a number of rows.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def convert(s: str, numRows: int) -> str:
+    if numRows == 1 or numRows >= len(s):
+        return s
+
+    # 2D matrix representing zigzag
+    answer = [[] for _ in range(numRows)]
+
+    # Sequentially place characters into the appropriate row
+    i = 0
+    while i < len(s):
+        # Filling in columns
+        for idx in range(numRows):
+            if i >= len(s):
+                break
+            answer[idx].append(s[i])
+            i += 1
+        # Filling in diagonals
+        for idx in range(numRows - 2, 0, -1):
+            if i >= len(s):
+                break
+            answer[idx].append(s[i])
+            i += 1
+
+    return "".join(["".join(row) for row in answer])
+```
+
+Alternative solution:
+
+-   This solution relies on finding the numerical pattern between indices per row.
+-   To see the pattern, create the expected output and zigzag for cases `numRows = 3, 4, and 5`.
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def convert(s: str, numRows: int) -> str:
+    if numRows == 1 or numRows >= len(s):
+        return s
+
+    answer = []
+    # Index difference between columns in the same row
+    offset = numRows * 2 - 2
+
+    # Handle first row
+    i = 0
+    while i < len(s):
+        answer.append(s[i])
+        i += offset
+
+    for i in range(1, numRows - 1):
+        # Middle rows will have alternating index differences
+        flip = False
+        offset1 = (numRows - i - 1) * 2
+        offset2 = offset - offset1
+        idx = i
+        while idx < len(s):
+            answer.append(s[idx])
+            idx += offset2 if flip else offset1
+            flip = not flip
+
+    # Handle last row
+    i = numRows - 1
+    while i < len(s):
+        answer.append(s[i])
+        i += offset
+
+    return "".join(answer)
+```
