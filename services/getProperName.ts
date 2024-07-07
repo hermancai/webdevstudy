@@ -14,6 +14,7 @@ const dictionary: { [key: string]: string } = {
     intervals: "Intervals",
     linkedlist: "Linked List",
     math: "Math",
+    slidingwindow: "Sliding Window",
     stack: "Stack",
     twopointers: "Two Pointers",
 };
