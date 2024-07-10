@@ -108,3 +108,138 @@ def spiralOrder(matrix: List[List[int]]) -> List[int]:
 
     return answer
 ```
+
+**question**
+
+<a href="https://leetcode.com/problems/rotate-image/description" target="_blank">Rotate Image</a> (Medium)
+
+You are given an `n x n` 2D `matrix` representing an image, rotate the image by 90 degrees (clockwise).
+
+Rotate the image in-place.
+
+**answer**
+
+```py
+# Time complexity: O(n * n)
+# Space complexity: O(1)
+def rotate(matrix: List[List[int]]) -> None:
+    """
+    Do not return anything, modify matrix in-place instead.
+    """
+    matrix.reverse()
+
+    # Transpose matrix
+    for i in range(len(matrix)):
+        for j in range(i + 1, len(matrix)):
+            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+# Transpose means to swap rows and columns:
+# 1 2 3      1 4 7
+# 4 5 6  ->  2 5 8
+# 7 8 9      3 6 9
+```
+
+To rotate counterclockwise, reverse each nested list, then transpose.
+
+**question**
+
+<a href="https://leetcode.com/problems/set-matrix-zeroes/description" target="_blank">Set Matrix Zeroes</a> (Medium)
+
+Given an `m x n` integer matrix `matrix`, if an element is `0`, set its entire row and column to `0`'s.
+
+Modify the matrix in place.
+
+**answer**
+
+```py
+# Time complexity: O(n * m)
+# Space complexity: O(1)
+def setZeroes(matrix: List[List[int]]) -> None:
+    # Check first row and column for pre-existing 0
+    firstRowZero = False
+    for i in range(len(matrix[0])):
+        if matrix[0][i] == 0:
+            firstRowZero = True
+            break
+    firstColumnZero = False
+    for i in range(len(matrix)):
+        if matrix[i][0] == 0:
+            firstColumnZero = True
+            break
+
+    # Use first row and column for flagging
+    for row in range(1, len(matrix)):
+        for col in range(1, len(matrix[0])):
+            if matrix[row][col] == 0:
+                matrix[0][col] = 0
+                matrix[row][0] = 0
+
+    # Convert columns
+    for i in range(1, len(matrix[0])):
+        if matrix[0][i] == 0:
+            for j in range(1, len(matrix)):
+                matrix[j][i] = 0
+
+    # Convert rows
+    for i in range(1, len(matrix)):
+        if matrix[i][0] == 0:
+            for j in range(1, len(matrix[0])):
+                matrix[i][j] = 0
+
+    # Convert first row and column if needed
+    if firstRowZero:
+        for i in range(len(matrix[0])):
+            matrix[0][i] = 0
+    if firstColumnZero:
+        for i in range(len(matrix)):
+            matrix[i][0] = 0
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/game-of-life/description" target="_blank">Game of Life</a> (Medium)
+
+"The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970."
+
+The board is made up of an `m x n` grid of cells, where each cell has an initial state: live (represented by a `1`) or dead (represented by a `0`). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules:
+
+-   Any live cell with fewer than two live neighbors dies as if caused by under-population.
+-   Any live cell with two or three live neighbors lives on to the next generation.
+-   Any live cell with more than three live neighbors dies, as if by over-population.
+-   Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+
+The next state is created by applying the above rules simultaneously to every cell in the current state, where births and deaths occur simultaneously. Given the current state of the `m x n` grid `board`, return the next state.
+
+**answer**
+
+```py
+# Time complexity: O(n * m)
+# Space complexity: O(1)
+def gameOfLife(self, board: List[List[int]]) -> None:
+    neighbors = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
+
+    for row in range(len(board)):
+        for col in range(len(board[0])):
+            # Count live neighbors
+            count = 0
+            for coord in neighbors:
+                newRow = row + coord[0]
+                newCol = col + coord[1]
+                if newRow >= 0 and newRow < len(board) and newCol >= 0 and newCol < len(board[0]):
+                    if board[newRow][newCol] == 1 or board[newRow][newCol] == 2:
+                        count += 1
+
+            # 2 = currently live, will die
+            # 3 = currently dead, will live
+            if board[row][col] == 1:
+                if count < 2 or count > 3:
+                    board[row][col] = 2
+            elif board[row][col] == 0:
+                if count == 3:
+                    board[row][col] = 3
+
+    # Convert 2 -> 0, 3 -> 1
+    for row in range(len(board)):
+        for col in range(len(board[0])):
+            board[row][col] %= 2
+```
