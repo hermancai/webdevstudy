@@ -14,7 +14,7 @@ class TreeNode:
         self.right = right
 
 # Time complexity: O(n)
-# Space complexity: O(log n) if excluding final result
+# Space complexity: O(log n) excluding output
 def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
     return self.helper(nums, 0, len(nums) - 1)
 

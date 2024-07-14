@@ -527,7 +527,7 @@ Solution logic:
 
 ```py
 # Time complexity: O(n)
-# Space complexity: O(1) if excluding answer
+# Space complexity: O(1) excluding output
 def productExceptSelf(nums: List[int]) -> List[int]:
     answer = [1 for _ in nums]
 
