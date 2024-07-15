@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
     title: "WebDevStudy",
@@ -53,6 +54,7 @@ export default function RootLayout({
                     Content is regularly updated.
                 </p>
             </body>
+            <GoogleAnalytics gaId="G-WQS7VC7B13" />
         </html>
     );
 }
