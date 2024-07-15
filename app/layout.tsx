@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
     title: "WebDevStudy",
@@ -23,11 +24,11 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className="bg-neutral-900 text-neutral-200 flex flex-col min-h-screen">
-                <div className="flex flex-nowrap items-center justify-between max-w-7xl mx-auto px-4 py-2 sticky top-0 bg-neutral-900 w-full">
+                <header className="flex flex-nowrap items-center justify-between max-w-7xl mx-auto px-4 py-2 sticky top-0 bg-neutral-900 w-full">
                     <Link href="/" className="font-mono">
                         WebDevStudy
                     </Link>
-                    <Link href="/">
+                    <Link href="/" aria-label="Home">
                         <div className="rounded-md hover:bg-neutral-700 transition-colors p-2">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -45,14 +46,15 @@ export default function RootLayout({
                             </svg>
                         </div>
                     </Link>
-                </div>
-                <div className="p-4 max-w-6xl mx-auto flex flex-col gap-4 w-full">
+                </header>
+                <main className="p-4 max-w-6xl mx-auto flex flex-col gap-4 w-full">
                     {children}
-                </div>
-                <p className="mt-auto self-center text-gray-400 text-sm py-4">
-                    Content is regularly updated.
-                </p>
+                </main>
+                <footer className="mt-auto self-center text-gray-400 text-sm py-4">
+                    <p>Content is regularly updated.</p>
+                </footer>
             </body>
+            <GoogleAnalytics gaId="G-WQS7VC7B13" />
         </html>
     );
 }
