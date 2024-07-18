@@ -15,6 +15,8 @@ Strategies:
 
 -   Use a dummy head node
 -   Use a slow (increment one) and fast (increment two) pointer
+-   Use two pointers `k` steps apart to reach `k`<sup>th</sup> node from end of list
+-   Create a cycle
 
 **question**
 
@@ -148,6 +150,12 @@ def copyRandomList(head: 'Optional[Node]') -> 'Optional[Node]':
 Alternative solution:
 
 ```py
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+
 # Time complexity: O(n)
 # Space complexity: O(1) excluding output
 def copyRandomList(head: 'Optional[Node]') -> 'Optional[Node]':
@@ -174,4 +182,142 @@ def copyRandomList(head: 'Optional[Node]') -> 'Optional[Node]':
         head = head.next.next
 
     return dummy.next
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/reverse-linked-list-ii/description" target="_blank">Reverse Linked List II</a> (Medium)
+
+Given the `head` of a singly linked list and two integers `left` and `right` where `left <= right`, reverse the nodes of the list from position `left` to position `right`, and return the reversed list.
+
+Assume `1 <= left <= right <= n` where `n` is the length of the linked list.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(1)
+def reverseBetween(head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+    if not head.next or left == right:
+        return head
+
+    # Go to node before start of swaps
+    dummy = beforeReverse = ListNode(0, head)
+    for _ in range(1, left):
+        beforeReverse = beforeReverse.next
+
+    # Reverse list
+    tail = beforeReverse.next
+    for _ in range(right - left):
+        # Save head of currently reversed list
+        temp = beforeReverse.next
+
+        # Move node after tail to front
+        beforeReverse.next = tail.next
+
+        # Skip pointer of moved node
+        tail.next = tail.next.next
+
+        # Attach saved head to moved node (new head)
+        beforeReverse.next.next = temp
+
+    return dummy.next
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/description" target="_blank">Remove Nth Node From End of List</a> (Medium)
+
+Given the `head` of a linked list, remove the `n`<sup>th</sup> node from the end of the list and return its head.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(1)
+def removeNthFromEnd(head: Optional[ListNode], n: int) -> Optional[ListNode]:
+    # Delay slow pointer by n steps
+    slow = fast = head
+    for _ in range(n):
+        fast = fast.next
+
+    # Reaching end of list means n points to head
+    if not fast:
+        return head.next
+
+    # Checking fast.next means loop ends one node before
+    #   actual node to be removed (i.e. previous node)
+    while fast.next:
+        slow = slow.next
+        fast = fast.next
+
+    slow.next = slow.next.next
+    return head
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/description" target="_blank">Remove Duplicates from Sorted List II</a> (Medium)
+
+Given the `head` of a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list. Return the linked list sorted as well.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(1)
+def deleteDuplicates(head: Optional[ListNode]) -> Optional[ListNode]:
+    if not head or not head.next:
+        return head
+
+    dummy = prev = ListNode(0, head)
+    curr = head
+
+    while curr:
+        val = curr.val
+        # Found duplicate. Remove all nodes with current value
+        if curr.next and curr.next.val == val:
+            while curr and curr.val == val:
+                prev.next = prev.next.next
+                curr = prev.next
+        else:
+            prev = curr
+            curr = curr.next
+
+    return dummy.next
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/rotate-list/description" target="_blank">Rotate List</a> (Medium)
+
+Given the `head` of a linked list, rotate the list to the right by `k` places.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(1)
+def rotateRight(head: Optional[ListNode], k: int) -> Optional[ListNode]:
+    if not head: return head
+
+    # Get list size and pointer to list tail
+    count = 1
+    tail = head
+    while tail.next:
+        count += 1
+        tail = tail.next
+
+    # Create cycle
+    tail.next = head
+
+    # Move to tail of final list
+    k %= count
+    for _ in range(count - k):
+        tail = tail.next
+
+    # Break cycle
+    newHead = tail.next
+    tail.next = None
+    return newHead
 ```
