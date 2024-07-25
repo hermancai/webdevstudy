@@ -293,3 +293,178 @@ class Solution:
         inorder(root)
         return self.answer
 ```
+
+**question**
+
+<a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description" target="_blank">Construct Binary Tree from Preorder and Inorder Traversal</a> (Medium)
+
+Given two integer arrays `preorder` and `inorder` where `preorder` is the preorder traversal of a binary tree and `inorder` is the inorder traversal of the same tree, construct and return the binary tree.
+
+`preorder` and `inorder` consist of unique values.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def buildTree(preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+    # Convert inorder to map with indices
+    m = {}
+    for i in range(len(inorder)):
+        m[inorder[i]] = i
+
+    return build(preorder, m, 0, 0, len(inorder) - 1)
+
+# p: index of current node in preorder
+# l: starting index of subtree in inorder
+# r: ending index of subtree in inorder
+def build(preorder, inorder, p, l, r) -> Optional[TreeNode]:
+    if p >= len(preorder) or l > r:
+        return None
+
+    # Position of current node in inorder
+    inIdx = inorder[preorder[p]]
+
+    node = TreeNode(preorder[p])
+    # In preorder, left child of node is always next
+    node.left = build(preorder, inorder, p + 1, l, inIdx - 1)
+
+    # In inorder, left subtree size == length of left subarray == inIdx - l
+    # To get index of right child in preorder, skip length of left subarray + 1
+    node.right = build(preorder, inorder, p + inIdx - l + 1, inIdx + 1, r)
+    return node
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description" target="_blank">Construct Binary Tree from Inorder and Postorder Traversal</a> (Medium)
+
+Given two integer arrays `inorder` and `postorder` where `inorder` is the inorder traversal of a binary tree and `postorder` is the postorder traversal of the same tree, construct and return the binary tree.
+
+**answer**
+
+The solution is similar to "Construct Binary Tree from Preorder and Inorder Traversal". Notice that the output of postorder traversal is similar to preorder traversal, except postorder starts with right subtrees and the output is reversed.
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def buildTree(inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+    # Convert inorder to map with indices
+    m = {}
+    for i in range(len(inorder)):
+        m[inorder[i]] = i
+
+    return build(m, postorder, len(postorder) - 1, 0, len(inorder) - 1)
+
+# p: index of current node in postorder
+# l: starting index of subtree in inorder
+# r: ending index of subtree in inorder
+def build(inorder, postorder, p, l, r):
+    if p < 0 or l > r:
+        return None
+
+    # Position of current node in inorder
+    inIdx = inorder[postorder[p]]
+
+    node = TreeNode(postorder[p])
+    # In postorder, right child of node is always before
+    node.right = build(inorder, postorder, p - 1, inIdx + 1, r)
+
+    # In inorder, right subtree size == length of right subarray == r - inIdx
+    # To get index of left child in postorder, skip length of right subarray + 1
+    node.left = build(inorder, postorder, p - (r - inIdx + 1), l, inIdx - 1)
+    return node
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/description" target="_blank">Populating Next Right Pointers in Each Node II</a> (Medium)
+
+Given a binary tree with nodes:
+
+```py
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+```
+
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to `NULL`.
+
+Initially, all next pointers are set to `NULL`.
+
+Write a solution that uses constant space. Recursion using implicit stack space is fine.
+
+**answer**
+
+Solution logic:
+
+-   You are essentially trying to create a linked list for each level in the binary tree using the custom nodes.
+-   After building a linked list for one level, that list can be used to build a list for the next level, and so on.
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(1)
+def connect(root: 'Node') -> 'Node':
+    # levelDummy will be the head of each level's linked list
+    levelDummy = curr = Node()
+    originalRoot = root
+
+    while root:
+        # Build list for next level, using completed previous level list
+        if root.left:
+            curr.next = root.left
+            curr = curr.next
+        if root.right:
+            curr.next = root.right
+            curr = curr.next
+        root = root.next
+
+        # Reached end of previous level list
+        if not root:
+            # Move on to next level
+            # levelDummy.next points to head of newly completed list
+            root = levelDummy.next
+            # Reset dummy pointers
+            curr = levelDummy
+            levelDummy.next = None
+
+    return originalRoot
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description" target="_blank">Flatten Binary Tree to Linked List</a> (Medium)
+
+Given the `root` of a binary tree, flatten the tree into a "linked list":
+
+-   The "linked list" should use the same `TreeNode` class where the `right` child pointer points to the next node in the list and the `left` child pointer is always `null`.
+-   The "linked list" should be in the same order as a pre-order traversal of the binary tree.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(1) excluding recursion
+def flatten(root: Optional[TreeNode]) -> None:
+    return helper(root, None)
+
+# Preorder traversal == reversed postorder starting with right subtrees
+# Preorder cannot be used here because left pointers get overwritten
+# Build list starting from tail with postorder starting with right subtrees
+def helper(curr, prev):
+    if not curr:
+        return prev
+
+    # To understanding this solution, keep track of what prev points to
+    prev = helper(curr.right, prev)
+    # prev can potentially point to a node from a far subtree
+    prev = helper(curr.left, prev)
+
+    # prev now points to the node after curr in preorder traversal
+    curr.right = prev
+    curr.left = None
+    return curr
+```
