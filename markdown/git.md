@@ -38,18 +38,19 @@ Given commits A -> B -> C, if C is HEAD, then B is HEAD\~1 and C is HEAD\~2.
 
 **question**
 
-Configure Git credentials
+`git config`
 
 **answer**
 
 ```bash
+# Configure Git credentials
 git config --global user.name "your name"
 git config --global user.email "your email"
 ```
 
 **question**
 
-Create or clone a repository
+`git init`
 
 **answer**
 
@@ -59,37 +60,77 @@ git init <directory>
 
 # Create a repository in the current directory
 git init .
-
-# Clone a repository
-git clone <url> <directory>
 ```
 
 **question**
 
-Stage and commit changes
+`git clone`
+
+**answer**
+
+```bash
+# Clone a repository in the given directory
+git clone <url> <directory>
+
+# Clone a repository in the current empty directory
+git clone <url> .
+```
+
+**question**
+
+`git status`
 
 **answer**
 
 ```bash
 # Check current state of repository
 git status
+```
 
+**question**
+
+`git add`
+
+**answer**
+
+```bash
 # Stage all changes in a file
 git add <file>
-
-# Cancel staged change
-git restore --staged <file>
 
 # Stage all changes in a directory
 git add <directory>
 
+# Stage part of a file
+# Git automatically breaks the file's changes into parts
+git add --patch <file>
+git add -p <file>
+```
+
+**question**
+
+`git restore`
+
+**answer**
+
+```bash
+# Cancel staged change
+git restore --staged <file>
+```
+
+**question**
+
+`git commit`
+
+**answer**
+
+```bash
 # Commit staged changes with message
 git commit -m "message"
 ```
 
 **question**
 
-Create a new branch
+`git branch`
 
 **answer**
 
@@ -109,24 +150,42 @@ git branch --track <new-branch> origin/<base-branch>
 
 **question**
 
-Sync branch with remote repository
+`git fetch`
 
 **answer**
 
 ```bash
 # Get updates from remote branch
 git fetch
+```
 
+**question**
+
+`git pull`
+
+**answer**
+
+```bash
 # Merge remote updates into current branch
 git pull
+```
 
+**question**
+
+`git push`
+
+**answer**
+
+```bash
 # Update remote repository with local commits
 git push
 ```
 
 **question**
 
-Switch to another branch
+`git switch`
+
+`git checkout`
 
 **answer**
 
@@ -145,7 +204,7 @@ git checkout <commit-hash>
 
 **question**
 
-Merge branches
+`git merge`
 
 **answer**
 
@@ -159,11 +218,14 @@ git merge --abort
 
 **question**
 
-Insert commits into current branch
+`git rebase`
 
 **answer**
 
 ```bash
+# Insert commits into current branch
+# In this example, commits F and G are inserted
+#
 #        A---B---C current
 #       /
 #  D---E---F---G main
@@ -177,11 +239,12 @@ git rebase main current
 
 **question**
 
-Get commit history of repository
+`git log`
 
 **answer**
 
 ```bash
+# Show commit history
 # Default display
 git log
 
@@ -196,7 +259,7 @@ git log --pretty=format:"%h %ad | %s%d [%an]" --date=short
 
 **question**
 
-Reset changes
+`git reset`
 
 **answer**
 
@@ -223,7 +286,7 @@ git reset --hard B
 
 **question**
 
-Revert a commit
+`git revert`
 
 **answer**
 
