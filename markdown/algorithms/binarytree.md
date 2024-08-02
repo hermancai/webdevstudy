@@ -546,3 +546,164 @@ class BSTIterator:
             self.stack.append(root)
             root = root.left
 ```
+
+**question**
+
+<a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description" target="_blank">Lowest Common Ancestor of a Binary Tree</a> (Medium)
+
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+
+The lowest common ancestor is defined between two nodes `p` and `q` as the lowest node in `T` that has both `p` and `q` as descendants (where we allow a node to be a descendant of itself).
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(h) where h = height of tree
+def lowestCommonAncestor(root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    # Return if p/q is found without searching deeper
+    #   because LCA cannot be in a lower level
+    if not root or root == p or root == q:
+        return root
+
+    # Search whole tree for p and q
+    # If p/q is not in left/right, left/right = None
+    left = lowestCommonAncestor(root.left, p, q)
+    right = lowestCommonAncestor(root.right, p, q)
+
+    # LCA is immediate parent when p and q are both found
+    if left and right:
+        return root
+
+    # When LCA is found, it will be carried up the stack
+    #   because either left or right would be None
+    return left or right
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/binary-tree-right-side-view/description" target="_blank">Binary Tree Right Side View</a> (Medium)
+
+Given the `root` of a binary tree, imagine yourself standing on the right side of it, and return the values of the nodes you can see ordered from top to bottom.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(h) where h = height of tree
+def rightSideView(root: Optional[TreeNode]) -> List[int]:
+    return helper(root, 0, [])
+
+# Reversed preorder traversal
+def helper(node: Optional[TreeNode], depth: int, answer: List[int]) -> List[int]:
+    if not node:
+        return answer
+
+    # Only add right-most node of new levels
+    if depth == len(answer):
+        answer.append(node.val)
+
+    helper(node.right, depth + 1, answer)
+    helper(node.left, depth + 1, answer)
+    return answer
+```
+
+Alternative solution:
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+# Iterative breadth-first-traversal, adding last node of every level
+def rightSideView(root: Optional[TreeNode]) -> List[int]:
+    if not root:
+        return []
+
+    answer = [root.val]
+    q = [root]
+    while q:
+        nextLevel = []
+        for node in q:
+            if node.left:
+                nextLevel.append(node.left)
+            if node.right:
+                nextLevel.append(node.right)
+        if nextLevel:
+            answer.append(nextLevel[-1].val)
+        q = nextLevel
+    return answer
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/binary-tree-level-order-traversal/description" target="_blank">Binary Tree Level Order Traversal</a> (Medium)
+
+Given the `root` of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def levelOrder(root: Optional[TreeNode]) -> List[List[int]]:
+    if not root:
+        return []
+
+    q = [root]
+    answer = []
+    # Breadth-first-traversal while adding values to answer
+    while q:
+        nextLevel = []
+        vals = []
+        for node in q:
+            vals.append(node.val)
+            if node.left:
+                nextLevel.append(node.left)
+            if node.right:
+                nextLevel.append(node.right)
+        answer.append(vals)
+        q = nextLevel
+
+    return answer
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description" target="_blank">Binary Tree Zigzag Level Order Traversal</a> (Medium)
+
+Given the `root` of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+def zigzagLevelOrder(root: Optional[TreeNode]) -> List[List[int]]:
+    if not root:
+        return []
+
+    answer = []
+    q = [root]
+    goRight = True
+    # Breadth-first-traversal while adding values to answer
+    while q:
+        nextLevel = []
+        vals = []
+        for i in range(len(q)):
+            node = q[i]
+
+            # Get symmetric index depending on goRight
+            if goRight:
+                vals.append(node.val)
+            else:
+                vals.append(q[len(q) - i - 1].val)
+
+            if node.left:
+                nextLevel.append(node.left)
+            if node.right:
+                nextLevel.append(node.right)
+        goRight = not goRight
+        answer.append(vals)
+        q = nextLevel
+
+    return answer
+```
