@@ -5,7 +5,8 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
     title: "WebDevStudy",
-    description: "Technical questions for web development topics",
+    description:
+        "A compilation of common web development topics and leetcode-style technical interview questions/answers",
     authors: [{ name: "Herman Cai", url: "hermancai.dev" }],
     robots: "follow, index",
     keywords: ["web development", "technical", "interview"],
