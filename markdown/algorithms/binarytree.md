@@ -707,3 +707,119 @@ def zigzagLevelOrder(root: Optional[TreeNode]) -> List[List[int]]:
 
     return answer
 ```
+
+**question**
+
+<a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/description" target="_blank">Kth Smallest Element in a BST</a> (Medium)
+
+Given the `root` of a binary search tree, and an integer `k`, return the `k`<sup>th</sup> smallest value (1-indexed) of all the values of the nodes in the tree.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(h) where h = height of tree
+def kthSmallest(root: Optional[TreeNode], k: int) -> int:
+    # Simulate global variables in list. vals[1] will contain answer
+    vals = [k, 0]
+    helper(root, vals)
+    return vals[1]
+
+# Recursive inorder traversal
+def helper(node: Optional[TreeNode], vals: List[int]) -> None:
+    if not node or vals[0] < 0:
+        return
+
+    helper(node.left, vals)
+
+    vals[0] -= 1
+    if vals[0] == 0:
+        vals[1] = node.val
+
+    helper(node.right, vals)
+```
+
+Alternative solution:
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+# Iterative inorder traversal
+def kthSmallest(root: Optional[TreeNode], k: int) -> int:
+    stack = []
+
+    while root or stack:
+        while root:
+            stack.append(root)
+            root = root.left
+
+        root = stack.pop()
+        k -= 1
+        if k == 0:
+            return root.val
+        root = root.right
+    return -1
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/validate-binary-search-tree/description" target="_blank">Validate Binary Search Tree</a> (Medium)
+
+Given the `root` of a binary tree, determine if it is a valid binary search tree (BST).
+
+A valid BST is defined as follows:
+
+-   The left subtree of a node contains only nodes with keys less than the node's key.
+-   The right subtree of a node contains only nodes with keys greater than the node's key.
+-   Both the left and right subtrees must also be binary search trees.
+
+**answer**
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(n)
+# Iterative inorder traversal while tracking previous node
+def isValidBST(root: Optional[TreeNode]) -> bool:
+    stack = []
+    prev = None
+
+    while root or stack:
+        while root:
+            stack.append(root)
+            root = root.left
+
+        root = stack.pop()
+        # Previous value must be less than current in inorder traversal of valid BST
+        if prev and root.val <= prev.val:
+            return False
+
+        prev = root
+        root = root.right
+    return True
+```
+
+Alternative solution:
+
+```py
+# Time complexity: O(n)
+# Space complexity: O(h) where h = height of tree
+def isValidBST(root: Optional[TreeNode]) -> bool:
+    return helper(root, float("-inf"), float("inf"))
+
+# Recursive inorder traversal
+# Keep track of valid range for current value
+def helper(node: Optional[TreeNode], minV, maxV) -> bool:
+    if not node:
+        return True
+
+    if node.val <= minV or node.val >= maxV:
+        return False
+
+    left = helper(node.left, minV, node.val)
+    if not left:
+        return False
+
+    right = helper(node.right, node.val, maxV)
+
+    return left and right
+```
