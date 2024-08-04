@@ -613,7 +613,7 @@ Alternative solution:
 ```py
 # Time complexity: O(n)
 # Space complexity: O(n)
-# Iterative breadth-first-traversal, adding last node of every level
+# Iterative breadth-first traversal, adding last node of every level
 def rightSideView(root: Optional[TreeNode]) -> List[int]:
     if not root:
         return []
@@ -650,7 +650,7 @@ def levelOrder(root: Optional[TreeNode]) -> List[List[int]]:
 
     q = [root]
     answer = []
-    # Breadth-first-traversal while adding values to answer
+    # Breadth-first traversal while adding values to answer
     while q:
         nextLevel = []
         vals = []
@@ -684,7 +684,7 @@ def zigzagLevelOrder(root: Optional[TreeNode]) -> List[List[int]]:
     answer = []
     q = [root]
     goRight = True
-    # Breadth-first-traversal while adding values to answer
+    # Breadth-first traversal while adding values to answer
     while q:
         nextLevel = []
         vals = []
