@@ -10,6 +10,7 @@ const dictionary: { [key: string]: string } = {
     binarytree: "Binary Tree",
     divideconquer: "Divide & Conquer",
     dynamicprogramming: "Dynamic Programming",
+    graph: "Graph",
     hashmap: "Hashmap",
     intervals: "Intervals",
     linkedlist: "Linked List",
