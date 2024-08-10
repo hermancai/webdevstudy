@@ -341,3 +341,237 @@ def dfs(current, courses, degrees, answer) -> None:
         if degrees[child] == 0:
             dfs(child, courses, degrees, answer)
 ```
+
+**question**
+
+<a href="https://leetcode.com/problems/snakes-and-ladders/description" target="_blank">Snakes and Ladders</a> (Medium)
+
+You are given an `n x n` integer matrix `board` where the cells are labeled from `1` to `n^2` in a Boustrophedon style starting from the bottom left of the board (i.e. `board[n - 1][0]`) and alternating direction each row.
+
+You start on square `1` of the board. In each move, starting from square `curr`, do the following:
+
+-   Choose a destination square `next` with a label in the range `[curr + 1, min(curr + 6, n^2)]`.
+    -   This choice simulates the result of a standard 6-sided die roll: i.e., there are always at most 6 destinations, regardless of the size of the board.
+-   If `next` has a snake or ladder, you must move to the destination of that snake or ladder. Otherwise, you move to `next`.
+-   The game ends when you reach the square `n^2`.
+
+A board square on row `r` and column `c` has a snake or ladder if `board[r][c] != -1`. The destination of that snake or ladder is `board[r][c]`. Squares `1` and `n^2` do not have a snake or ladder.
+
+Note that you only take a snake or ladder at most once per move. If the destination to a snake or ladder is the start of another snake or ladder, you do not follow the subsequent snake or ladder.
+
+Return the least number of moves required to reach the square `n^2`. If it is not possible to reach the square, return `-1`.
+
+**answer**
+
+```py
+from collections import deque
+
+# Time complexity: O(n^2)
+# Space complexity: O(n^2)
+def snakesAndLadders(board: List[List[int]]) -> int:
+    goal = len(board) * len(board)
+    steps = {1: 0}  # Track steps to current square. Also tracks if visited
+    q = deque()
+    q.append(1)
+
+    while q:
+        step = q.popleft()
+        # Looping backwards from +6 to +1 is an optimization
+        # If square +6 is -1, squares +1 to +5 do not need to be checked
+        #   if that square is also -1
+        skipStep = False
+        for i in range(min(goal, step + 6), step, -1):
+            # Convert step to indices on board
+            row = (i - 1) // len(board)
+            col = (i - 1) % len(board)
+            # ~ means invert bits (e.g. ~3 -> -4; 011 -> 100)
+            # Used to get index from right. (~i) = -(i + 1)
+            nextStep = board[~row][col if row % 2 == 0 else ~col]
+
+            # Found snake/ladder
+            if nextStep > 0:
+                i = nextStep
+
+            if i == goal:
+                return steps[step] + 1
+
+            # Found normal square. Can ignore lower normal squares
+            if nextStep < 0:
+                if skipStep:
+                    continue
+                skipStep = True
+
+            if i not in steps:
+                steps[i] = steps[step] + 1
+                q.append(i)
+    return -1
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/minimum-genetic-mutation/description" target="_blank">Minimum Genetic Mutation</a> (Medium)
+
+A gene string can be represented by an 8-character long string, with choices from `'A'`, `'C'`, `'G'`, and `'T'`.
+
+Suppose we need to investigate a mutation from a gene string `startGene` to a gene string `endGene` where one mutation is defined as one single character changed in the gene string.
+
+For example, `"AACCGGTT" --> "AACCGGTA"` is one mutation.
+
+There is also a gene bank `bank` that records all the valid gene mutations. A gene must be in `bank` to make it a valid gene string.
+
+Given the two gene strings `startGene` and `endGene` and the gene bank `bank`, return the minimum number of mutations needed to mutate from `startGene` to `endGene`. If there is no such a mutation, return `-1`.
+
+Note that the starting point is assumed to be valid, so it might not be included in the bank.
+
+**answer**
+
+```py
+from collections import deque
+
+# Time complexity: O(N^2 * M * K) where N = string length, M = mutations, K = bank size
+# Space complexity: O(N^2 * M * K)
+def minMutation(startGene: str, endGene: str, bank: List[str]) -> int:
+    bank = set(bank)
+    if endGene not in bank:
+        return -1
+
+    mutations = ["A", "C", "G", "T"]
+    # Track number of mutations to reach each string
+    visited = {startGene: 0}
+    q = deque()
+    q.append(startGene)
+
+    while q:
+        curr = q.popleft()
+        # Try swapping every character with every mutation
+        for i in range(len(curr)):
+            for m in mutations:
+                newM = list(curr)
+                newM[i] = m
+                newM = "".join(newM)
+                if newM == endGene:
+                    return visited[curr] + 1
+                if newM in bank and newM not in visited:
+                    q.append(newM)
+                    visited[newM] = visited[curr] + 1
+    return -1
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/minimum-genetic-mutation/description" target="_blank">Minimum Genetic Mutation</a> (Medium)
+
+A trie (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.
+
+Implement the Trie class:
+
+-   `Trie()` Initializes the trie object.
+-   `void insert(String word)` Inserts the string `word` into the trie.
+-   `boolean search(String word)` Returns `true` if the string `word` is in the trie (i.e., was inserted before), and `false` otherwise.
+-   `boolean startsWith(String prefix)` Returns `true` if there is a previously inserted string `word` that has the prefix `prefix`, and `false` otherwise.
+
+**answer**
+
+```py
+class Trie:
+    def __init__(self):
+        # Nested dictionaries to simulate a graph
+        # Example: "apple" -> {a: {p: {p: {l: {e: {"#": "#"}}}}}}
+        self.graph = {}
+
+    def insert(self, word: str) -> None:
+        # Traverse nested levels, registering char if needed
+        level = self.graph
+        for c in word:
+            if c not in level:
+                level[c] = {}
+            level = level[c]
+        # Use "#" to signal end of a word
+        level["#"] = "#"
+
+    def search(self, word: str) -> bool:
+        level = self.graph
+        for c in word:
+            if c not in level:
+                return False
+            level = level[c]
+        return True if "#" in level else False
+
+    def startsWith(self, prefix: str) -> bool:
+        level = self.graph
+        for c in prefix:
+            if c not in level:
+                return False
+            level = level[c]
+        return True
+```
+
+Alternative solution:
+
+```py
+# Use a custom node class instead of nested dictionaries
+class TrieNode:
+    def __init__(self):
+        # children -> {"a": TrieNode, "b": TrieNode, ...}
+        self.children = {}
+        self.completeWord = False
+```
+
+**question**
+
+<a href="https://leetcode.com/problems/design-add-and-search-words-data-structure/description" target="_blank">Design Add and Search Words Data Structure</a> (Medium)
+
+Design a data structure that supports adding new words and finding if a string matches any previously added string.
+
+Implement the `WordDictionary` class:
+
+-   `WordDictionary()` Initializes the object.
+-   `void addWord(word)` Adds `word` to the data structure, it can be matched later.
+-   `bool search(word)` Returns `true` if there is any string in the data structure that matches `word` or `false` otherwise. `word` may contain dots `'.'` where dots can be matched with any letter.
+
+**answer**
+
+```py
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.completeWord = False
+
+class WordDictionary:
+    def __init__(self):
+        self.node = TrieNode()
+
+    # Time complexity: O(N) where N = length of word
+    def addWord(self, word: str) -> None:
+        node = self.node
+        for c in word:
+            if c not in node.children:
+                node.children[c] = TrieNode()
+            node = node.children[c]
+        node.completeWord = True
+
+    # Time complexity: O(M) where M = number of TrieNodes
+    def search(self, word: str) -> bool:
+        return self.searchHelper(word, 0, self.node)
+
+    def searchHelper(self, word: str, i: int, node: Optional["TrieNode"]) -> bool:
+        # Note that len(word) is checked instead of len(word) - 1
+        # This functions checks if the next char is in the current node's children
+        if i == len(word):
+            # At end of word, node points to node for last char
+            return node.completeWord
+
+        # Depth-first traversal
+        if word[i] == ".":
+            # Check all children
+            for child in node.children.values():
+                if self.searchHelper(word, i + 1, child):
+                    return True
+        else:
+            # Standard check for one char
+            if word[i] not in node.children:
+                return False
+            return self.searchHelper(word, i + 1, node.children[word[i]])
+
+        return False
+```
