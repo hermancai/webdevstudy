@@ -6,6 +6,7 @@ const dictionary: { [key: string]: string } = {
     typescript: "TypeScript",
     git: "Git",
     arraystring: "Array / String",
+    backtracking: "Backtracking",
     binarysearch: "Binary Search",
     binarytree: "Binary Tree",
     divideconquer: "Divide & Conquer",
