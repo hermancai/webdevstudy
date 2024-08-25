@@ -13,6 +13,7 @@ const dictionary: { [key: string]: string } = {
     dynamicprogramming: "Dynamic Programming",
     graph: "Graph",
     hashmap: "Hashmap",
+    heap: "Heap",
     intervals: "Intervals",
     linkedlist: "Linked List",
     math: "Math",
