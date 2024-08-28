@@ -9,6 +9,7 @@ const dictionary: { [key: string]: string } = {
     backtracking: "Backtracking",
     binarysearch: "Binary Search",
     binarytree: "Binary Tree",
+    bitmanipulation: "Bit Manipulation",
     divideconquer: "Divide & Conquer",
     dynamicprogramming: "Dynamic Programming",
     graph: "Graph",
