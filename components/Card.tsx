@@ -60,15 +60,22 @@ export default function Card({ question, answer, number }: CardProps) {
                     <p>{number}.</p>
                     <div className="flex flex-col overflow-hidden grow">
                         {question}
-                        {showAnswer ? (
-                            <div className="mt-3 mb-2">{answer}</div>
-                        ) : null}
+
+                        <div
+                            className={`${
+                                showAnswer ? "block" : "hidden"
+                            } mt-3 mb-2`}
+                            aria-hidden={!showAnswer}
+                        >
+                            {answer}
+                        </div>
                     </div>
                 </div>
                 <button
                     onClick={toggleShowAnswer}
                     className="rounded-md p-4 hover:bg-neutral-700 transition-colors"
                     title={showAnswer ? "Hide Answer" : "Show Answer"}
+                    aria-expanded={showAnswer}
                 >
                     {showAnswer ? <MinusSVG /> : <PlusSVG />}
                 </button>
