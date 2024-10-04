@@ -16,6 +16,7 @@ export default function OptionsGrid({ fileNames, root }: OptionsGridType) {
                         key={i}
                         href={`${root}${name}`}
                         className="bg-neutral-800 rounded-md p-2 text-center font-mono transition-colors hover:bg-neutral-700"
+                        scroll={false}
                     >
                         {title}
                     </Link>

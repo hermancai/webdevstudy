@@ -2,8 +2,8 @@ import parseMarkdown from "@/services/parseMarkdown";
 import getProperName from "@/services/getProperName";
 import getMarkdownFileNames from "@/services/getMarkdownFileNames";
 import NotFoundPage from "@/components/NotFoundPage";
-import PageTitle from "@/components/PageTitle";
-import CardsContainer from "@/components/CardsContainer";
+import SlugContainer from "@/components/SlugContainer";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 // Routes are generated at build time based on files in the markdown directory
 export async function generateStaticParams() {
@@ -26,11 +26,21 @@ export default function Page({ params }: { params: { slug: string } }) {
 
     try {
         const cards = parseMarkdown("./markdown/", slug);
+        const questions = cards.map((card, i) => (
+            <MarkdownRenderer key={i} markdown={card.question} />
+        ));
+        const answers = cards.map((card, i) => (
+            <MarkdownRenderer key={i} markdown={card.answer} />
+        ));
+
         return (
-            <>
-                <PageTitle title={getProperName(slug)} backLink="/" />
-                <CardsContainer cards={cards} />
-            </>
+            <SlugContainer
+                cards={cards}
+                title={getProperName(slug)}
+                backLink="/"
+                questions={questions}
+                answers={answers}
+            />
         );
     } catch (e) {
         return <NotFoundPage />;

@@ -1,11 +1,11 @@
-"use client";
-
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 
 type CardProps = {
-    number: number;
+    index: number;
     question: ReactNode;
     answer: ReactNode;
+    isOpen: boolean;
+    setIsOpen: (i: number) => void;
 };
 
 function PlusSVG() {
@@ -46,31 +46,38 @@ function MinusSVG() {
     );
 }
 
-export default function Card({ question, answer, number }: CardProps) {
-    const [showAnswer, setShowAnswer] = useState(false);
-
-    const toggleShowAnswer = () => {
-        setShowAnswer(!showAnswer);
-    };
-
+export default function Card({
+    question,
+    answer,
+    index,
+    isOpen,
+    setIsOpen,
+}: CardProps) {
     return (
         <div className="p-3 rounded-md bg-neutral-800 border border-neutral-700">
             <div className="flex flex-row flex-nowrap gap-2 items-start pl-1">
                 <div className="grow overflow-hidden flex items-baseline gap-2">
-                    <p>{number}.</p>
+                    <p>{index + 1}.</p>
                     <div className="flex flex-col overflow-hidden grow">
                         {question}
-                        {showAnswer ? (
-                            <div className="mt-3 mb-2">{answer}</div>
-                        ) : null}
+
+                        <div
+                            className={`${
+                                isOpen ? "block" : "hidden"
+                            } mt-3 mb-2`}
+                            aria-hidden={!isOpen}
+                        >
+                            {answer}
+                        </div>
                     </div>
                 </div>
                 <button
-                    onClick={toggleShowAnswer}
+                    onClick={() => setIsOpen(index)}
                     className="rounded-md p-4 hover:bg-neutral-700 transition-colors"
-                    title={showAnswer ? "Hide Answer" : "Show Answer"}
+                    title={isOpen ? "Hide Answer" : "Show Answer"}
+                    aria-expanded={isOpen}
                 >
-                    {showAnswer ? <MinusSVG /> : <PlusSVG />}
+                    {isOpen ? <MinusSVG /> : <PlusSVG />}
                 </button>
             </div>
         </div>

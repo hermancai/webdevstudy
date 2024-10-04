@@ -13,6 +13,7 @@ export default function PageTitle({ title, backLink }: PageTitleType) {
                     href={backLink}
                     className="rounded-md hover:bg-neutral-700 transition-colors py-1 px-2"
                     aria-label="Back to previous page"
+                    scroll={false}
                 >
                     <div>
                         <svg

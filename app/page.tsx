@@ -1,6 +1,5 @@
 import getMarkdownFileNames from "@/services/getMarkdownFileNames";
-import OptionsGrid from "@/components/OptionsGrid";
-import PageTitle from "@/components/PageTitle";
+import TopicsContainer from "@/components/TopicsContainer";
 
 export default function Home() {
     const fileNames = getMarkdownFileNames("./markdown");
@@ -8,9 +7,10 @@ export default function Home() {
     fileNames.sort();
 
     return (
-        <>
-            <PageTitle title="Web Development Topics" />
-            <OptionsGrid fileNames={fileNames} root="/" />
-        </>
+        <TopicsContainer
+            title="Web Development Topics"
+            fileNames={fileNames}
+            root="/"
+        />
     );
 }

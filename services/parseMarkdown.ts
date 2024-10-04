@@ -1,5 +1,5 @@
 import fs from "fs";
-import type { CardFormat } from "@/custom-types";
+import type { CardFormat } from "@/types/card";
 
 /**
  * Convert markdown file to list of objects
