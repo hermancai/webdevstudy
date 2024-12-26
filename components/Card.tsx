@@ -64,7 +64,7 @@ export default function Card({
                         <div
                             className={`${
                                 isOpen ? "block" : "hidden"
-                            } mt-3 mb-2`}
+                            } mt-3 mb-2 border-t border-neutral-600 pt-2`}
                             aria-hidden={!isOpen}
                         >
                             {answer}
