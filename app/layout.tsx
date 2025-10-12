@@ -25,9 +25,7 @@ export default function RootLayout({
         <html lang="en">
             <body className="bg-neutral-900 text-neutral-200 flex flex-col min-h-screen">
                 <main className="flex flex-col">{children}</main>
-                <footer className="mt-auto self-center text-gray-400 text-sm py-4">
-                    <p>Content is regularly updated.</p>
-                </footer>
+                <footer className="py-4" />
             </body>
             <GoogleAnalytics gaId="G-WQS7VC7B13" />
         </html>

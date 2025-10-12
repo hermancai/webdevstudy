@@ -91,7 +91,7 @@ const z: boolean = true;
 
 Arrays
 
-type[] and Array<type> mean the same thing
+`type[]` and `Array<type>` mean the same thing
 
 ```ts
 const numArr: number[] = [1, 2, 3];
