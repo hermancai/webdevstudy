@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     robots: "follow, index",
     keywords: ["web development", "technical", "interview"],
     manifest: "manifest.json",
+    verification: {
+        google: "k9yNjKCp5BuiSVXrJIfoJxbK7bVxTpQcx1MT3jwryK8",
+    },
 };
 
 export const viewport: Viewport = {
