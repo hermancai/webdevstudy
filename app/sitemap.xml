@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://webdevstudy.vercel.app</loc><changefreq>monthly</changefreq><priority>1</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/arraystring</loc><lastmod>2024-08-21T10:12:16.318Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/backtracking</loc><lastmod>2024-08-15T21:58:52.078Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/binarysearch</loc><lastmod>2024-08-24T22:56:44.994Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/binarytree</loc><lastmod>2024-08-04T06:23:03.183Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/bitmanipulation</loc><lastmod>2024-08-28T05:43:59.889Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/divideconquer</loc><lastmod>2024-08-18T06:09:55.144Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/dynamicprogramming</loc><lastmod>2024-09-19T06:03:51.502Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/graph</loc><lastmod>2024-08-10T04:38:19.276Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/hashmap</loc><lastmod>2024-07-11T04:13:12.073Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/heap</loc><lastmod>2024-08-27T07:02:00.480Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/intervals</loc><lastmod>2024-07-14T04:38:12.432Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/linkedlist</loc><lastmod>2024-07-19T06:15:27.624Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/math</loc><lastmod>2024-08-30T23:12:58.333Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/matrix</loc><lastmod>2024-07-10T04:05:01.242Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/slidingwindow</loc><lastmod>2024-07-07T03:18:23.052Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/stack</loc><lastmod>2024-07-15T01:40:18.186Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/algorithms/twopointers</loc><lastmod>2024-07-06T10:07:46.244Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/general</loc><lastmod>2024-12-26T06:14:53.150Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/git</loc><lastmod>2024-07-30T06:54:19.962Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/javascript</loc><lastmod>2024-06-10T05:46:23.138Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://webdevstudy.vercel.app/typescript</loc><lastmod>2025-10-12T11:41:29.105Z</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+</urlset>
