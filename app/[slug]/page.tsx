@@ -16,13 +16,18 @@ export async function generateStaticParams() {
 export async function generateMetadata({
     params,
 }: {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 }) {
-    return { title: getProperName(params.slug) + " - WebDevStudy" };
+    const { slug } = await params;
+    return { title: getProperName(slug) + " - WebDevStudy" };
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
-    const { slug } = params;
+export default async function Page({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}) {
+    const { slug } = await params;
 
     try {
         const cards = parseMarkdown("./markdown/", slug);
