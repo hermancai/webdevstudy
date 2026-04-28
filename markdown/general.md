@@ -1,6 +1,10 @@
+**anchor**
+
+Object-Oriented Programming
+
 **question**
 
-What is object-oriented programming?
+Object-Oriented Programming
 
 **answer**
 
@@ -14,9 +18,13 @@ The four main principles of OOP are abstraction, encapsulation, inheritance, and
 
 OOP can be applied to most coding languages, but support for OOP features can vary. For example, Java, Python, C++, and C# have built-in support to create classes and apply the main OOP principles. JavaScript did not originally support such features, but this has changed in later iterations of the language by including structures such as classes, constructors, and prototype-based inheritance. Languages like C are mainly procedural/functional and do not natively support OOP. While simulating OOP principles is still possible, implementation may be more difficult and conflict with the language's conventions.
 
+**anchor**
+
+Abstraction
+
 **question**
 
-What is abstraction?
+Abstraction
 
 **answer**
 
@@ -40,9 +48,13 @@ class Square
         getArea()
 ```
 
+**anchor**
+
+Encapsulation
+
 **question**
 
-What is encapsulation?
+Encapsulation
 
 **answer**
 
@@ -65,9 +77,13 @@ class Student
 
 With this change, implementation is kept within the class, and external code does not have to worry about the logic behind the requirements.
 
+**anchor**
+
+Inheritance
+
 **question**
 
-What is inheritance?
+Inheritance
 
 **answer**
 
@@ -103,9 +119,13 @@ Notice that `Student` has its own implementation of `introduceSelf()`, which all
 
 <br/>
 
+**anchor**
+
+Polymorphism
+
 **question**
 
-What is polymorphism?
+Polymorphism
 
 **answer**
 
@@ -147,30 +167,38 @@ for (const person of people) {
 
 In the code above, the for loop treats each object in the array as a `Person` object. During runtime, the unique implementations of `introduceSelf()` in `Student` and `Teacher` will be executed instead of the default implementation in `Person`.
 
+**anchor**
+
+Functional Programming
+
 **question**
 
-What is functional programming?
+Functional Programming
 
 **answer**
 
 Functional programming is a different way to organize code, focusing on mathematical functions and immutability. The following are some key concepts of functional programming:
 
--   Pure Functions
-    -   Given the same input, a pure function will always produce the same output.
-    -   There are no side effects such as modifying external variables.
--   Immutability
-    -   Data is never modified. If changes need to be made to the data, a new copy is created.
-    -   This reduces bugs and simplifies debugging/testing.
--   First-Class and Higher-Order Functions
-    -   Functions can be assigned to variables, passed as arguments, and returned by other functions.
--   Recursion
-    -   Loops are not used because they involve mutating state during iteration.
+- Pure Functions
+    - Given the same input, a pure function will always produce the same output.
+    - There are no side effects such as modifying external variables.
+- Immutability
+    - Data is never modified. If changes need to be made to the data, a new copy is created.
+    - This reduces bugs and simplifies debugging/testing.
+- First-Class and Higher-Order Functions
+    - Functions can be assigned to variables, passed as arguments, and returned by other functions.
+- Recursion
+    - Loops are not used because they involve mutating state during iteration.
 
 Pure functional programming languages include Haskell, Elm, and Clojure. Languages that support functional programming include JavaScript, Python, and Java.
 
+**anchor**
+
+Abstract class vs interface
+
 **question**
 
-What is the difference between an abstract class and an interface?
+Abstract class vs interface
 
 **answer**
 
@@ -180,25 +208,29 @@ Abstract classes and interfaces both serve as blueprints for implementing concre
 
 Abstract Class
 
--   Can contain both abstract (method signatures without implementation) and concrete (with implementation) methods
--   Single inheritance: A class can only extend one abstract class
--   Can contain constructors to be used by derived classes
--   Useful for sharing code between related classes
-    -   Example: Concrete classes `Dog` and `Cat` can be derived from abstract class `Animal`
+- Can contain both abstract (method signatures without implementation) and concrete (with implementation) methods
+- Single inheritance: A class can only extend one abstract class
+- Can contain constructors to be used by derived classes
+- Useful for sharing code between related classes
+    - Example: Concrete classes `Dog` and `Cat` can be derived from abstract class `Animal`
 
 <br/>
 
 Interface
 
--   Specifies methods/properties that implementing classes must define
--   Multiple inheritance: A class can implement multiple interfaces
--   Cannot have constructors because they are not part of the inheritance heirarchy
--   Useful for defining a contract between unrelated classes, or implementing multiple interfaces
-    -   Example: Concrete classes `Human` and `Tree` can both implement interface `Height`
+- Specifies methods/properties that implementing classes must define
+- Multiple inheritance: A class can implement multiple interfaces
+- Cannot have constructors because they are not part of the inheritance heirarchy
+- Useful for defining a contract between unrelated classes, or implementing multiple interfaces
+    - Example: Concrete classes `Human` and `Tree` can both implement interface `Height`
+
+**anchor**
+
+Composition vs inheritance
 
 **question**
 
-What is the difference between composition and inheritance?
+Composition vs inheritance
 
 **answer**
 
@@ -208,11 +240,11 @@ Composition and inheritance are concepts in object-oriented programming that des
 
 Composition
 
--   Combines objects with other objects to create a "has-a" relationship
-    -   A `Car` "has-a" `Engine`
-    -   Objects are used as properties in a class
--   Allows objects to be swapped during runtime
--   Loose coupling: Implementation of classes do not have to depend on each other.
+- Combines objects with other objects to create a "has-a" relationship
+    - A `Car` "has-a" `Engine`
+    - Objects are used as properties in a class
+- Allows objects to be swapped during runtime
+- Loose coupling: Implementation of classes do not have to depend on each other.
 
 ```code
 class Engine
@@ -234,11 +266,11 @@ class Car
 
 Inheritance
 
--   Creates objects derived from other objects to create an "is-a" relationship
-    -   A `Student` "is-a" `Person`
-    -   Subclasses inherit the attributes of a superclass
--   The inheritance heirarchy is fixed
--   Tight coupling: Subclasses depend on the superclass.
+- Creates objects derived from other objects to create an "is-a" relationship
+    - A `Student` "is-a" `Person`
+    - Subclasses inherit the attributes of a superclass
+- The inheritance heirarchy is fixed
+- Tight coupling: Subclasses depend on the superclass.
 
 ```code
 class Person

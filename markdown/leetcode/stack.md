@@ -1,3 +1,7 @@
+**anchor**
+
+Valid Parentheses (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/valid-parentheses/description" target="_blank">Valid Parentheses</a> (Easy)
@@ -6,9 +10,9 @@ Given a string `s` containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'
 
 An input string is valid if:
 
--   Open brackets must be closed by the same type of brackets.
--   Open brackets must be closed in the correct order.
--   Every close bracket has a corresponding open bracket of the same type.
+- Open brackets must be closed by the same type of brackets.
+- Open brackets must be closed in the correct order.
+- Every close bracket has a corresponding open bracket of the same type.
 
 **answer**
 
@@ -35,6 +39,10 @@ def isValid(s: str) -> bool:
     return len(stack) == 0
 ```
 
+**anchor**
+
+Simplify Path (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/simplify-path/description" target="_blank">Simplify Path</a> (Medium)
@@ -45,10 +53,10 @@ In Unix-style file system context, a single period `'.'` signifies the current d
 
 The simplified canonical path should adhere to the following rules:
 
--   It must start with a single slash `'/'`.
--   Directories within the path should be separated by only one slash `'/'`.
--   It should not end with a slash `'/'`, unless it's the root directory.
--   It should exclude any single or double periods used to denote current or parent directories.
+- It must start with a single slash `'/'`.
+- Directories within the path should be separated by only one slash `'/'`.
+- It should not end with a slash `'/'`, unless it's the root directory.
+- It should exclude any single or double periods used to denote current or parent directories.
 
 Return the new path.
 
@@ -74,6 +82,10 @@ def simplifyPath(path: str) -> str:
     return "/" + "/".join(final)
 ```
 
+**anchor**
+
+Min Stack (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/min-stack/description" target="_blank">Min Stack</a> (Medium)
@@ -82,11 +94,11 @@ Design a stack that supports push, pop, top, and retrieving the minimum element 
 
 Implement the `MinStack` class:
 
--   `MinStack()` initializes the stack object.
--   `void push(int val)` pushes the element val onto the stack.
--   `void pop()` removes the element on the top of the stack.
--   `int top()` gets the top element of the stack.
--   `int getMin()` retrieves the minimum element in the stack.
+- `MinStack()` initializes the stack object.
+- `void push(int val)` pushes the element val onto the stack.
+- `void pop()` removes the element on the top of the stack.
+- `int top()` gets the top element of the stack.
+- `int getMin()` retrieves the minimum element in the stack.
 
 Assume methods `pop`, `top` and `getMin` will always be called on non-empty stacks.
 
@@ -113,6 +125,10 @@ class MinStack:
         return self.stack[-1][1]
 ```
 
+**anchor**
+
+Evaluate Reverse Polish Notation (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/evaluate-reverse-polish-notation/description" target="_blank">Evaluate Reverse Polish Notation</a> (Medium)
@@ -121,12 +137,12 @@ You are given an array of strings `tokens` that represents an arithmetic express
 
 Evaluate the expression. Return an integer that represents the value of the expression.
 
--   The valid operators are `'+'`, `'-'`, `'*'`, and `'/'`.
--   Each operand may be an integer or another expression.
--   The division between two integers always truncates toward zero.
--   There will not be any division by zero.
--   The input represents a valid arithmetic expression in a reverse polish notation.
--   The answer and all the intermediate calculations can be represented in a 32-bit integer.
+- The valid operators are `'+'`, `'-'`, `'*'`, and `'/'`.
+- Each operand may be an integer or another expression.
+- The division between two integers always truncates toward zero.
+- There will not be any division by zero.
+- The input represents a valid arithmetic expression in a reverse polish notation.
+- The answer and all the intermediate calculations can be represented in a 32-bit integer.
 
 **answer**
 

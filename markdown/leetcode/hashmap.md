@@ -1,3 +1,7 @@
+**anchor**
+
+Ransom Note (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/ransom-note/description" target="_blank">Ransom Note</a> (Easy)
@@ -22,6 +26,10 @@ def canConstruct(ransomNote: str, magazine: str) -> bool:
         m[c] -= 1
     return True
 ```
+
+**anchor**
+
+Isosmorphic Strings (Easy)
 
 **question**
 
@@ -52,6 +60,10 @@ def isIsomorphic(self, s: str, t: str) -> bool:
 ```
 
 NOTE: The solution for "Word Pattern" can also be used to solve this problem.
+
+**anchor**
+
+Word Pattern (Easy)
 
 **question**
 
@@ -104,6 +116,10 @@ def wordPattern(pattern: str, s: str) -> bool:
     return convertPatternToTuple(pattern) == convertWordsToTuple(s)
 ```
 
+**anchor**
+
+Valid Anagram (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/valid-anagram/description" target="_blank">Valid Anagram</a> (Easy)
@@ -132,6 +148,10 @@ def isAnagram(s: str, t: str) -> bool:
     return True
 ```
 
+**anchor**
+
+Two Sum (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/two-sum/description" target="_blank">Two Sum</a> (Easy)
@@ -156,6 +176,10 @@ def twoSum(nums: List[int], target: int) -> List[int]:
         m[nums[i]] = i
 ```
 
+**anchor**
+
+Happy Number (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/happy-number/description" target="_blank">Happy Number</a> (Easy)
@@ -164,9 +188,9 @@ Write an algorithm to determine if a number `n` is happy.
 
 A happy number is a number defined by the following process:
 
--   Starting with any positive integer, replace the number by the sum of the squares of its digits.
--   Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
--   Those numbers for which this process ends in 1 are happy.
+- Starting with any positive integer, replace the number by the sum of the squares of its digits.
+- Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+- Those numbers for which this process ends in 1 are happy.
 
 Return `true` if `n` is a happy number, and `false` if not.
 
@@ -193,6 +217,10 @@ def isHappy(n: int) -> bool:
         n = sum
 ```
 
+**anchor**
+
+Contains Duplicate II (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/contains-duplicate-ii/description" target="_blank">Contains Duplicate II</a> (Easy)
@@ -215,6 +243,10 @@ def containsNearbyDuplicate(nums: List[int], k: int) -> bool:
             m[nums[i]] = i
     return False
 ```
+
+**anchor**
+
+Group Anagrams (Medium)
 
 **question**
 
@@ -262,6 +294,10 @@ def groupAnagrams(strs: List[str]) -> List[List[str]]:
 
     return [m[tup] for tup in m]
 ```
+
+**anchor**
+
+Longest Consecutive Sequence (Medium)
 
 **question**
 

@@ -2,11 +2,11 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 
-interface NavbarButtonsProps {
+interface CardTogglesProps {
     setCardsOpen: Dispatch<SetStateAction<boolean[]>>;
 }
 
-export default function NavbarButtons({ setCardsOpen }: NavbarButtonsProps) {
+export default function CardToggles({ setCardsOpen }: CardTogglesProps) {
     const [expand, setExpand] = useState(false);
 
     const expandAll = () => {
@@ -20,10 +20,10 @@ export default function NavbarButtons({ setCardsOpen }: NavbarButtonsProps) {
     };
 
     return (
-        <div className="flex flex-row self-center gap-4 max-[400px]:hidden absolute left-1/2 -translate-x-1/2">
+        <div className="flex justify-evenly bg-neutral-800 p-2 gap-2">
             <button
-                title="Scroll to bottom"
-                onClick={() => document.body.scrollIntoView(false)}
+                title="Scroll to top"
+                onClick={() => document.body.scrollIntoView()}
                 className="rounded-md p-2 hover:bg-neutral-700 transition-colors"
             >
                 <svg
@@ -37,7 +37,7 @@ export default function NavbarButtons({ setCardsOpen }: NavbarButtonsProps) {
                     <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                        d="m4.5 15.75 7.5-7.5 7.5 7.5"
                     />
                 </svg>
             </button>
@@ -79,8 +79,8 @@ export default function NavbarButtons({ setCardsOpen }: NavbarButtonsProps) {
                 )}
             </button>
             <button
-                title="Scroll to top"
-                onClick={() => document.body.scrollIntoView()}
+                title="Scroll to bottom"
+                onClick={() => document.body.scrollIntoView(false)}
                 className="rounded-md p-2 hover:bg-neutral-700 transition-colors"
             >
                 <svg
@@ -94,7 +94,7 @@ export default function NavbarButtons({ setCardsOpen }: NavbarButtonsProps) {
                     <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                        d="m19.5 8.25-7.5 7.5-7.5-7.5"
                     />
                 </svg>
             </button>

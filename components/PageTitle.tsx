@@ -3,15 +3,20 @@ import Link from "next/link";
 type PageTitleType = {
     title: string;
     backLink?: string;
+    forSidebar?: boolean;
 };
 
-export default function PageTitle({ title, backLink }: PageTitleType) {
+export default function PageTitle({
+    title,
+    backLink,
+    forSidebar,
+}: PageTitleType) {
     return (
         <div className="flex flex-nowrap gap-4 items-center">
             {backLink && (
                 <Link
                     href={backLink}
-                    className="rounded-md hover:bg-neutral-700 transition-colors py-1 px-2"
+                    className={`rounded-md hover:bg-neutral-700 transition-colors py-1 px-2 ${forSidebar && "hidden md:block"}`}
                     aria-label="Back to previous page"
                     scroll={false}
                 >
@@ -33,7 +38,9 @@ export default function PageTitle({ title, backLink }: PageTitleType) {
                     </div>
                 </Link>
             )}
-            <h1 className="text-3xl">{title}</h1>
+            <h1 className={`text-2xl ${forSidebar && "px-2 md:px-0"}`}>
+                {title}
+            </h1>
         </div>
     );
 }

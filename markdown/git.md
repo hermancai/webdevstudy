@@ -1,6 +1,10 @@
+**anchor**
+
+Git
+
 **question**
 
-About Git
+Git
 
 **answer**
 
@@ -10,9 +14,9 @@ Git is a source code management (SCM) tool (aka version control).
 
 Git tracks the state of a project by using a model called the "three trees", which are three data structures that keep a timeline of file changes:
 
--   Working Directory (or Working Tree): Represents changes in local files.
--   Staging Area (or Index): Represents changes that are flagged by `git add` and will be included in the next commit.
--   Repository (or Commit History): Represents a complete record of all commits to the project.
+- Working Directory (or Working Tree): Represents changes in local files.
+- Staging Area (or Index): Represents changes that are flagged by `git add` and will be included in the next commit.
+- Repository (or Commit History): Represents a complete record of all commits to the project.
 
 HEAD is a pointer that can refer to a branch or a commit, depending on the `checkout` command.
 
@@ -22,8 +26,8 @@ git checkout main
 # HEAD -> main -> C
 ```
 
--   When checking out a branch called main, HEAD will point to 'main', which is a branch reference that in turn points to the latest commit C.
--   Suppose the branch receives a new commit D. The reference 'main' will update to point to D, while HEAD continues to point to 'main'.
+- When checking out a branch called main, HEAD will point to 'main', which is a branch reference that in turn points to the latest commit C.
+- Suppose the branch receives a new commit D. The reference 'main' will update to point to D, while HEAD continues to point to 'main'.
 
 ```bash
 git checkout <commit-hash-for-C>
@@ -31,10 +35,14 @@ git checkout <commit-hash-for-C>
 # HEAD -> C
 ```
 
--   When checking out a specific commit, HEAD will point directly to that commit without a branch reference. This is called a "detached HEAD" state.
--   Suppose a new commit D is made. HEAD will point to D. However, there is no associated branch. To save the commit, a new branch must be created or an existing branch must be updated to include D.
+- When checking out a specific commit, HEAD will point directly to that commit without a branch reference. This is called a "detached HEAD" state.
+- Suppose a new commit D is made. HEAD will point to D. However, there is no associated branch. To save the commit, a new branch must be created or an existing branch must be updated to include D.
 
 Given commits A -> B -> C, if C is HEAD, then B is HEAD\~1 and C is HEAD\~2.
+
+**anchor**
+
+git config
 
 **question**
 
@@ -47,6 +55,10 @@ Given commits A -> B -> C, if C is HEAD, then B is HEAD\~1 and C is HEAD\~2.
 git config --global user.name "your name"
 git config --global user.email "your email"
 ```
+
+**anchor**
+
+git init
 
 **question**
 
@@ -62,6 +74,10 @@ git init <directory>
 git init .
 ```
 
+**anchor**
+
+git clone
+
 **question**
 
 `git clone`
@@ -76,6 +92,10 @@ git clone <url> <directory>
 git clone <url> .
 ```
 
+**anchor**
+
+git status
+
 **question**
 
 `git status`
@@ -86,6 +106,10 @@ git clone <url> .
 # Check current state of repository
 git status
 ```
+
+**anchor**
+
+git add
 
 **question**
 
@@ -106,6 +130,10 @@ git add --patch <file>
 git add -p <file>
 ```
 
+**anchor**
+
+git restore
+
 **question**
 
 `git restore`
@@ -117,6 +145,10 @@ git add -p <file>
 git restore --staged <file>
 ```
 
+**anchor**
+
+git commit
+
 **question**
 
 `git commit`
@@ -127,6 +159,10 @@ git restore --staged <file>
 # Commit staged changes with message
 git commit -m "message"
 ```
+
+**anchor**
+
+git branch
 
 **question**
 
@@ -148,6 +184,10 @@ git branch <new-branch> <commit-hash>
 git branch --track <new-branch> origin/<base-branch>
 ```
 
+**anchor**
+
+git fetch
+
 **question**
 
 `git fetch`
@@ -158,6 +198,10 @@ git branch --track <new-branch> origin/<base-branch>
 # Get updates from remote branch
 git fetch
 ```
+
+**anchor**
+
+git pull
 
 **question**
 
@@ -170,6 +214,10 @@ git fetch
 git pull
 ```
 
+**anchor**
+
+git push
+
 **question**
 
 `git push`
@@ -180,6 +228,10 @@ git pull
 # Update remote repository with local commits
 git push
 ```
+
+**anchor**
+
+git switch/checkout
 
 **question**
 
@@ -202,6 +254,10 @@ git checkout <branch>
 git checkout <commit-hash>
 ```
 
+**anchor**
+
+git merge
+
 **question**
 
 `git merge`
@@ -215,6 +271,10 @@ git merge <branch>
 # Cancel merge
 git merge --abort
 ```
+
+**anchor**
+
+git rebase
 
 **question**
 
@@ -237,6 +297,10 @@ git merge --abort
 git rebase main current
 ```
 
+**anchor**
+
+git log
+
 **question**
 
 `git log`
@@ -257,6 +321,10 @@ git log --pretty=format:"%h %ad | %s%d [%an]" --date=short
 
 <a href="https://git-scm.com/docs/git-log" target="_blank">More Options</a>
 
+**anchor**
+
+git reset
+
 **question**
 
 `git reset`
@@ -267,9 +335,9 @@ git log --pretty=format:"%h %ad | %s%d [%an]" --date=short
 
 There are three main options that affect the "three trees" differently:
 
--   `--hard`: All commits and pending local changes made after the specified commit will be deleted from the branch. That is, the staging area will be wiped and the working directory will be reset to reflect the specified commit. Be careful using this option.
--   `--mixed`: The default option. The staging area will be wiped, and all changes will unstaged/retained in the working directory.
--   `--soft`: Only performs the movement of the HEAD and branch reference to the specificed commit. The working directory and staging area are untouched.
+- `--hard`: All commits and pending local changes made after the specified commit will be deleted from the branch. That is, the staging area will be wiped and the working directory will be reset to reflect the specified commit. Be careful using this option.
+- `--mixed`: The default option. The staging area will be wiped, and all changes will unstaged/retained in the working directory.
+- `--soft`: Only performs the movement of the HEAD and branch reference to the specificed commit. The working directory and staging area are untouched.
 
 ```bash
 # A -> B -> C
@@ -283,6 +351,10 @@ git reset --mixed B
 # Remove all changes since a commit
 git reset --hard B
 ```
+
+**anchor**
+
+git revert
 
 **question**
 

@@ -1,3 +1,7 @@
+**anchor**
+
+Linked List
+
 **question**
 
 Linked List
@@ -13,11 +17,15 @@ class ListNode:
 
 Strategies:
 
--   Use a dummy head node
--   Use a slow (increment one) and fast (increment two) pointer
--   Use two pointers `k` steps apart to reach `k`<sup>th</sup> node from end of list
--   Create a cycle
--   Use a doubly linked list if possible
+- Use a dummy head node
+- Use a slow (increment one) and fast (increment two) pointer
+- Use two pointers `k` steps apart to reach `k`<sup>th</sup> node from end of list
+- Create a cycle
+- Use a doubly linked list if possible
+
+**anchor**
+
+Linked List Cycle (Easy)
 
 **question**
 
@@ -47,6 +55,10 @@ def hasCycle(head: ListNode) -> bool:
             return True
     return False
 ```
+
+**anchor**
+
+Merge Two Sorted Lists (Easy)
 
 **question**
 
@@ -79,6 +91,10 @@ def mergeTwoLists(list1: Optional[ListNode], list2: Optional[ListNode]) -> Optio
     return dummy.next
 ```
 
+**anchor**
+
+Add Two Numbers (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/add-two-numbers/description" target="_blank">Add Two Numbers</a> (Medium)
@@ -108,6 +124,10 @@ def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[Li
         curr.next = ListNode(1)
     return dummy.next
 ```
+
+**anchor**
+
+Copy List with Random Pointer (Medium)
 
 **question**
 
@@ -185,6 +205,10 @@ def copyRandomList(head: 'Optional[Node]') -> 'Optional[Node]':
     return dummy.next
 ```
 
+**anchor**
+
+Reverse Linked List II (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/reverse-linked-list-ii/description" target="_blank">Reverse Linked List II</a> (Medium)
@@ -225,6 +249,10 @@ def reverseBetween(head: Optional[ListNode], left: int, right: int) -> Optional[
     return dummy.next
 ```
 
+**anchor**
+
+Remove Nth Node From End of List (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/description" target="_blank">Remove Nth Node From End of List</a> (Medium)
@@ -255,6 +283,10 @@ def removeNthFromEnd(head: Optional[ListNode], n: int) -> Optional[ListNode]:
     slow.next = slow.next.next
     return head
 ```
+
+**anchor**
+
+Remove Duplicates from Sorted List II (Medium)
 
 **question**
 
@@ -287,6 +319,10 @@ def deleteDuplicates(head: Optional[ListNode]) -> Optional[ListNode]:
 
     return dummy.next
 ```
+
+**anchor**
+
+Rotate List (Medium)
 
 **question**
 
@@ -323,6 +359,10 @@ def rotateRight(head: Optional[ListNode], k: int) -> Optional[ListNode]:
     return newHead
 ```
 
+**anchor**
+
+Partition List (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/partition-list/description" target="_blank">Partition List</a> (Medium)
@@ -356,6 +396,10 @@ def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
     return leftDummy.next
 ```
 
+**anchor**
+
+LRU Cache (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/lru-cache/description" target="_blank">LRU Cache</a> (Medium)
@@ -364,9 +408,9 @@ Design a data structure that follows the constraints of a Least Recently Used (L
 
 Implement the `LRUCache` class:
 
--   `LRUCache(int capacity)` Initialize the LRU cache with positive size `capacity`.
--   `int get(int key)` Return the value of the key if the `key` exists, otherwise return `-1`.
--   `void put(int key, int value)` Update the value of the `key` if the `key` exists. Otherwise, add the `key-value` pair to the cache. If the number of keys exceeds the `capacity` from this operation, evict the least recently used key.
+- `LRUCache(int capacity)` Initialize the LRU cache with positive size `capacity`.
+- `int get(int key)` Return the value of the key if the `key` exists, otherwise return `-1`.
+- `void put(int key, int value)` Update the value of the `key` if the `key` exists. Otherwise, add the `key-value` pair to the cache. If the number of keys exceeds the `capacity` from this operation, evict the least recently used key.
 
 The functions `get` and `put` must each run in `O(1)` average time complexity.
 

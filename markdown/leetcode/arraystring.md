@@ -1,3 +1,7 @@
+**anchor**
+
+Merge Sorted Array (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/merge-sorted-array/description" target="_blank">Merge Sorted Array</a> (Easy)
@@ -29,6 +33,10 @@ def merge(nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         i -= 1
 ```
 
+**anchor**
+
+Remove Element (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/remove-element/description" target="_blank">Remove Element</a> (Easy)
@@ -51,6 +59,10 @@ def removeElement(nums: List[int], val: int) -> int:
     return nonValIndex
 ```
 
+**anchor**
+
+Remove Duplicates from Sorted Array (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/description" target="_blank">Remove Duplicates from Sorted Array</a> (Easy)
@@ -72,6 +84,10 @@ def removeDuplicates(nums: List[int]) -> int:
             finalIndex += 1
     return finalIndex
 ```
+
+**anchor**
+
+Majority Element (Easy)
 
 **question**
 
@@ -103,6 +119,10 @@ def majorityElement(nums: List[int]) -> int:
 
     return answer
 ```
+
+**anchor**
+
+Best Time to Buy and Sell Stock (Easy)
 
 **question**
 
@@ -149,6 +169,10 @@ def maxSubarray(nums: List[int]) -> int:
     return bestSum
 ```
 
+**anchor**
+
+Roman to Integer (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/roman-to-integer/description" target="_blank">Roman to Integer</a> (Easy)
@@ -192,6 +216,10 @@ def romanToInt(s: str) -> int:
     return answer
 ```
 
+**anchor**
+
+Length of Last Word (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/length-of-last-word/description" target="_blank">Length of Last Word</a> (Easy)
@@ -217,6 +245,10 @@ def lengthOfLastWord(s: str) -> int:
 
     return count
 ```
+
+**anchor**
+
+Longest Common Prefix (Easy)
 
 **question**
 
@@ -249,6 +281,10 @@ def longestCommonPrefix(strs: List[str]) -> str:
     return shortestWord
 ```
 
+**anchor**
+
+Find the Index of the First Occurrence in a String (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description" target="_blank">Find the Index of the First Occurrence in a String</a> (Easy)
@@ -277,6 +313,10 @@ def strStr(haystack: str, needle: str) -> int:
 
     return -1
 ```
+
+**anchor**
+
+Remove Duplicates from Sorted Array II (Medium)
 
 **question**
 
@@ -308,6 +348,10 @@ def removeDuplicates(nums: List[int]) -> int:
     return i
 ```
 
+**anchor**
+
+Rotate Array (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/rotate-array/description" target="_blank">Rotate Array</a> (Medium)
@@ -331,6 +375,10 @@ def reverseList(li: List[int], start: int, end: int) -> None:
         start += 1
         end -= 1
 ```
+
+**anchor**
+
+Best Time to Buy and Sell Stock II (Medium)
 
 **question**
 
@@ -365,6 +413,10 @@ def maxProfit(prices: List[int]) -> int:
     return answer
 ```
 
+**anchor**
+
+Jump Game (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/jump-game/description" target="_blank">Jump Game</a> (Medium)
@@ -396,6 +448,10 @@ def canJump(nums: List[int]) -> bool:
     return farthest >= target
 ```
 
+**anchor**
+
+Jump Game II (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/jump-game-ii/description" target="_blank">Jump Game II</a> (Medium)
@@ -425,6 +481,10 @@ def jump(nums: List[int]) -> int:
             currEnd = currFarthest
     return answer
 ```
+
+**anchor**
+
+H-Index (Medium)
 
 **question**
 
@@ -458,16 +518,20 @@ def hIndex(citations: List[int]) -> int:
     return 0
 ```
 
+**anchor**
+
+Insert Delete GetRandom O(1) (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/insert-delete-getrandom-o1/description" target="_blank">Insert Delete GetRandom O(1)</a> (Medium)
 
 Implement the `RandomizedSet` class:
 
--   `RandomizedSet()` Initializes the `RandomizedSet` object.
--   `bool insert(int val)` Inserts an item `val` into the set if not present. Returns `true` if the item was not present, `false` otherwise.
--   `bool remove(int val)` Removes an item `val` from the set if present. Returns `true` if the item was present, `false` otherwise.
--   `int getRandom()` Returns a random element from the current set of elements (it's guaranteed that at least one element exists when this method is called). Each element must have the same probability of being returned.
+- `RandomizedSet()` Initializes the `RandomizedSet` object.
+- `bool insert(int val)` Inserts an item `val` into the set if not present. Returns `true` if the item was not present, `false` otherwise.
+- `bool remove(int val)` Removes an item `val` from the set if present. Returns `true` if the item was present, `false` otherwise.
+- `int getRandom()` Returns a random element from the current set of elements (it's guaranteed that at least one element exists when this method is called). Each element must have the same probability of being returned.
 
 Implement the functions of the class such that each function works in average `O(1)` time complexity.
 
@@ -505,6 +569,10 @@ class RandomizedSet:
         return random.choice(self.nums)
 ```
 
+**anchor**
+
+Product of Array Except Self (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/product-of-array-except-self/description" target="_blank">Product of Array Except Self</a> (Medium)
@@ -517,13 +585,13 @@ Write an algorithm that runs in `O(n)` time and without using the division opera
 
 Solution logic:
 
--   The answer can be derived by creating two arrays: `prefix` and `suffix`.
--   `prefix[i]` contains the product of all elements before `i`.
--   `suffix[i]` contains the product of all elements after `i`.
--   `answer[i] = prefix[i] * suffix[i]`
--   Space can be optimized by using the `answer` array to build both `prefix` and `suffix`.
--   Iterate normally through `answer` while keeping track of a prefix total.
--   Then iterate backwards while keeping track of a suffix total.
+- The answer can be derived by creating two arrays: `prefix` and `suffix`.
+- `prefix[i]` contains the product of all elements before `i`.
+- `suffix[i]` contains the product of all elements after `i`.
+- `answer[i] = prefix[i] * suffix[i]`
+- Space can be optimized by using the `answer` array to build both `prefix` and `suffix`.
+- Iterate normally through `answer` while keeping track of a prefix total.
+- Then iterate backwards while keeping track of a suffix total.
 
 ```py
 # Time complexity: O(n)
@@ -543,6 +611,10 @@ def productExceptSelf(nums: List[int]) -> List[int]:
 
     return answer
 ```
+
+**anchor**
+
+Gas Station (Medium)
 
 **question**
 
@@ -575,6 +647,10 @@ def canCompleteCircuit(gas: List[int], cost: List[int]) -> int:
     return idx
 ```
 
+**anchor**
+
+Integer to Roman (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/integer-to-roman/description" target="_blank">Integer to Roman</a> (Medium)
@@ -585,9 +661,9 @@ I -> 1, V -> 5, X -> 10, L -> 50, C -> 100, D -> 500, M -> 1000
 
 Roman numerals are formed by appending the conversions of decimal place values from highest to lowest. Converting a decimal place value into a Roman numeral has the following rules:
 
--   If the value does not start with 4 or 9, select the symbol of the maximal value that can be subtracted from the input, append that symbol to the result, subtract its value, and convert the remainder to a Roman numeral.
--   If the value starts with 4 or 9 use the subtractive form representing one symbol subtracted from the following symbol, for example, 4 is 1 (I) less than 5 (V): IV and 9 is 1 (I) less than 10 (X): IX. Only the following subtractive forms are used: 4 (IV), 9 (IX), 40 (XL), 90 (XC), 400 (CD) and 900 (CM).
--   Only powers of 10 (I, X, C, M) can be appended consecutively at most 3 times to represent multiples of 10. You cannot append 5 (V), 50 (L), or 500 (D) multiple times. If you need to append a symbol 4 times use the subtractive form.
+- If the value does not start with 4 or 9, select the symbol of the maximal value that can be subtracted from the input, append that symbol to the result, subtract its value, and convert the remainder to a Roman numeral.
+- If the value starts with 4 or 9 use the subtractive form representing one symbol subtracted from the following symbol, for example, 4 is 1 (I) less than 5 (V): IV and 9 is 1 (I) less than 10 (X): IX. Only the following subtractive forms are used: 4 (IV), 9 (IX), 40 (XL), 90 (XC), 400 (CD) and 900 (CM).
+- Only powers of 10 (I, X, C, M) can be appended consecutively at most 3 times to represent multiples of 10. You cannot append 5 (V), 50 (L), or 500 (D) multiple times. If you need to append a symbol 4 times use the subtractive form.
 
 Given an integer, convert it to a Roman numeral.
 
@@ -621,6 +697,10 @@ def intToRoman(num: int) -> str:
 
     return "".join(answer)
 ```
+
+**anchor**
+
+Reverse Words in a String (Medium)
 
 **question**
 
@@ -660,6 +740,10 @@ def reverseWords(s: str) -> str:
 
     return " ".join(answer)
 ```
+
+**anchor**
+
+Zigzag Conversion (Medium)
 
 **question**
 
@@ -710,8 +794,8 @@ def convert(s: str, numRows: int) -> str:
 
 Alternative solution:
 
--   This solution relies on finding the numerical pattern between indices per row.
--   To see the pattern, create the expected output and zigzag for cases `numRows = 3, 4, and 5`.
+- This solution relies on finding the numerical pattern between indices per row.
+- To see the pattern, create the expected output and zigzag for cases `numRows = 3, 4, and 5`.
 
 ```py
 # Time complexity: O(n)
@@ -750,6 +834,10 @@ def convert(s: str, numRows: int) -> str:
     return "".join(answer)
 ```
 
+**anchor**
+
+Maximum Subarray (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/maximum-subarray/description" target="_blank">Maximum Subarray</a> (Medium)
@@ -773,6 +861,10 @@ def maxSubArray(nums: List[int]) -> int:
     return answer
 ```
 
+**anchor**
+
+Maximum Sum Circular Subarray (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/maximum-sum-circular-subarray/description" target="_blank">Maximum Sum Circular Subarray</a> (Medium)
@@ -787,11 +879,11 @@ A subarray may only include each element of the fixed buffer `nums` at most once
 
 Solution logic:
 
--   The maximum sum subarray is either contiguous or wraps around the circular array.
--   Find the potentially contiguous subarray using Kadane's algorithm.
--   To find the wrapping subarray, get the contiguous minimum sum and subtract from the array total sum.
-    -   total = min array + max array --> max array = total - min array
--   Note that only computing (total - min array) is not enough to find the maximum sum subarray. If the maximum sum subarray is contiguous, the minimum sum subarray wraps and will not be found by Kadane's algorithm.
+- The maximum sum subarray is either contiguous or wraps around the circular array.
+- Find the potentially contiguous subarray using Kadane's algorithm.
+- To find the wrapping subarray, get the contiguous minimum sum and subtract from the array total sum.
+    - total = min array + max array --> max array = total - min array
+- Note that only computing (total - min array) is not enough to find the maximum sum subarray. If the maximum sum subarray is contiguous, the minimum sum subarray wraps and will not be found by Kadane's algorithm.
 
 ```py
 # Time complexity: O(n)

@@ -1,3 +1,7 @@
+**anchor**
+
+Number of Islands (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/number-of-islands/description" target="_blank">Number of Islands</a> (Medium)
@@ -62,15 +66,19 @@ def markIsland(grid: List[List[str]], row: int, col: int) -> None:
     markIsland(grid, row, col - 1)
 ```
 
+**anchor**
+
+Surrounded Regions (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/surrounded-regions/description" target="_blank">Surrounded Regions</a> (Medium)
 
 You are given an `m x n` matrix `board` containing letters `'X'` and `'O'`, capture regions that are surrounded:
 
--   Connect: A cell is connected to adjacent cells horizontally or vertically.
--   Region: To form a region connect every `'O'` cell.
--   Surround: The region is surrounded with `'X'` cells if you can connect the region with `'X'` cells and none of the region cells are on the edge of the `board`.
+- Connect: A cell is connected to adjacent cells horizontally or vertically.
+- Region: To form a region connect every `'O'` cell.
+- Surround: The region is surrounded with `'X'` cells if you can connect the region with `'X'` cells and none of the region cells are on the edge of the `board`.
 
 A surrounded region is captured by replacing all `'O'`s with `'X'`s in the input matrix `board`.
 
@@ -113,6 +121,10 @@ def markRegion(board: List[List[str]], row: int, col: int) -> None:
     markRegion(board, row + 1, col)
     markRegion(board, row, col - 1)
 ```
+
+**anchor**
+
+Clone Graph (Medium)
 
 **question**
 
@@ -181,6 +193,10 @@ def helper(node: Optional['Node'], visited) -> Optional['Node']:
     return visited[node]
 ```
 
+**anchor**
+
+Evaluate Division (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/evaluate-division/description" target="_blank">Evaluate Division</a> (Medium)
@@ -245,6 +261,10 @@ def getPath(graph, query: List[str]) -> float:
     return -1
 ```
 
+**anchor**
+
+Course Schedule (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/course-schedule/description" target="_blank">Course Schedule</a> (Medium)
@@ -292,6 +312,10 @@ def canFinish(numCourses: int, prerequisites: List[List[int]]) -> bool:
 
     return numCourses == 0
 ```
+
+**anchor**
+
+Course Schedule II (Medium)
 
 **question**
 
@@ -342,6 +366,10 @@ def dfs(current, courses, degrees, answer) -> None:
             dfs(child, courses, degrees, answer)
 ```
 
+**anchor**
+
+Snakes and Ladders (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/snakes-and-ladders/description" target="_blank">Snakes and Ladders</a> (Medium)
@@ -350,10 +378,10 @@ You are given an `n x n` integer matrix `board` where the cells are labeled from
 
 You start on square `1` of the board. In each move, starting from square `curr`, do the following:
 
--   Choose a destination square `next` with a label in the range `[curr + 1, min(curr + 6, n^2)]`.
-    -   This choice simulates the result of a standard 6-sided die roll: i.e., there are always at most 6 destinations, regardless of the size of the board.
--   If `next` has a snake or ladder, you must move to the destination of that snake or ladder. Otherwise, you move to `next`.
--   The game ends when you reach the square `n^2`.
+- Choose a destination square `next` with a label in the range `[curr + 1, min(curr + 6, n^2)]`.
+    - This choice simulates the result of a standard 6-sided die roll: i.e., there are always at most 6 destinations, regardless of the size of the board.
+- If `next` has a snake or ladder, you must move to the destination of that snake or ladder. Otherwise, you move to `next`.
+- The game ends when you reach the square `n^2`.
 
 A board square on row `r` and column `c` has a snake or ladder if `board[r][c] != -1`. The destination of that snake or ladder is `board[r][c]`. Squares `1` and `n^2` do not have a snake or ladder.
 
@@ -407,6 +435,10 @@ def snakesAndLadders(board: List[List[int]]) -> int:
     return -1
 ```
 
+**anchor**
+
+Minimum Genetic Mutation (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/minimum-genetic-mutation/description" target="_blank">Minimum Genetic Mutation</a> (Medium)
@@ -457,18 +489,22 @@ def minMutation(startGene: str, endGene: str, bank: List[str]) -> int:
     return -1
 ```
 
+**anchor**
+
+Implement Trie (Prefix Tree) (Medium)
+
 **question**
 
-<a href="https://leetcode.com/problems/minimum-genetic-mutation/description" target="_blank">Minimum Genetic Mutation</a> (Medium)
+<a href="https://leetcode.com/problems/implement-trie-prefix-tree/description" target="_blank">Implement Trie (Prefix Tree)</a> (Medium)
 
 A trie (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker.
 
 Implement the Trie class:
 
--   `Trie()` Initializes the trie object.
--   `void insert(String word)` Inserts the string `word` into the trie.
--   `boolean search(String word)` Returns `true` if the string `word` is in the trie (i.e., was inserted before), and `false` otherwise.
--   `boolean startsWith(String prefix)` Returns `true` if there is a previously inserted string `word` that has the prefix `prefix`, and `false` otherwise.
+- `Trie()` Initializes the trie object.
+- `void insert(String word)` Inserts the string `word` into the trie.
+- `boolean search(String word)` Returns `true` if the string `word` is in the trie (i.e., was inserted before), and `false` otherwise.
+- `boolean startsWith(String prefix)` Returns `true` if there is a previously inserted string `word` that has the prefix `prefix`, and `false` otherwise.
 
 **answer**
 
@@ -517,6 +553,10 @@ class TrieNode:
         self.completeWord = False
 ```
 
+**anchor**
+
+Design Add and Seach Words Data Structure (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/design-add-and-search-words-data-structure/description" target="_blank">Design Add and Search Words Data Structure</a> (Medium)
@@ -525,9 +565,9 @@ Design a data structure that supports adding new words and finding if a string m
 
 Implement the `WordDictionary` class:
 
--   `WordDictionary()` Initializes the object.
--   `void addWord(word)` Adds `word` to the data structure, it can be matched later.
--   `bool search(word)` Returns `true` if there is any string in the data structure that matches `word` or `false` otherwise. `word` may contain dots `'.'` where dots can be matched with any letter.
+- `WordDictionary()` Initializes the object.
+- `void addWord(word)` Adds `word` to the data structure, it can be matched later.
+- `bool search(word)` Returns `true` if there is any string in the data structure that matches `word` or `false` otherwise. `word` may contain dots `'.'` where dots can be matched with any letter.
 
 **answer**
 

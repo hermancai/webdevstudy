@@ -1,3 +1,7 @@
+**anchor**
+
+TypeScript
+
 **question**
 
 TypeScript
@@ -6,15 +10,19 @@ TypeScript
 
 TypeScript is an open-source programming language developed by Microsoft in 2012. Some benefits of TypeScript include:
 
--   Static typing: Errors are caught at compile time instead of runtime.
--   Type inference: Types are automatically inferred.
--   Tooling: Editors can provide autocompletion, function signatures, and inline documentation.
--   Self-documentation: Types inherently act as documentation for describing code.
--   JavaScript compatibility
-    -   TypeScript is a superset of JavaScript, meaning all legal JavaScript syntax is legal in TypeScript.
-    -   TypeScript guarantees that JavaScript converted into TypeScript will always behave the same way during runtime.
--   Custom typing: Interfaces and type aliases can be used to model objects.
--   Widespread support: Many modern frameworks and libraries use/support TypeScript.
+- Static typing: Errors are caught at compile time instead of runtime.
+- Type inference: Types are automatically inferred.
+- Tooling: Editors can provide autocompletion, function signatures, and inline documentation.
+- Self-documentation: Types inherently act as documentation for describing code.
+- JavaScript compatibility
+    - TypeScript is a superset of JavaScript, meaning all legal JavaScript syntax is legal in TypeScript.
+    - TypeScript guarantees that JavaScript converted into TypeScript will always behave the same way during runtime.
+- Custom typing: Interfaces and type aliases can be used to model objects.
+- Widespread support: Many modern frameworks and libraries use/support TypeScript.
+
+**anchor**
+
+TypeScript compiler
 
 **question**
 
@@ -44,6 +52,10 @@ Notice that the template string in TypeScript is converted to a string using `co
 
 By default, the compiler will always produce create a JavaScript file even if the TypeScript contains errors. This behavior can be changed by using the `noEmitOnError` compiler option.
 
+**anchor**
+
+Explicit/Implicit Types
+
 **question**
 
 Explicit/Implicit Types
@@ -68,14 +80,18 @@ Sometimes TypeScript cannot infer a type. In the function above, if the date par
 
 TypeScript offers options for how to handle ambiguous types. These options can be managed via the CLI, or in a `tsconfig.json` file. Some options include:
 
--   `strict`: toggle all options regarding type-checking strictness
--   `noImplicitAny`: raises an error for variables that are inferred as `any`
--   `strictNullChecks`: raises an error for variables that may be `null` or `undefined`, forcing explicit type checking by the user
-    -   Use `!` to assert that a value will never be `null`/`undefined`. Example: `str!.toUpperCase()`
+- `strict`: toggle all options regarding type-checking strictness
+- `noImplicitAny`: raises an error for variables that are inferred as `any`
+- `strictNullChecks`: raises an error for variables that may be `null` or `undefined`, forcing explicit type checking by the user
+    - Use `!` to assert that a value will never be `null`/`undefined`. Example: `str!.toUpperCase()`
+
+**anchor**
+
+Type Syntax
 
 **question**
 
-Common Type Syntax
+Type Syntax
 
 **answer**
 
@@ -125,6 +141,10 @@ strArr.forEach((s) => {
     console.log(typeof s);
 });
 ```
+
+**anchor**
+
+Object Types
 
 **question**
 
@@ -217,6 +237,10 @@ interface Worker {
 type StudentWorker = Student & Worker;
 ```
 
+**anchor**
+
+Union Types
+
 **question**
 
 Union Types
@@ -236,6 +260,10 @@ function print(val: string | number | boolean) {
 ```
 
 When performing operations on `val`, the operations must be valid for every union member. Since the `toUpperCase` function only exists for string values, the function must be called within code that guarantees `val` is a string. Within the conditional statement checking `typeof val`, TypeScript can narrow the union into a specific type.
+
+**anchor**
+
+Type Aliases and Interfaces
 
 **question**
 
@@ -271,13 +299,17 @@ interface FullName {
 
 Differences between `type` and `interface`
 
--   `type` allows more types (e.g. primitives, unions, intersections) while `interface` is for structuring objects
--   `interface`s declared with the same name will be merged. `type`s cannot be changed.
--   `interface` can be extended to add types. `type` must use intersections.
-    -   `interface Person extends Animal { name: string; }`
-    -   `type Person = Animal & { name: string }`
+- `type` allows more types (e.g. primitives, unions, intersections) while `interface` is for structuring objects
+- `interface`s declared with the same name will be merged. `type`s cannot be changed.
+- `interface` can be extended to add types. `type` must use intersections.
+    - `interface Person extends Animal { name: string; }`
+    - `type Person = Animal & { name: string }`
 
 A common guideline is to use `interface` unless some feature of `type` is necessary.
+
+**anchor**
+
+Type Assertions
 
 **question**
 
@@ -304,6 +336,10 @@ const str = "string" as number;
 // First cast as any or unknown
 const str = "string" as any as number;
 ```
+
+**anchor**
+
+Literal Types
 
 **question**
 
@@ -343,6 +379,10 @@ const obj2 = {
     str: "hello",
 } as const;
 ```
+
+**anchor**
+
+Type Guards & Narrowing
 
 **question**
 
@@ -451,6 +491,10 @@ function print(s: unknown) {
 }
 ```
 
+**anchor**
+
+Discriminated Unions
+
 **question**
 
 Discriminated Unions
@@ -491,9 +535,13 @@ function getArea(shape: Shape) {
 }
 ```
 
+**anchor**
+
+never
+
 **question**
 
-`never` type
+`never`
 
 **answer**
 
@@ -547,6 +595,10 @@ function print1(val: string | number | boolean) {
 ```
 
 In the example above, note that `valType` has the standard `typeof` return type. This is due to TypeScript's type-checking strictness. During JavaScript runtime, there is no guarantee that only values of expected types will be passed into the function.
+
+**anchor**
+
+Generics
 
 **question**
 
@@ -663,6 +715,10 @@ function getShape<Type extends Shape = Square>(shape?: Type): Type {
 }
 ```
 
+**anchor**
+
+keyof
+
 **question**
 
 `keyof`
@@ -692,6 +748,10 @@ type L = keyof List; // type L = number
 `type O = string | number` because in JavaScript, numeric keys are coerced into strings. `obj[123]` means `obj["123"]`.
 
 `type L = number` instead of `type L = string | number` because TypeScript distinguishes numeric index signatures for type checking. Object behavior will not change during JavaScript runtime.
+
+**anchor**
+
+typeof
 
 **question**
 
@@ -724,6 +784,10 @@ function func(val: unknown): number {
 }
 type Y = ReturnType<typeof func>; // type Y = number
 ```
+
+**anchor**
+
+Indexed Access Types
 
 **question**
 
@@ -771,6 +835,10 @@ type Person = (typeof PersonArray)[number];
 type Name1 = (typeof PersonArray)[number]["name"]; // type Name = string
 type Name2 = Person["age"]; // type Name2 = string
 ```
+
+**anchor**
+
+Conditional Types
 
 **question**
 
@@ -846,6 +914,10 @@ type NoDistArray<T> = [T] extends [any] ? T[] : never;
 type StrNumArray = NoDistArray<string | number>; // type StrNumArray = (string | number)[]
 ```
 
+**anchor**
+
+Template Literal Types
+
 **question**
 
 Template Literal Types
@@ -902,6 +974,10 @@ type CapName = Capitalize<Name>; // type CapName = "Joe"
 type Greet = "Hello WORLD";
 type UncapShape = Uncapitalize<Greet>; // type UncapShape = "hello WORLD"
 ```
+
+**anchor**
+
+Mapped Types
 
 **question**
 
@@ -963,6 +1039,10 @@ type RemoveId<T> = {
 type NoIdPerson = RemoveId<Person>; // { name: string; }
 ```
 
+**anchor**
+
+Classes
+
 **question**
 
 Classes
@@ -1007,7 +1087,7 @@ class Point {
     constructor(
         public readonly x: number,
         protected y: number,
-        private z: number
+        private z: number,
     ) {}
 }
 

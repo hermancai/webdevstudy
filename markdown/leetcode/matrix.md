@@ -1,17 +1,21 @@
+**anchor**
+
+Valid Sudoku (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/valid-sudoku/description" target="_blank">Valid Sudoku</a> (Medium)
 
 Determine if a `9 x 9` Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
 
--   Each row must contain the digits `1-9` without repetition.
--   Each column must contain the digits `1-9` without repetition.
--   Each of the nine `3 x 3` sub-boxes of the grid must contain the digits `1-9` without repetition.
+- Each row must contain the digits `1-9` without repetition.
+- Each column must contain the digits `1-9` without repetition.
+- Each of the nine `3 x 3` sub-boxes of the grid must contain the digits `1-9` without repetition.
 
 Note:
 
--   A Sudoku board (partially filled) could be valid but is not necessarily solvable.
--   Only the filled cells need to be validated according to the mentioned rules.
+- A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+- Only the filled cells need to be validated according to the mentioned rules.
 
 **answer**
 
@@ -67,6 +71,10 @@ def isValidSudoku(board: List[List[str]]) -> bool:
     return True
 ```
 
+**anchor**
+
+Spiral Matrix (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/spiral-matrix/description" target="_blank">Spiral Matrix</a> (Medium)
@@ -109,6 +117,10 @@ def spiralOrder(matrix: List[List[int]]) -> List[int]:
     return answer
 ```
 
+**anchor**
+
+Rotate Image (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/rotate-image/description" target="_blank">Rotate Image</a> (Medium)
@@ -140,6 +152,10 @@ def rotate(matrix: List[List[int]]) -> None:
 ```
 
 To rotate counterclockwise, reverse each nested list, then transpose.
+
+**anchor**
+
+Set Matrix Zeroes (Medium)
 
 **question**
 
@@ -195,6 +211,10 @@ def setZeroes(matrix: List[List[int]]) -> None:
             matrix[i][0] = 0
 ```
 
+**anchor**
+
+Game of Life (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/game-of-life/description" target="_blank">Game of Life</a> (Medium)
@@ -203,10 +223,10 @@ def setZeroes(matrix: List[List[int]]) -> None:
 
 The board is made up of an `m x n` grid of cells, where each cell has an initial state: live (represented by a `1`) or dead (represented by a `0`). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules:
 
--   Any live cell with fewer than two live neighbors dies as if caused by under-population.
--   Any live cell with two or three live neighbors lives on to the next generation.
--   Any live cell with more than three live neighbors dies, as if by over-population.
--   Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+- Any live cell with fewer than two live neighbors dies as if caused by under-population.
+- Any live cell with two or three live neighbors lives on to the next generation.
+- Any live cell with more than three live neighbors dies, as if by over-population.
+- Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
 The next state is created by applying the above rules simultaneously to every cell in the current state, where births and deaths occur simultaneously. Given the current state of the `m x n` grid `board`, return the next state.
 

@@ -1,3 +1,7 @@
+**anchor**
+
+Add Binary (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/add-binary/description" target="_blank">Add Binary</a> (Easy)
@@ -33,6 +37,10 @@ def addBinary(a: str, b: str) -> str:
         answer.append("1")
     return "".join(reversed(answer))
 ```
+
+**anchor**
+
+Reverse Bits (Easy)
 
 **question**
 
@@ -73,6 +81,10 @@ def reverseBits(n: int) -> int:
     return answer
 ```
 
+**anchor**
+
+Number of 1 Bits (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/number-of-1-bits/description" target="_blank">Number of 1 Bits</a> (Easy)
@@ -95,6 +107,10 @@ def hammingWeight(n: int) -> int:
         n >>= 1
     return count
 ```
+
+**anchor**
+
+Single Number (Easy)
 
 **question**
 

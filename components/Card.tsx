@@ -1,7 +1,10 @@
-import { ReactNode } from "react";
+"use client";
+
+import { MouseEvent, MouseEventHandler, ReactNode } from "react";
 
 type CardProps = {
     index: number;
+    anchor: string;
     question: ReactNode;
     answer: ReactNode;
     isOpen: boolean;
@@ -47,38 +50,39 @@ function MinusSVG() {
 }
 
 export default function Card({
+    anchor,
     question,
     answer,
     index,
     isOpen,
     setIsOpen,
 }: CardProps) {
-    return (
-        <div className="p-3 rounded-md bg-neutral-800 border border-neutral-700">
-            <div className="flex flex-row flex-nowrap gap-2 items-start pl-1">
-                <div className="grow overflow-hidden flex items-baseline gap-2">
-                    <p>{index + 1}.</p>
-                    <div className="flex flex-col overflow-hidden grow">
-                        {question}
+    const handleExpandCard = (e: MouseEvent<HTMLDivElement>) => {
+        // Stop propagation if clicking on link
+        if ((e.target as HTMLElement).closest("a")) return;
+        setIsOpen(index);
+    };
 
-                        <div
-                            className={`${
-                                isOpen ? "block" : "hidden"
-                            } mt-3 mb-2 border-t border-neutral-600 pt-2`}
-                            aria-hidden={!isOpen}
-                        >
-                            {answer}
-                        </div>
-                    </div>
-                </div>
-                <button
-                    onClick={() => setIsOpen(index)}
-                    className="rounded-md p-4 hover:bg-neutral-700 transition-colors"
-                    title={isOpen ? "Hide Answer" : "Show Answer"}
-                    aria-expanded={isOpen}
-                >
+    return (
+        <div
+            className={`scroll-mt-[var(--header-height)] rounded-md bg-neutral-800 border border-neutral-600 ${isOpen ? "border-b-2 border-b-green-500" : ""}`}
+            id={anchor.toLowerCase().replace(/\s+/g, "-")}
+        >
+            <div
+                className="flex items-center justify-between gap-2 w-full p-4 border border-transparent hover:border-neutral-300 rounded-md cursor-pointer transition-colors"
+                onClick={handleExpandCard}
+                aria-expanded={isOpen}
+            >
+                {question}
+                <div className="self-start">
                     {isOpen ? <MinusSVG /> : <PlusSVG />}
-                </button>
+                </div>
+            </div>
+            <div
+                className={`${isOpen ? "flex" : "hidden"} p-4`}
+                aria-hidden={!isOpen}
+            >
+                {answer}
             </div>
         </div>
     );
