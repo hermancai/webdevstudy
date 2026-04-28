@@ -2,15 +2,13 @@
 
 [webdevstudy.vercel.app](https://webdevstudy.vercel.app/)
 
-This is a compilation of common web development technical interview questions and answers.
-
-Developed with Next.js
+This is a work-in-progress compilation of common web dev topics and LeetCode.
 
 ## Local Development
 
 Data is stored in .md files in the ./markdown directory.
 
-To the development server:
+To run locally:
 
 ```bash
 npm run dev
