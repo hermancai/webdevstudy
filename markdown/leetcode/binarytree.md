@@ -1,3 +1,7 @@
+**anchor**
+
+Binary Tree
+
 **question**
 
 Binary Tree
@@ -14,18 +18,22 @@ class TreeNode:
 
 Preorder traversal
 
--   Process node -> traverse left subtree -> traverse right subtree
--   Used to create a copy of the tree
+- Process node -> traverse left subtree -> traverse right subtree
+- Used to create a copy of the tree
 
 Inorder traversal
 
--   Traverse left subtree -> process node -> traverse right subtree
--   Used to get sorted values in a binary search tree
+- Traverse left subtree -> process node -> traverse right subtree
+- Used to get sorted values in a binary search tree
 
 Postorder traversal
 
--   Traverse left subtree -> traverse right subtree -> process node
--   Used to delete a tree starting from leaves to root
+- Traverse left subtree -> traverse right subtree -> process node
+- Used to delete a tree starting from leaves to root
+
+**anchor**
+
+Maximum Depth of Binary Tree (Easy)
 
 **question**
 
@@ -49,6 +57,10 @@ def maxDepth(root: Optional[TreeNode]) -> int:
 
     return max(left, right)
 ```
+
+**anchor**
+
+Same Tree (Easy)
 
 **question**
 
@@ -75,6 +87,10 @@ def isSameTree(p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
 
     return p.val == q.val
 ```
+
+**anchor**
+
+Invert Binary Tree (Easy)
 
 **question**
 
@@ -121,6 +137,10 @@ def invertTree(root: Node) -> Node:
             q.append(node.right)
     return root
 ```
+
+**anchor**
+
+Symmetric Tree (Easy)
 
 **question**
 
@@ -176,6 +196,10 @@ def isSymmetric(root:Node) -> bool:
     return True
 ```
 
+**anchor**
+
+Path Sum (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/path-sum/description" target="_blank">Path Sum</a> (Easy)
@@ -203,6 +227,10 @@ def helper(root, total, targetSum):
     right = self.helper(root.right, total + root.val, targetSum)
     return right
 ```
+
+**anchor**
+
+Count Complete Tree Nodes (Easy)
 
 **question**
 
@@ -237,6 +265,10 @@ def countNodes(root) -> int:
         return countNodes(root.left) + 2**right
 ```
 
+**anchor**
+
+Average of Levels in Binary Tree (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/average-of-levels-in-binary-tree/description" target="_blank">Average of Levels in Binary Tree</a> (Easy)
@@ -264,6 +296,10 @@ def averageOfLevels(root: Optional[TreeNode]) -> List[float]:
         q = nextLevel
     return answer
 ```
+
+**anchor**
+
+Minimum Absolute Difference in BST (Easy)
 
 **question**
 
@@ -293,6 +329,10 @@ class Solution:
         inorder(root)
         return self.answer
 ```
+
+**anchor**
+
+Construct Binary Tree from Preorder and Inorder Traversal (Medium)
 
 **question**
 
@@ -335,6 +375,10 @@ def build(preorder, inorder, p, l, r) -> Optional[TreeNode]:
     return node
 ```
 
+**anchor**
+
+Construct Binary Tree from Inorder and Postorder Traversal (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description" target="_blank">Construct Binary Tree from Inorder and Postorder Traversal</a> (Medium)
@@ -376,6 +420,10 @@ def build(inorder, postorder, p, l, r):
     return node
 ```
 
+**anchor**
+
+Populating Next Right Pointers in Each Node II (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/description" target="_blank">Populating Next Right Pointers in Each Node II</a> (Medium)
@@ -401,8 +449,8 @@ Write a solution that uses constant space. Recursion using implicit stack space 
 
 Solution logic:
 
--   You are essentially trying to create a linked list for each level in the binary tree using the custom nodes.
--   After building a linked list for one level, that list can be used to build a list for the next level, and so on.
+- You are essentially trying to create a linked list for each level in the binary tree using the custom nodes.
+- After building a linked list for one level, that list can be used to build a list for the next level, and so on.
 
 ```py
 # Time complexity: O(n)
@@ -434,14 +482,18 @@ def connect(root: 'Node') -> 'Node':
     return originalRoot
 ```
 
+**anchor**
+
+Flatten Binary Tree to Linked List (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description" target="_blank">Flatten Binary Tree to Linked List</a> (Medium)
 
 Given the `root` of a binary tree, flatten the tree into a "linked list":
 
--   The "linked list" should use the same `TreeNode` class where the `right` child pointer points to the next node in the list and the `left` child pointer is always `null`.
--   The "linked list" should be in the same order as a pre-order traversal of the binary tree.
+- The "linked list" should use the same `TreeNode` class where the `right` child pointer points to the next node in the list and the `left` child pointer is always `null`.
+- The "linked list" should be in the same order as a pre-order traversal of the binary tree.
 
 **answer**
 
@@ -468,6 +520,10 @@ def helper(curr, prev):
     curr.left = None
     return curr
 ```
+
+**anchor**
+
+Sum Root to Leaf Numbers (Medium)
 
 **question**
 
@@ -501,15 +557,19 @@ def helper(node: Optional[TreeNode], currVal: int) -> int:
     return left + right
 ```
 
+**anchor**
+
+Binary Search Tree Iterator (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/binary-search-tree-iterator/description" target="_blank">Binary Search Tree Iterator</a> (Medium)
 
 Implement the `BSTIterator` class that represents an iterator over the in-order traversal of a binary search tree (BST):
 
--   `BSTIterator(TreeNode root)` Initializes an object of the `BSTIterator` class. The `root` of the BST is given as part of the constructor. The pointer should be initialized to a non-existent number smaller than any element in the BST.
--   `boolean hasNext()` Returns `true` if there exists a number in the traversal to the right of the pointer, otherwise returns `false`.
--   `int next()` Moves the pointer to the right, then returns the number at the pointer.
+- `BSTIterator(TreeNode root)` Initializes an object of the `BSTIterator` class. The `root` of the BST is given as part of the constructor. The pointer should be initialized to a non-existent number smaller than any element in the BST.
+- `boolean hasNext()` Returns `true` if there exists a number in the traversal to the right of the pointer, otherwise returns `false`.
+- `int next()` Moves the pointer to the right, then returns the number at the pointer.
 
 Notice that by initializing the pointer to a non-existent smallest number, the first call to `next()` will return the smallest element in the BST.
 
@@ -547,6 +607,10 @@ class BSTIterator:
             root = root.left
 ```
 
+**anchor**
+
+Lowest Common Ancestor of a Binary Tree (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description" target="_blank">Lowest Common Ancestor of a Binary Tree</a> (Medium)
@@ -579,6 +643,10 @@ def lowestCommonAncestor(root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'Tre
     #   because either left or right would be None
     return left or right
 ```
+
+**anchor**
+
+Binary Tree Right Side View (Medium)
 
 **question**
 
@@ -633,6 +701,10 @@ def rightSideView(root: Optional[TreeNode]) -> List[int]:
     return answer
 ```
 
+**anchor**
+
+Binary Tree Level Order Traversal (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/binary-tree-level-order-traversal/description" target="_blank">Binary Tree Level Order Traversal</a> (Medium)
@@ -665,6 +737,10 @@ def levelOrder(root: Optional[TreeNode]) -> List[List[int]]:
 
     return answer
 ```
+
+**anchor**
+
+Binary Tree Zigzag Level Order Traversal (Medium)
 
 **question**
 
@@ -707,6 +783,10 @@ def zigzagLevelOrder(root: Optional[TreeNode]) -> List[List[int]]:
 
     return answer
 ```
+
+**anchor**
+
+Kth Smallest Element in a BST (Medium)
 
 **question**
 
@@ -761,6 +841,10 @@ def kthSmallest(root: Optional[TreeNode], k: int) -> int:
     return -1
 ```
 
+**anchor**
+
+Validate Binary Search Tree (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/validate-binary-search-tree/description" target="_blank">Validate Binary Search Tree</a> (Medium)
@@ -769,9 +853,9 @@ Given the `root` of a binary tree, determine if it is a valid binary search tree
 
 A valid BST is defined as follows:
 
--   The left subtree of a node contains only nodes with keys less than the node's key.
--   The right subtree of a node contains only nodes with keys greater than the node's key.
--   Both the left and right subtrees must also be binary search trees.
+- The left subtree of a node contains only nodes with keys less than the node's key.
+- The right subtree of a node contains only nodes with keys greater than the node's key.
+- Both the left and right subtrees must also be binary search trees.
 
 **answer**
 

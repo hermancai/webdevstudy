@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 
 // Routes are generated at build time based on files in the markdown directory
 export async function generateStaticParams() {
-    const fileNames = getMarkdownFileNames("./markdown/");
+    const fileNames = getMarkdownFileNames("./markdown/leetcode/");
     return fileNames.map((file) => {
         return { slug: file };
     });
@@ -29,7 +29,7 @@ export default async function Page({
 }) {
     const { slug } = await params;
 
-    const cards = parseMarkdown("./markdown/", slug);
+    const cards = parseMarkdown("./markdown/leetcode/", slug);
     const anchors = cards.map((card) => card.anchor);
     const questions = cards.map((card, i) => (
         <MarkdownRenderer key={i} markdown={card.question} />
@@ -45,7 +45,7 @@ export default async function Page({
                 <SlugContainer
                     cards={cards}
                     title={getProperName(slug)}
-                    backLink="/"
+                    backLink="/leetcode"
                     anchors={anchors}
                     questions={questions}
                     answers={answers}

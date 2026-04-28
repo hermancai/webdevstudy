@@ -1,3 +1,7 @@
+**anchor**
+
+Letter Combinations of a Phone Number (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/description" target="_blank">Letter Combinations of a Phone Number</a> (Medium)
@@ -84,6 +88,10 @@ def letterCombinations(digits: str) -> List[str]:
     return q
 ```
 
+**anchor**
+
+Combinations (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/combinations/description" target="_blank">Combinations</a> (Medium)
@@ -121,6 +129,10 @@ def helper(n, k, answer, currLi, currVal) -> None:
         currLi.pop()
 ```
 
+**anchor**
+
+Permutations (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/permutations/description" target="_blank">Permutations</a> (Medium)
@@ -151,6 +163,10 @@ def helper(nums, answer, currLi, currSet) -> None:
             currLi.pop()
             currSet.remove(nums[i])
 ```
+
+**anchor**
+
+Combination Sum (Medium)
 
 **question**
 
@@ -186,6 +202,10 @@ def helper(candidates, target, answer, currLi, currSum, index):
         currLi.pop()
 ```
 
+**anchor**
+
+Generate Parentheses (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/generate-parentheses/description" target="_blank">Generate Parentheses</a> (Medium)
@@ -220,6 +240,10 @@ def helper(n, answer, currLi, openCount, closeCount):
     helper(n, answer, currLi, openCount, closeCount + 1)
     currLi.pop()
 ```
+
+**anchor**
+
+Word Search (Medium)
 
 **question**
 

@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import OptionsGrid from "./OptionsGrid";
 import PageTitle from "./PageTitle";
 
@@ -16,12 +15,9 @@ export default function TopicsContainer({
     root,
 }: TopicsContainerProps) {
     return (
-        <>
-            <Navbar />
-            <div className="p-4 max-w-6xl mx-auto flex flex-col gap-4 w-full">
-                <PageTitle title={title} backLink={backLink} />
-                <OptionsGrid fileNames={fileNames} root={root} />
-            </div>
-        </>
+        <div className="px-6 pt-2 pb-6 max-w-6xl mx-auto flex flex-col gap-4 w-full">
+            <PageTitle title={title} backLink={backLink} />
+            <OptionsGrid fileNames={fileNames} root={root} />
+        </div>
     );
 }

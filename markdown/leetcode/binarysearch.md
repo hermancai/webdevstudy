@@ -1,3 +1,7 @@
+**anchor**
+
+Search Insert Position (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/search-insert-position/description" target="_blank">Search Insert Position</a> (Easy)
@@ -27,14 +31,18 @@ def searchInsert(nums: List[int], target: int) -> int:
     return start
 ```
 
+**anchor**
+
+Search a 2D Matrix (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/search-a-2d-matrix/description" target="_blank">Search a 2D Matrix</a> (Medium)
 
 You are given an `m x n` integer matrix `matrix` with the following two properties:
 
--   Each row is sorted in non-decreasing order.
--   The first integer of each row is greater than the last integer of the previous row.
+- Each row is sorted in non-decreasing order.
+- The first integer of each row is greater than the last integer of the previous row.
 
 Given an integer `target`, return `true` if `target` is in matrix or `false` otherwise.
 
@@ -74,6 +82,10 @@ def searchMatrix(matrix: List[List[int]], target: int) -> bool:
     return False
 ```
 
+**anchor**
+
+Find Peak Element (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/find-peak-element/description" target="_blank">Find Peak Element</a> (Medium)
@@ -112,6 +124,10 @@ def findPeakElement(nums: List[int]) -> int:
         else:
             start = mid + 1
 ```
+
+**anchor**
+
+Search in Rotated Sorted Array (Medium)
 
 **question**
 
@@ -154,6 +170,10 @@ def search(nums: List[int], target: int) -> int:
 
     return -1
 ```
+
+**anchor**
+
+Find First and Last Position of Element in Sorted Array (Medium)
 
 **question**
 
@@ -201,14 +221,18 @@ def searchRange(nums: List[int], target: int) -> List[int]:
     return answer
 ```
 
+**anchor**
+
+Find Minimum in Rotated Sorted Array (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description" target="_blank">Find Minimum in Rotated Sorted Array</a> (Medium)
 
 Suppose an array of length `n` sorted in ascending order is rotated between `1` and `n` times. For example, the array `nums = [0,1,2,4,5,6,7]` might become:
 
--   `[4,5,6,7,0,1,2]` if it was rotated `4` times.
--   `[0,1,2,4,5,6,7]` if it was rotated `7` times.
+- `[4,5,6,7,0,1,2]` if it was rotated `4` times.
+- `[0,1,2,4,5,6,7]` if it was rotated `7` times.
 
 Notice that rotating an array `[a[0], a[1], a[2], ..., a[n-1]]` 1 time results in the array `[a[n-1], a[0], a[1], a[2], ..., a[n-2]]`.
 

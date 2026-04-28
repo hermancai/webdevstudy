@@ -1,3 +1,7 @@
+**anchor**
+
+Climbing Stairs (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/climbing-stairs/description" target="_blank">Climbing Stairs</a> (Easy)
@@ -22,6 +26,10 @@ def climbStairs(n: int) -> int:
         prev = curr - prev
     return curr
 ```
+
+**anchor**
+
+House Robber (Medium)
 
 **question**
 
@@ -48,6 +56,10 @@ def rob(nums: List[int]) -> int:
         oneBefore = curr
     return oneBefore
 ```
+
+**anchor**
+
+Word Break (Medium)
 
 **question**
 
@@ -82,6 +94,10 @@ def wordBreak(s: str, wordDict: List[str]) -> bool:
     return memo[-1]
 ```
 
+**anchor**
+
+Coin Change (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/coin-change/description" target="_blank">Coin Change</a> (Medium)
@@ -113,6 +129,10 @@ def coinChange(coins: List[int], amount: int) -> int:
 
     return memo[-1] if memo[-1] != float("inf") else -1
 ```
+
+**anchor**
+
+Longest Increasing Subsequence (Medium)
 
 **question**
 
@@ -174,6 +194,10 @@ def getIndexOfLowestGreaterVal(sub: List[int], n: int) -> int:
     return start
 ```
 
+**anchor**
+
+Triangle (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/triangle/description" target="_blank">Triangle</a> (Medium)
@@ -234,6 +258,10 @@ def minimumTotal(triangle: List[List[int]]) -> int:
     return min(triangle[-1])
 ```
 
+**anchor**
+
+Minimum Path Sum (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/minimum-path-sum/description" target="_blank">Minimum Path Sum</a> (Medium)
@@ -263,6 +291,10 @@ def minPathSum(grid: List[List[int]]) -> int:
 
     return grid[-1][-1]
 ```
+
+**anchor**
+
+Unique Paths II (Medium)
 
 **question**
 
@@ -354,6 +386,10 @@ def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
     return obstacleGrid[-1][-1]
 ```
 
+**anchor**
+
+Longest Palindromic Substring (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/longest-palindromic-substring/description" target="_blank">Longest Palindromic Substring</a> (Medium)
@@ -417,6 +453,10 @@ def expandPalindrome(s: str, left: int, right: int) -> Tuple[int, int]:
     return left + 1, right - 1
 ```
 
+**anchor**
+
+Interleaving String (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/interleaving-string/description" target="_blank">Interleaving String</a> (Medium)
@@ -425,10 +465,10 @@ Given strings `s1`, `s2`, and `s3`, find whether `s3` is formed by an interleavi
 
 An interleaving of two strings `s` and `t` is a configuration where `s` and `t` are divided into `n` and `m` substrings respectively, such that:
 
--   `s = s1 + s2 + ... + sn`
--   `t = t1 + t2 + ... + tm`
--   `|n - m| <= 1`
--   The interleaving is` s1 + t1 + s2 + t2 + s3 + t3 + ...` or `t1 + s1 + t2 + s2 + t3 + s3 + ...`
+- `s = s1 + s2 + ... + sn`
+- `t = t1 + t2 + ... + tm`
+- `|n - m| <= 1`
+- The interleaving is` s1 + t1 + s2 + t2 + s3 + t3 + ...` or `t1 + s1 + t2 + s2 + t3 + s3 + ...`
 
 **answer**
 
@@ -472,6 +512,10 @@ def isInterleave(s1: str, s2: str, s3: str) -> bool:
     return memo[len(s1)][len(s2)]
 ```
 
+**anchor**
+
+Edit Distance (Medium)
+
 **question**
 
 <a href="https://leetcode.com/problems/edit-distance/description" target="_blank">Edit Distance</a> (Medium)
@@ -480,9 +524,9 @@ Given two strings `word1` and `word2`, return the minimum number of operations r
 
 You have the following three operations permitted on a word:
 
--   Insert a character
--   Delete a character
--   Replace a character
+- Insert a character
+- Delete a character
+- Replace a character
 
 Example:
 
@@ -572,6 +616,10 @@ def helper(word1, word2, i, j, memo):
     # The final answer is stored in memo[(0, 0)]
     return memo[(i, j)]
 ```
+
+**anchor**
+
+Maximal Square (Medium)
 
 **question**
 

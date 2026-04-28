@@ -10,13 +10,24 @@ export const metadata: Metadata = {
     robots: "follow, index",
     keywords: ["web development", "technical", "interview"],
     manifest: "manifest.json",
+    icons: {
+        icon: "/favicon.ico",
+    },
+    appleWebApp: {
+        capable: true,
+        statusBarStyle: "black-translucent",
+    },
     verification: {
         google: "k9yNjKCp5BuiSVXrJIfoJxbK7bVxTpQcx1MT3jwryK8",
     },
 };
 
+// viewportFit cover looks clunky on mobile landscape view
 export const viewport: Viewport = {
-    themeColor: "#171717",
+    themeColor: "#0a0a0a",
+    // width: "device-width",
+    // initialScale: 1,
+    // viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -26,9 +37,8 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className="bg-neutral-900 text-neutral-200 flex flex-col min-h-screen">
-                <main className="flex flex-col">{children}</main>
-                <footer className="py-4" />
+            <body className="max-w-screen-2xl w-full bg-neutral-900 text-neutral-200 flex flex-col items-center min-h-screen mx-auto">
+                {children}
             </body>
             <GoogleAnalytics gaId="G-WQS7VC7B13" />
         </html>

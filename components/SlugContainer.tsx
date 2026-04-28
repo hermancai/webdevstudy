@@ -1,15 +1,15 @@
 "use client";
 
 import { CardFormat } from "@/types/card";
-import Navbar from "./Navbar";
-import PageTitle from "./PageTitle";
 import CardsContainer from "./CardsContainer";
 import { ReactNode, useState } from "react";
+import CardSidebar from "./CardSidebar";
 
 interface SlugContainerProps {
     cards: CardFormat[];
     title: string;
     backLink: string;
+    anchors: string[];
     questions: ReactNode[];
     answers: ReactNode[];
 }
@@ -18,25 +18,32 @@ export default function SlugContainer({
     cards,
     title,
     backLink,
+    anchors,
     questions,
     answers,
 }: SlugContainerProps) {
     const [cardsOpen, setCardsOpen] = useState<boolean[]>(
-        cards.map(() => false)
+        cards.map(() => false),
     );
 
     return (
-        <>
-            <Navbar cardsOpen={cardsOpen} setCardsOpen={setCardsOpen} />
-            <div className="p-4 max-w-6xl mx-auto flex flex-col gap-4 w-full">
-                <PageTitle title={title} backLink={backLink} />
+        <div className="flex flex-row w-full relative">
+            <CardSidebar
+                cardsOpen={cardsOpen}
+                setCardsOpen={setCardsOpen}
+                anchors={anchors}
+                title={title}
+                backLink={backLink}
+            />
+            <div className="px-4 md:px-[clamp(2.5rem,4vw,5rem)] pb-4 md:pb-10 pt-4 md:pt-0 border-t md:border-0 min-w-0 flex-1">
                 <CardsContainer
                     cardsOpen={cardsOpen}
                     setCardsOpen={setCardsOpen}
+                    anchors={anchors}
                     questions={questions}
                     answers={answers}
                 />
             </div>
-        </>
+        </div>
     );
 }

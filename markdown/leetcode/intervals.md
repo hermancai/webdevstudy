@@ -1,3 +1,7 @@
+**anchor**
+
+Summary Ranges (Easy)
+
 **question**
 
 <a href="https://leetcode.com/problems/summary-ranges/description" target="_blank">Summary Ranges</a> (Easy)
@@ -10,8 +14,8 @@ Return the smallest sorted list of ranges that cover all the numbers in the arra
 
 Each range [a,b] in the list should be output as:
 
--   `"a->b"` if `a != b`
--   `"a"` if `a == b`
+- `"a->b"` if `a != b`
+- `"a"` if `a == b`
 
 **answer**
 
@@ -36,6 +40,10 @@ def summaryRanges(nums: List[int]) -> List[str]:
 
     return result
 ```
+
+**anchor**
+
+Merge Intervals (Medium)
 
 **question**
 
@@ -62,6 +70,10 @@ def merge(intervals: List[List[int]]) -> List[List[int]]:
     answer.append(curr)
     return answer
 ```
+
+**anchor**
+
+Insert Interval (Medium)
 
 **question**
 
@@ -103,6 +115,10 @@ def insert(intervals: List[List[int]], newInterval: List[int]) -> List[List[int]
 
     return answer
 ```
+
+**anchor**
+
+Minimum Number of Arrows to Burst Balloons (Medium)
 
 **question**
 

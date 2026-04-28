@@ -2,12 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --header-height: 64px;
+}
+
 .break {
     @apply block h-4;
 }
 
 .markdown {
-    @apply leading-relaxed;
+    @apply leading-relaxed overflow-x-auto w-full;
 }
 
 .markdown ol, .markdown ul {
@@ -24,7 +28,7 @@
 }
 
 .markdown a {
-    @apply underline text-blue-500;
+    @apply text-blue-500 hover:underline;
 }
 
 code:not(pre code) {

@@ -4,6 +4,7 @@ import Card from "./Card";
 interface CardsContainerProps {
     cardsOpen: boolean[];
     setCardsOpen: Dispatch<SetStateAction<boolean[]>>;
+    anchors: string[];
     questions: ReactNode[];
     answers: ReactNode[];
 }
@@ -11,6 +12,7 @@ interface CardsContainerProps {
 export default function CardsContainer({
     cardsOpen,
     setCardsOpen,
+    anchors,
     questions,
     answers,
 }: CardsContainerProps) {
@@ -28,6 +30,7 @@ export default function CardsContainer({
                 return (
                     <Card
                         key={i}
+                        anchor={anchors[i]}
                         question={questions[i]}
                         answer={answers[i]}
                         index={i}

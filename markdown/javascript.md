@@ -1,6 +1,10 @@
+**anchor**
+
+Primitive data types
+
 **question**
 
-What are the primitive data types?
+Primitive data types
 
 **answer**
 
@@ -14,9 +18,13 @@ What are the primitive data types?
 
 Primitives are immutable.
 
+**anchor**
+
+Object data type
+
 **question**
 
-What is the Object data type?
+Object data type
 
 **answer**
 
@@ -48,9 +56,13 @@ console.log(user.fullName);  // Output: John Smith
 user.fullName = "Joe Bob";  // first == "Joe"; last == "Bob"
 ```
 
+**anchor**
+
+Object creation
+
 **question**
 
-How can an object be created?
+Object creation
 
 **answer**
 
@@ -97,9 +109,13 @@ How can an object be created?
     const person = new Person("John");
     ```
 
+**anchor**
+
+Object cloning
+
 **question**
 
-How can an object be cloned?
+Object cloning
 
 **answer**
 
@@ -123,9 +139,13 @@ How can an object be cloned?
 
 3. `structuredClone()` performs a deep clone instead of copying references.
 
+**anchor**
+
+Prototypes
+
 **question**
 
-What is a prototype?
+Prototypes
 
 **answer**
 
@@ -144,9 +164,13 @@ console.log(Object.getPrototypeOf(date.__proto__.__proto__)); // null
 
 When accessing an object property, the prototype chain will be traversed until the property is found, starting with the initial object. If the property cannot be found, `undefined` is returned.
 
+**anchor**
+
+Prototype vs instance properties
+
 **question**
 
-What is the difference between prototype properties and instance properties?
+Prototype vs instance properties
 
 **answer**
 
@@ -174,46 +198,58 @@ console.log(x.value, x.randomVal); // 2 4
 console.log(y.value, y.randomVal); // 1 4
 ```
 
+**anchor**
+
+What functions can check if a value exists in an array?
+
 **question**
 
 What functions can check if a value exists in an array?
 
 **answer**
 
--   `includes()` returns true if the value exists
--   `find()` returns the value that passes the callback
--   `some()` returns true if at least one value passes the callback
--   `indexOf()` returns the first index of the found value or -1
+- `includes()` returns true if the value exists
+- `find()` returns the value that passes the callback
+- `some()` returns true if at least one value passes the callback
+- `indexOf()` returns the first index of the found value or -1
+
+**anchor**
+
+var, let, const
 
 **question**
 
-What is the difference between `var`, `let`, and `const`?
+`var`, `let`, `const`
 
 **answer**
 
 `var`
 
--   Global scope when declared outside a function. Function scope otherwise
--   Can be re-declared and updated
--   Gets hoisted to the top of its scope and initialized with `undefined`
+- Global scope when declared outside a function. Function scope otherwise
+- Can be re-declared and updated
+- Gets hoisted to the top of its scope and initialized with `undefined`
 
 `let`
 
--   Block scope (i.e. any code bound by braces { }). This means variable names can be reused in different scopes without affecting other variables with the same name
--   Can be updated but not re-declared
--   Gets hoisted to the top of its scope but is not initialized with a value
+- Block scope (i.e. any code bound by braces { }). This means variable names can be reused in different scopes without affecting other variables with the same name
+- Can be updated but not re-declared
+- Gets hoisted to the top of its scope but is not initialized with a value
 
 `const`
 
--   Block scope
--   Cannot be re-declared or updated. This means initialization must happen during declaration.
--   Gets hoisted to the top of its scope but is not initialized with a value
+- Block scope
+- Cannot be re-declared or updated. This means initialization must happen during declaration.
+- Gets hoisted to the top of its scope but is not initialized with a value
 
 `var` always existed in JavaScript. `let` and `const` were introduced in ES6 (2015). A common guideline in modern JavaScript is to never use `var`, and always use `const` unless `let` is required.
 
+**anchor**
+
+Declare vs initialize
+
 **question**
 
-What is the difference between declaring and initializing?
+Declare vs initialize
 
 **answer**
 
@@ -223,31 +259,39 @@ x = 5; // Initialize
 let y = 10; // Declare AND initialize
 ```
 
+**anchor**
+
+Scope
+
 **question**
 
-Explain the three types of scope.
+Scope
 
 **answer**
 
 Global
 
--   Any variable declared outside a function has global scope.
--   Global variables can be accessed from anywhere.
--   Any variable that has been assigned a value but has not been declared becomes global.
+- Any variable declared outside a function has global scope.
+- Global variables can be accessed from anywhere.
+- Any variable that has been assigned a value but has not been declared becomes global.
 
 Function
 
--   Each function has its own scope.
--   Variables declared in a function are not accessible outside the function.
+- Each function has its own scope.
+- Variables declared in a function are not accessible outside the function.
 
 Block
 
--   Each block of code surrounded by braces { } has its own scope.
--   Variables declared in a { } block are not accessible outside the block, except for `var` variables.
+- Each block of code surrounded by braces { } has its own scope.
+- Variables declared in a { } block are not accessible outside the block, except for `var` variables.
+
+**anchor**
+
+Hoisting
 
 **question**
 
-What is hoisting?
+Hoisting
 
 **answer**
 
@@ -284,12 +328,16 @@ console.log(x); // Output: undefined
 `const` variables must be initialized during declaration.
 
 ```js
-const y;  // SyntaxError
+const y; // SyntaxError
 ```
+
+**anchor**
+
+Temporal Dead Zone
 
 **question**
 
-What is a Temporal Dead Zone?
+Temporal Dead Zone
 
 **answer**
 
@@ -306,9 +354,13 @@ Variable declarations get hoisted in JavaScript. Initialization is not hoisted. 
 }
 ```
 
+**anchor**
+
+Closure
+
 **question**
 
-What is closure?
+Closure
 
 **answer**
 
@@ -350,9 +402,13 @@ function sum(a) {
 console.log(sum(1)(2)(3)); // 16
 ```
 
+**anchor**
+
+Event object
+
 **question**
 
-What is an event object?
+Event object
 
 **answer**
 
@@ -367,9 +423,13 @@ function handleEvent(event) {
 someElement.addEventLister("click", handleEvent);
 ```
 
+**anchor**
+
+Event bubbling and capturing
+
 **question**
 
-What is event bubbling and event capturing?
+Event bubbling and capturing
 
 **answer**
 
@@ -398,9 +458,13 @@ Event capturing is the opposite behavior of event bubbling, so events will trigg
 
 To prevent event bubbling/capturing, use `stopPropagation()`. This method is available in the event object passed through event handler functions.
 
+**anchor**
+
+Event delegation
+
 **question**
 
-What is event delegation?
+Event delegation
 
 **answer**
 
@@ -425,24 +489,32 @@ container.addEventListener("click", (event) => {
 
 NOTE: The event object contains these properties: `event.target` and `event.currentTarget`. <br/>`event.target` refers to the element that received the click event (i.e. the inner most element). `event.currentTarget` refers to the element that the event handler is attached to. This is why even though the container has the event listener, only the buttons are changed because the function uses `event.target`.
 
+**anchor**
+
+Strict mode
+
 **question**
 
-What is strict mode?
+Strict mode
 
 **answer**
 
 Strict mode is the alternative to JavaScript's default non-strict mode. Strict mode changes syntax and runtime behavior, and can allow errors to be caught earlier in development. Strict mode can be applied to code by adding the `"use strict";` directive to the top of scripts or functions. Some of strict mode's features include:
 
--   changing some silent errors into thrown errors
--   reserving keywords that may exist in future versions of ECMAScript
--   disallowing assignment to undeclared variables
--   disallowing assignment/deletion to non-writable properties
--   disallowing duplicate parameter and property names
--   simplifying mapping of variable names to optimize runtime code
+- changing some silent errors into thrown errors
+- reserving keywords that may exist in future versions of ECMAScript
+- disallowing assignment to undeclared variables
+- disallowing assignment/deletion to non-writable properties
+- disallowing duplicate parameter and property names
+- simplifying mapping of variable names to optimize runtime code
+
+**anchor**
+
+this
 
 **question**
 
-What is the purpose of the keyword `this`?
+`this`
 
 **answer**
 
@@ -483,9 +555,13 @@ console.log(C.staticField === C); // true
 
 In the global context, `this` depends on the execution environment. In an HTML script, `this === window`. In a module, `this === undefined` at the top level.
 
+**anchor**
+
+call(), apply(), bind()
+
 **question**
 
-Explain `call()`, `apply()`, and `bind()`.
+`call()`, `apply()`, `bind()`
 
 **answer**
 
@@ -535,9 +611,13 @@ const boundLog2 = boundLog.bind({ obj: "two" }, 3, 4);
 boundLog2(5, 6); // {obj: "one"} 1 2 3 4 5 6
 ```
 
+**anchor**
+
+== vs ===
+
 **question**
 
-What is the difference between `==` and `===`?
+`==` and `===`
 
 **answer**
 
@@ -549,27 +629,31 @@ The biggest difference between the two is that the `==` operator attempts to con
 
 `==` AND `===`
 
--   Object: true if both operands reference same object
--   String: true if both operands have same characters in same order
--   Number: true if both operands are same value
-    -   `+0` and `-0` are equal
-    -   `NaN` is never equal to itself
--   Boolean: true if operands are both `true` or both `false`
+- Object: true if both operands reference same object
+- String: true if both operands have same characters in same order
+- Number: true if both operands are same value
+    - `+0` and `-0` are equal
+    - `NaN` is never equal to itself
+- Boolean: true if operands are both `true` or both `false`
 
 `==` ONLY
 
--   Attempts to convert operands into same type
--   If one operand is an object and one operand is a primitive, the object will be converted to a primitive.
--   If one operand is `null` or `undefined`, the other operand must also be `null` or `undefined` to return true. Returns false otherwise.
+- Attempts to convert operands into same type
+- If one operand is an object and one operand is a primitive, the object will be converted to a primitive.
+- If one operand is `null` or `undefined`, the other operand must also be `null` or `undefined` to return true. Returns false otherwise.
 
 `===` ONLY
 
--   Returns false if operands are different types
--   `null !== undefined`
+- Returns false if operands are different types
+- `null !== undefined`
+
+**anchor**
+
+Type coercion
 
 **question**
 
-What is type coercion?
+Type coercion
 
 **answer**
 
@@ -596,9 +680,13 @@ console.log(1 - "1"); // 0
 console.log(1 - "A"); // NaN
 ```
 
+**anchor**
+
+NaN
+
 **question**
 
-What is `NaN`?
+`NaN`
 
 **answer**
 
@@ -608,16 +696,20 @@ NaN is a special number value when an arithmetic operation cannot be expressed a
 console.log(NaN == NaN); // false
 ```
 
+**anchor**
+
+Function declarations vs expressions
+
 **question**
 
-What is the difference between function declarations and function expressions?
+Function declarations vs expressions
 
 **answer**
 
 Function Declaration
 
--   This is a function statement that provides a function name and uses the function keyword.
--   Declarations are hoisted to the top of function or global scope and can be used before declaration.
+- This is a function statement that provides a function name and uses the function keyword.
+- Declarations are hoisted to the top of function or global scope and can be used before declaration.
 
     ```js
     console.log(sum(1, 2)); // 3
@@ -629,9 +721,9 @@ Function Declaration
 
 Function Expression
 
--   Function expressions cannot begin with the `function` keyword, to avoid ambiguity with function declarations.
--   Function expressions are not hoisted.
--   Names can be omitted to create an anonymous function.
+- Function expressions cannot begin with the `function` keyword, to avoid ambiguity with function declarations.
+- Function expressions are not hoisted.
+- Names can be omitted to create an anonymous function.
 
     ```js
     console.log(sum(1, 2)); // ReferenceError
@@ -641,9 +733,13 @@ Function Expression
     };
     ```
 
+**anchor**
+
+Immediately Invoked Function Expression (IIFE)
+
 **question**
 
-What is an Immediately Invoked Function Expression (IIFE)?
+Immediately Invoked Function Expression (IIFE)
 
 **answer**
 
@@ -663,9 +759,13 @@ Another set of parentheses follows the expression to immediately call the functi
 
 IIFEs are useful for keeping the global namespace clean, since variables declared inside the function will be discarded after execution.
 
+**anchor**
+
+Currying
+
 **question**
 
-What is currying?
+Currying
 
 **answer**
 
@@ -700,17 +800,21 @@ const add5 = curryAdd(5);
 console.log(add5(3)(4)); // 12
 ```
 
+**anchor**
+
+forEach(), filter(), map()
+
 **question**
 
-Explain `forEach()`, `filter()`, `map()`.
+`forEach()`, `filter()`, `map()`
 
 **answer**
 
 These functions are available in `Array.prototype`. Each function takes a callback, which is executed for every element in the array.
 
--   `forEach()` returns `undefined`. The callback's return value is discarded.
--   `filter()` returns a shallow copy of the array, containing elements that result in a truthy return value in the callback.
--   `map()` returns a new array populated by results returned by the callback.
+- `forEach()` returns `undefined`. The callback's return value is discarded.
+- `filter()` returns a shallow copy of the array, containing elements that result in a truthy return value in the callback.
+- `map()` returns a new array populated by results returned by the callback.
 
 ```js
 const nums = [1, 2, 3, 4, 5];
@@ -726,9 +830,13 @@ const square = nums.map((num) => num ** 2);
 // [1, 4, 8, 16, 25]
 ```
 
+**anchor**
+
+reduce()
+
 **question**
 
-Explain `reduce()`.
+`reduce()`
 
 **answer**
 
@@ -751,9 +859,13 @@ const sum = nums.reduce(callback, initialTotal);
 console.log(sum); // 15
 ```
 
+**anchor**
+
+slice() and splice()
+
 **question**
 
-Explain `slice()` and `splice()`?
+`slice()` and `splice()`
 
 **answer**
 
@@ -779,9 +891,13 @@ console.log(removed); // ["c"]
 console.log(nums); // ["a", "b", "x", "y", "z", "d", "e"]
 ```
 
+**anchor**
+
+Promise
+
 **question**
 
-What is a `Promise`?
+`Promise`
 
 **answer**
 
@@ -841,9 +957,13 @@ getEvenInt
     .finally(() => {});
 ```
 
+**anchor**
+
+async and await
+
 **question**
 
-Explain `async` and `await`.
+`async` and `await`
 
 **answer**
 
@@ -876,9 +996,13 @@ async function func() {
 func().catch(() => console.log(`Catch`));
 ```
 
+**anchor**
+
+fetch()
+
 **question**
 
-What does the `fetch()` function do?
+`fetch()`
 
 **answer**
 
@@ -901,9 +1025,13 @@ The returned `Response` object includes information about the response such as t
 })();
 ```
 
+**anchor**
+
+JSON
+
 **question**
 
-What is JSON?
+JSON
 
 **answer**
 
@@ -913,17 +1041,25 @@ JSON stands for JavaScript Object Notation. It is a data interchange format used
 
 In JavaScript, `JSON` is a built-in global object with static methods for handling JSON. The static methods are `parse()`, `stringify()`, `rawJSON()`, and `isRawJSON()`.
 
+**anchor**
+
+window object
+
 **question**
 
-What is the `window` object?
+`window` object
 
 **answer**
 
 `window` is a global object available in browser environments. The window contains the DOM as well as many properties and methods such as `innerWidth`, `document`, `localStorage`, `fetch()`, and `setTimeout()`. Each tab in a browser is represented by its own window object.
 
+**anchor**
+
+DOM
+
 **question**
 
-What is the `DOM`?
+`DOM`
 
 **answer**
 
@@ -933,9 +1069,13 @@ DOM stands for Document Object Model. It is an in-memory representation of an HT
 
 When the browser receives HTML, the HTML is analyzed and parsed. Elements and text content are used to create nodes, which are then organized in a tree structure. This structure is the DOM tree. The browser uses the tree to render and manage contents of the web page. The tree is accessible via the `document` property in the global `window` object.
 
+**anchor**
+
+localStorage and sessionStorage
+
 **question**
 
-Explain `localStorage` and `sessionStorage`.
+`localStorage` and `sessionStorage`
 
 **answer**
 
@@ -953,9 +1093,13 @@ Data in `localStorage` does not expire. However, data loaded into `localStorage`
 
 Data in `sessionStorage` is cleared when the page session ends. When a new tab is opened, a unique page session is created for that particular tab. A session lasts as long as the tab is open, and persists across page reload/restore. Opening tabs with the same URL will create a new `sessionStorage`, and duplicating a tab will copy the original tab's `sessionStorage`.
 
+**anchor**
+
+Cookies
+
 **question**
 
-What are cookies and how can they be managed?
+Cookies
 
 **answer**
 
@@ -969,19 +1113,23 @@ A server can send cookies by using the `Set-Cookie` header in a response. After 
 
 Cookie Attributes
 
--   `Expires` and `Max-age` determine when the cookie will be deleted
--   `Secure` allows the cookie to only be sent to the server over the HTTPS protocol
--   `HttpOnly` denies cookie access via the JavaScript `Document.cookie` API
--   `Domain` determines whether subdomains will receive the cookie
--   `Path` sends the cookie if the requested URL matches
--   `SameSite` determines if the cookie can be sent from a cross-origin request
-    -   `Strict`: only send the cookie if the request is from the origin site
-    -   `Lax`: allow sending the cookie if the user navigates to the origin site from an external site. This is the default setting.
-    -   `None`: allows cross-site requests but only through HTTPS. The `Secure` attribute must also be set.
+- `Expires` and `Max-age` determine when the cookie will be deleted
+- `Secure` allows the cookie to only be sent to the server over the HTTPS protocol
+- `HttpOnly` denies cookie access via the JavaScript `Document.cookie` API
+- `Domain` determines whether subdomains will receive the cookie
+- `Path` sends the cookie if the requested URL matches
+- `SameSite` determines if the cookie can be sent from a cross-origin request
+    - `Strict`: only send the cookie if the request is from the origin site
+    - `Lax`: allow sending the cookie if the user navigates to the origin site from an external site. This is the default setting.
+    - `None`: allows cross-site requests but only through HTTPS. The `Secure` attribute must also be set.
+
+**anchor**
+
+defer and async in HTML
 
 **question**
 
-What are the `defer` and `async` attributes in HTML scripts?
+`defer` and `async` in HTML
 
 **answer**
 
@@ -995,9 +1143,13 @@ Setting the `defer` attribute in a script allows the browser to load the script 
 
 The `async` attribute also allows a script to be non-blocking. Async scripts will run immediately after loading, without waiting for the DOM or any other script.
 
+**anchor**
+
+Iterator
+
 **question**
 
-What is an iterator?
+Iterator
 
 **answer**
 
@@ -1034,9 +1186,13 @@ iter.next(); // {value: -1, done: true}
 iter.next(); // {value: -1, done: true}
 ```
 
+**anchor**
+
+Generator functions
+
 **question**
 
-What is a generator function?
+Generator functions
 
 **answer**
 
@@ -1059,9 +1215,13 @@ iter.next(); // {value: -1, done: true}
 iter.next(); // {value: undefined, done: true}
 ```
 
+**anchor**
+
+Arrow functions
+
 **question**
 
-What are arrow functions?
+Arrow functions
 
 **answer**
 
@@ -1084,9 +1244,13 @@ const add2 = (a, b) => {
 };
 ```
 
+**anchor**
+
+Rest parameter
+
 **question**
 
-What is a rest parameter?
+Rest parameter
 
 **answer**
 
@@ -1102,9 +1266,13 @@ print(1, 2); // 1 2 []
 print(1); // 1 undefined []
 ```
 
+**anchor**
+
+Spread operator
+
 **question**
 
-What is the spread operator?
+Spread operator
 
 **answer**
 
@@ -1128,9 +1296,13 @@ const newObj = { ...obj, prop: "val" }; // { 0: 1, 1: 2, 2: 3, prop: "val" }
 const newObj2 = { ...newObj, prop: "override" }; // { 0: 1, 1: 2, 2: 3, prop: "override" }
 ```
 
+**anchor**
+
+Destructuring
+
 **question**
 
-What is destructuring?
+Destructuring
 
 **answer**
 
@@ -1163,9 +1335,13 @@ const [first, ...others] = [1, 2, 3];
 console.log(others); // [2, 3]
 ```
 
+**anchor**
+
+WeakMap and WeakSet
+
 **question**
 
-Explain `WeakMap` and `WeakSet`.
+`WeakMap` and `WeakSet`
 
 **answer**
 
@@ -1179,17 +1355,21 @@ Objects take up memory, and can be accessed via references. As long as at least 
 
 One use case for a WeakMap is to cache calculated data related to an object, reducing redundant processing. Once the associated object is removed, the WeakMap will also be cleaned up. This is better than using a traditional Map because the Map will keep the object reference, preventing garbage collection and taking up memory.
 
+**anchor**
+
+Classes
+
 **question**
 
-What is a class?
+Classes
 
 **answer**
 
 Classes are templates for creating objects. Each element in a class can have these aspects:
 
--   Kind: getter, setter, method, or field
--   Location: static or instance
--   Visibility: public or private
+- Kind: getter, setter, method, or field
+- Location: static or instance
+- Visibility: public or private
 
 Classes have the `constructor` method for initializing objects. Instance properties that depend on the constructor's arguments can be created here.
 
@@ -1244,25 +1424,33 @@ class Employee extends Person {
 }
 ```
 
+**anchor**
+
+Website Optimization
+
 **question**
 
-What are some ways to optimize a website?
+Website Optimization
 
 **answer**
 
--   Optimize images: compression, file format, lazy loading
--   Minify JavaScript, HTML, CSS
--   Enable compression: gzip reduces file sizes before network transfer
--   Utilize browser caching
--   Minimize server response time: optimize database queries, caching
--   Use Content Delivery Network (CDN)
--   Minimize HTTP requests and third-party scripts
--   Implement responsive design
--   Monitor and analyze performance
+- Optimize images: compression, file format, lazy loading
+- Minify JavaScript, HTML, CSS
+- Enable compression: gzip reduces file sizes before network transfer
+- Utilize browser caching
+- Minimize server response time: optimize database queries, caching
+- Use Content Delivery Network (CDN)
+- Minimize HTTP requests and third-party scripts
+- Implement responsive design
+- Monitor and analyze performance
+
+**anchor**
+
+JavaScript engine
 
 **question**
 
-What is a JavaScript engine?
+JavaScript engine
 
 **answer**
 
@@ -1272,21 +1460,25 @@ A JavaScript engine is a program that translates JavaScript source code into mac
 
 Modern JavaScript engines use JIT ("just in time") compilation to translate and execute JavaScript. The process generally goes as follows:
 
--   A parser uses the JavaScript source code to create an Abstract Syntax Tree (AST).
--   The AST is used to generate bytecode, an intermediate representation of the source code.
--   An interpreter translates the bytecode into machine code for immediate execution.
--   Executed code is profiled (tracked and analyzed) for possible optimizations.
--   The JIT compiler takes chunks of code that are run often (aka "hot paths") and generates optimized machine code, which will be used for subsequent execution.
+- A parser uses the JavaScript source code to create an Abstract Syntax Tree (AST).
+- The AST is used to generate bytecode, an intermediate representation of the source code.
+- An interpreter translates the bytecode into machine code for immediate execution.
+- Executed code is profiled (tracked and analyzed) for possible optimizations.
+- The JIT compiler takes chunks of code that are run often (aka "hot paths") and generates optimized machine code, which will be used for subsequent execution.
 
 An engine also contains a call stack and memory heap.
 
--   The call stack is a data structure for managing function calls. The stack stores the execution context (i.e. variables, scope, `this`) of each function. The stack can also store primitive values.
+- The call stack is a data structure for managing function calls. The stack stores the execution context (i.e. variables, scope, `this`) of each function. The stack can also store primitive values.
 
--   The memory heap is unstructured memory for storing dynamic data such as functions, objects, and arrays. The heap is where memory allocation and garbage collection occur.
+- The memory heap is unstructured memory for storing dynamic data such as functions, objects, and arrays. The heap is where memory allocation and garbage collection occur.
+
+**anchor**
+
+JavaScript runtime
 
 **question**
 
-What is a JavaScript runtime?
+JavaScript runtime
 
 **answer**
 
@@ -1296,17 +1488,21 @@ A JavaScript runtime is the environment (set of components and resources) provid
 
 The callback queue (aka task queue or message queue) is a list of messages. Each message has an associated function to be called. For example, a click event will add a message to the queue, attached with its event listener callback function.
 
+**anchor**
+
+Event loop
+
 **question**
 
-What is the event loop?
+Event loop
 
 **answer**
 
 The event loop is a mechanism in the JavaScript runtime for handling asychronous operations. The loop involves the call stack and the callback queue. One iteration (tick) of the loop goes as follows:
 
--   The tick starts when the call stack is empty.
--   The first message from the queue is moved to the call stack for execution.
--   The function in the call stack may call other functions or put more messages into the queue. Everything will be handled synchronously while the initial function remains in the call stack.
--   The tick ends when the call stack is empty again.
+- The tick starts when the call stack is empty.
+- The first message from the queue is moved to the call stack for execution.
+- The function in the call stack may call other functions or put more messages into the queue. Everything will be handled synchronously while the initial function remains in the call stack.
+- The tick ends when the call stack is empty again.
 
 Ticks can last varying amounts of time depending on the number of operations that need to be processed.

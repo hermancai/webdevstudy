@@ -1,5 +1,5 @@
 const dictionary: { [key: string]: string } = {
-    algorithms: "Algorithms",
+    leetcode: "LeetCode",
     general: "General",
     javascript: "JavaScript",
     react: "React",

@@ -1,33 +1,45 @@
 import fs from "fs";
 import type { CardFormat } from "@/types/card";
+import { notFound } from "next/navigation";
 
 /**
  * Convert markdown file to list of objects
  * Checks files in markdown folder in root directory
  * Markdown files should be formatted as follows:
+ *  **anchor**
+ *  text
  *  **question**
- *  question text
+ *  text
  *  **answer**
- *  answer text
+ *  text
  *
  * @param folder path to markdown folder
  * @param fileName name of markdown file without extension
- * @returns list of objects with question and answer properties
+ * @returns list of objects with anchor, question, and answer properties
  */
 export default function parseMarkdown(
     folder: string,
-    fileName: string
+    fileName: string,
 ): CardFormat[] {
-    const markdown = fs.readFileSync(`${folder}${fileName}.md`, "utf-8");
+    let markdown;
+    try {
+        markdown = fs.readFileSync(`${folder}${fileName}.md`, "utf-8");
+    } catch (e) {
+        notFound();
+    }
 
-    const objectList: CardFormat[] = [];
-    markdown.split("**question**").map((text) => {
-        const cardData = text.split("**answer**");
-        objectList.push({
-            question: cardData[0],
-            answer: cardData[1],
-        });
-    });
+    const cardList: CardFormat[] = [];
 
-    return objectList.slice(1);
+    // One card of info will be split into 6 parts
+    const parts = markdown.split(/\*\*(anchor|question|answer)\*\*/).slice(1);
+
+    for (let i = 0; i < parts.length; i += 6) {
+        const anchor = parts[i + 1].trim();
+        const question = parts[i + 3].trim();
+        const answer = parts[i + 5].trim();
+
+        cardList.push({ anchor, question, answer });
+    }
+
+    return cardList;
 }

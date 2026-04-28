@@ -8,7 +8,7 @@ export default function MarkdownRenderer({ markdown }: { markdown: string }) {
     // <br/> tags are replaced with a span element to allow for custom styling
     const replacedMarkdown = markdown.replaceAll(
         "<br/>",
-        "<span class='break'></span>"
+        "<span class='break'></span>",
     );
 
     return (
@@ -27,7 +27,7 @@ export default function MarkdownRenderer({ markdown }: { markdown: string }) {
                                 PreTag="div"
                                 language={match[1]}
                                 {...props}
-                                className="rounded-md p-4 border-2 border-neutral-900"
+                                className="rounded-md p-4 border-2 border-neutral-900 overflow-x-auto"
                             >
                                 {String(children).replace(/\n$/, "")}
                             </SyntaxHighlighter>
