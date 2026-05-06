@@ -1,0 +1,29 @@
+{
+    "title": "Array / String",
+    "folderType": "card",
+    "cards": [
+        "merge-sorted-array-easy.md",
+        "remove-element-easy.md",
+        "remove-duplicates-from-sorted-array-easy.md",
+        "majority-element-easy.md",
+        "best-time-to-buy-and-sell-stock-easy.md",
+        "roman-to-integer-easy.md",
+        "length-of-last-word-easy.md",
+        "longest-common-prefix-easy.md",
+        "find-the-index-of-the-first-occurrence-in-a-string-easy.md",
+        "remove-duplicates-from-sorted-array-ii-medium.md",
+        "rotate-array-medium.md",
+        "best-time-to-buy-and-sell-stock-ii-medium.md",
+        "jump-game-medium.md",
+        "jump-game-ii-medium.md",
+        "h-index-medium.md",
+        "insert-delete-getrandom-o1-medium.md",
+        "product-of-array-except-self-medium.md",
+        "gas-station-medium.md",
+        "integer-to-roman-medium.md",
+        "reverse-words-in-a-string-medium.md",
+        "zigzag-conversion-medium.md",
+        "maximum-subarray-medium.md",
+        "maximum-sum-circular-subarray-medium.md"
+    ]
+}

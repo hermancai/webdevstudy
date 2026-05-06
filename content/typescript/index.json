@@ -1,0 +1,26 @@
+{
+    "title": "TypeScript",
+    "folderType": "card",
+    "cards": [
+        "typescript.md",
+        "typescript-compiler.md",
+        "explicitimplicit-types.md",
+        "type-syntax.md",
+        "object-types.md",
+        "union-types.md",
+        "type-aliases-and-interfaces.md",
+        "type-assertions.md",
+        "literal-types.md",
+        "type-guards-narrowing.md",
+        "discriminated-unions.md",
+        "never.md",
+        "generics.md",
+        "keyof.md",
+        "typeof.md",
+        "indexed-access-types.md",
+        "conditional-types.md",
+        "template-literal-types.md",
+        "mapped-types.md",
+        "classes.md"
+    ]
+}

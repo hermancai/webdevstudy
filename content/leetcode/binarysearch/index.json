@@ -1,0 +1,12 @@
+{
+    "title": "Binary Search",
+    "folderType": "card",
+    "cards": [
+        "search-insert-position-easy.md",
+        "search-a-2d-matrix-medium.md",
+        "find-peak-element-medium.md",
+        "search-in-rotated-sorted-array-medium.md",
+        "find-first-and-last-position-of-element-in-sorted-array-medium.md",
+        "find-minimum-in-rotated-sorted-array-medium.md"
+    ]
+}

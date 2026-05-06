@@ -1,0 +1,12 @@
+{
+    "title": "Backtracking",
+    "folderType": "card",
+    "cards": [
+        "letter-combinations-of-a-phone-number-medium.md",
+        "combinations-medium.md",
+        "permutations-medium.md",
+        "combination-sum-medium.md",
+        "generate-parentheses-medium.md",
+        "word-search-medium.md"
+    ]
+}

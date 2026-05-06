@@ -1,0 +1,14 @@
+{
+    "title": "General",
+    "folderType": "card",
+    "cards": [
+        "object-oriented-programming.md",
+        "abstraction.md",
+        "encapsulation.md",
+        "inheritance.md",
+        "polymorphism.md",
+        "functional-programming.md",
+        "abstract-class-vs-interface.md",
+        "composition-vs-inheritance.md"
+    ]
+}

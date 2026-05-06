@@ -1,0 +1,10 @@
+{
+    "title": "Intervals",
+    "folderType": "card",
+    "cards": [
+        "summary-ranges-easy.md",
+        "merge-intervals-medium.md",
+        "insert-interval-medium.md",
+        "minimum-number-of-arrows-to-burst-balloons-medium.md"
+    ]
+}

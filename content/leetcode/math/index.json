@@ -1,0 +1,11 @@
+{
+    "title": "Math",
+    "folderType": "card",
+    "cards": [
+        "palindrome-number-easy.md",
+        "plus-one-easy.md",
+        "sqrtx-easy.md",
+        "factorial-trailing-zeroes-medium.md",
+        "powx-n-medium.md"
+    ]
+}
