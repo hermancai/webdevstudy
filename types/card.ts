@@ -1,5 +1,5 @@
 interface CardFormat {
-    anchor: string;
+    title: string;
     question: string;
     answer: string;
 }

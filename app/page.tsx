@@ -1,22 +1,26 @@
-import getMarkdownFileNames from "@/services/getMarkdownFileNames";
 import TopicsContainer from "@/components/TopicsContainer";
-import Navbar from "@/components/Navbar";
+import { getContentMap } from "@/lib/getContent";
 
 export default function Home() {
-    const fileNames = getMarkdownFileNames("./markdown");
-    fileNames.push("leetcode");
-    fileNames.sort();
+    const index = getContentMap().get("");
+    if (!index || index.folderType === "card") {
+        throw new Error("Missing index.json");
+    }
+
+    const folders: string[] = [];
+    const titles: string[] = [];
+
+    index.topics.forEach((topic) => {
+        folders.push(topic.folder);
+        titles.push(topic.title);
+    });
 
     return (
-        <>
-            <Navbar />
-            <main className="w-full">
-                <TopicsContainer
-                    title="Web Development Topics"
-                    fileNames={fileNames}
-                    root="/"
-                />
-            </main>
-        </>
+        <TopicsContainer
+            root=""
+            title={index.title}
+            folders={folders}
+            titles={titles}
+        />
     );
 }

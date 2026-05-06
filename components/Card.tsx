@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent, MouseEventHandler, ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 
 type CardProps = {
     index: number;
@@ -66,24 +66,18 @@ export default function Card({
     return (
         <div
             className={`scroll-mt-[var(--header-height)] rounded-md bg-neutral-800 border border-neutral-600 ${isOpen ? "border-b-2 border-b-green-500" : ""}`}
-            id={anchor.toLowerCase().replace(/\s+/g, "-")}
+            id={anchor}
         >
             <div
                 className="flex items-center justify-between gap-2 w-full p-4 border border-transparent hover:border-neutral-300 rounded-md cursor-pointer transition-colors"
                 onClick={handleExpandCard}
-                aria-expanded={isOpen}
             >
                 {question}
                 <div className="self-start">
                     {isOpen ? <MinusSVG /> : <PlusSVG />}
                 </div>
             </div>
-            <div
-                className={`${isOpen ? "flex" : "hidden"} p-4`}
-                aria-hidden={!isOpen}
-            >
-                {answer}
-            </div>
+            <div className={`${isOpen ? "flex" : "hidden"} p-4`}>{answer}</div>
         </div>
     );
 }
