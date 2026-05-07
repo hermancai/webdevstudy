@@ -1,5 +1,5 @@
 import TopicsContainer from "@/components/TopicsContainer";
-import SlugContainer from "@/components/SlugContainer";
+import CardsContainer from "@/components/CardsContainer";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { getContentList, getContentMap, getIndexCards } from "@/lib/getContent";
 import { notFound } from "next/navigation";
@@ -42,11 +42,10 @@ export default async function Page({ params }: ParamSlug) {
 
         return (
             <TopicsContainer
-                backLink={"/" + slug.slice(0, -1).join("/")}
+                backLink={"/" + slug.slice(0, -2).join("/")}
                 title={contentMap.title}
                 folders={folders}
                 titles={titles}
-                root={slugString}
             />
         );
     }
@@ -67,8 +66,8 @@ export default async function Page({ params }: ParamSlug) {
     });
 
     return (
-        <SlugContainer
-            backLink={"/" + slug.slice(0, -1).join("/")}
+        <CardsContainer
+            backLink={"/" + slug.slice(0, -2).join("/")}
             topic={contentMap.title}
             titles={titles}
             questions={questions}
