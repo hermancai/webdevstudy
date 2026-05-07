@@ -1,0 +1,18 @@
+{
+    "title": "Dynamic Programming",
+    "folderType": "card",
+    "cards": [
+        "climbing-stairs-easy.md",
+        "house-robber-medium.md",
+        "word-break-medium.md",
+        "coin-change-medium.md",
+        "longest-increasing-subsequence-medium.md",
+        "triangle-medium.md",
+        "minimum-path-sum-medium.md",
+        "unique-paths-ii-medium.md",
+        "longest-palindromic-substring-medium.md",
+        "interleaving-string-medium.md",
+        "edit-distance-medium.md",
+        "maximal-square-medium.md"
+    ]
+}

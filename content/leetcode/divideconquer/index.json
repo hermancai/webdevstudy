@@ -1,0 +1,9 @@
+{
+    "title": "Divide & Conquer",
+    "folderType": "card",
+    "cards": [
+        "convert-sorted-array-to-binary-search-tree-easy.md",
+        "sort-list-medium.md",
+        "construct-quad-tree-medium.md"
+    ]
+}

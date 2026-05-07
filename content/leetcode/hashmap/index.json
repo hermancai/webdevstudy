@@ -1,0 +1,15 @@
+{
+    "title": "Hashmap",
+    "folderType": "card",
+    "cards": [
+        "ransom-note-easy.md",
+        "isosmorphic-strings-easy.md",
+        "word-pattern-easy.md",
+        "valid-anagram-easy.md",
+        "two-sum-easy.md",
+        "happy-number-easy.md",
+        "contains-duplicate-ii-easy.md",
+        "group-anagrams-medium.md",
+        "longest-consecutive-sequence-medium.md"
+    ]
+}

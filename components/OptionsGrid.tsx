@@ -1,24 +1,20 @@
-import Link from "next/link";
-import getProperName from "@/services/getProperName";
+import HoverPrefetchLink from "./HoverPrefetchLink";
 
 type OptionsGridType = {
-    fileNames: string[];
-    root: string;
+    folders: string[];
+    titles: string[];
 };
 
-export default function OptionsGrid({ fileNames, root }: OptionsGridType) {
+export default function OptionsGrid({ folders, titles }: OptionsGridType) {
     return (
         <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
-            {fileNames.map((name, i) => {
-                const title = getProperName(name);
+            {folders.map((folder, i) => {
                 return (
-                    <Link
+                    <HoverPrefetchLink
                         key={i}
-                        href={`${root}${name}`}
-                        className="bg-neutral-800 rounded-md p-2 text-center font-mono transition-colors hover:bg-neutral-700"
-                    >
-                        {title}
-                    </Link>
+                        href={folder}
+                        title={titles[i]}
+                    />
                 );
             })}
         </div>

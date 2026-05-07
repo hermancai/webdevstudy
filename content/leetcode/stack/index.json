@@ -1,0 +1,10 @@
+{
+    "title": "Stack",
+    "folderType": "card",
+    "cards": [
+        "valid-parentheses-easy.md",
+        "simplify-path-medium.md",
+        "min-stack-medium.md",
+        "evaluate-reverse-polish-notation-medium.md"
+    ]
+}

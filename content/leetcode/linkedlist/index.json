@@ -1,0 +1,17 @@
+{
+    "title": "Linked List",
+    "folderType": "card",
+    "cards": [
+        "linked-list.md",
+        "linked-list-cycle-easy.md",
+        "merge-two-sorted-lists-easy.md",
+        "add-two-numbers-medium.md",
+        "copy-list-with-random-pointer-medium.md",
+        "reverse-linked-list-ii-medium.md",
+        "remove-nth-node-from-end-of-list-medium.md",
+        "remove-duplicates-from-sorted-list-ii-medium.md",
+        "rotate-list-medium.md",
+        "partition-list-medium.md",
+        "lru-cache-medium.md"
+    ]
+}

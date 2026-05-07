@@ -13,7 +13,7 @@ export default function PageTitle({
 }: PageTitleType) {
     return (
         <div className="flex flex-nowrap gap-4 items-center">
-            {backLink && (
+            {backLink !== undefined && (
                 <Link
                     href={backLink}
                     className={`rounded-md hover:bg-neutral-700 transition-colors py-1 px-2 ${forSidebar && "hidden md:block"}`}

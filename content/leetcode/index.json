@@ -1,0 +1,22 @@
+{
+    "title": "LeetCode",
+    "folderType": "topic",
+    "topics": [
+        { "folder": "arraystring", "title": "Array / String" },
+        { "folder": "backtracking", "title": "Backtracking" },
+        { "folder": "binarysearch", "title": "Binary Search" },
+        { "folder": "bitmanipulation", "title": "Bit Manipulation" },
+        { "folder": "divideconquer", "title": "Divide & Conquer" },
+        { "folder": "dynamicprogramming", "title": "Dynamic Programming" },
+        { "folder": "graph", "title": "Graph" },
+        { "folder": "hashmap", "title": "Hashmap" },
+        { "folder": "heap", "title": "Heap" },
+        { "folder": "intervals", "title": "Intervals" },
+        { "folder": "linkedlist", "title": "Linked List" },
+        { "folder": "math", "title": "Math" },
+        { "folder": "matrix", "title": "Matrix" },
+        { "folder": "slidingwindow", "title": "Sliding Window" },
+        { "folder": "stack", "title": "Stack" },
+        { "folder": "twopointers", "title": "Two Pointers" }
+    ]
+}

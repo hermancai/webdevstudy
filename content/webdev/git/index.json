@@ -1,0 +1,24 @@
+{
+    "title": "Git",
+    "folderType": "card",
+    "cards": [
+        "git.md",
+        "git-config.md",
+        "git-init.md",
+        "git-clone.md",
+        "git-status.md",
+        "git-add.md",
+        "git-restore.md",
+        "git-commit.md",
+        "git-branch.md",
+        "git-fetch.md",
+        "git-pull.md",
+        "git-push.md",
+        "git-switchcheckout.md",
+        "git-merge.md",
+        "git-rebase.md",
+        "git-log.md",
+        "git-reset.md",
+        "git-revert.md"
+    ]
+}

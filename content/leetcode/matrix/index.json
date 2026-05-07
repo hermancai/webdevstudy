@@ -1,0 +1,11 @@
+{
+    "title": "Matrix",
+    "folderType": "card",
+    "cards": [
+        "valid-sudoku-medium.md",
+        "spiral-matrix-medium.md",
+        "rotate-image-medium.md",
+        "set-matrix-zeroes-medium.md",
+        "game-of-life-medium.md"
+    ]
+}

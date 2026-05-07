@@ -1,0 +1,16 @@
+{
+    "title": "Graph",
+    "folderType": "card",
+    "cards": [
+        "number-of-islands-medium.md",
+        "surrounded-regions-medium.md",
+        "clone-graph-medium.md",
+        "evaluate-division-medium.md",
+        "course-schedule-medium.md",
+        "course-schedule-ii-medium.md",
+        "snakes-and-ladders-medium.md",
+        "minimum-genetic-mutation-medium.md",
+        "implement-trie-prefix-tree-medium.md",
+        "design-add-and-seach-words-data-structure-medium.md"
+    ]
+}

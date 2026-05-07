@@ -5,25 +5,21 @@ import CardToggles from "./CardToggles";
 import PageTitle from "./PageTitle";
 
 interface CardSidebarProps {
-    cardsOpen: boolean[];
-    setCardsOpen: Dispatch<SetStateAction<boolean[]>>;
-    anchors: string[];
-    title: string;
+    topic: string;
     backLink: string;
+    anchors: string[];
+    titles: string[];
+    setCardsOpen: Dispatch<SetStateAction<boolean[]>>;
 }
 
 export default function CardSidebar({
-    cardsOpen,
-    setCardsOpen,
-    anchors,
-    title,
+    topic,
     backLink,
+    anchors,
+    titles,
+    setCardsOpen,
 }: CardSidebarProps) {
     const [isOpen, setIsOpen] = useState(false);
-
-    if (!cardsOpen || !anchors) {
-        return null;
-    }
 
     return (
         <>
@@ -65,7 +61,7 @@ export default function CardSidebar({
             >
                 <div className="p-4">
                     <PageTitle
-                        title={title}
+                        title={topic}
                         backLink={backLink}
                         forSidebar={true}
                     />
@@ -74,13 +70,13 @@ export default function CardSidebar({
                 <CardToggles setCardsOpen={setCardsOpen} />
                 <div className="h-0 w-full border-t border-neutral-500" />
                 <div className="flex flex-col overflow-y-auto gap-2 p-4 flex-1">
-                    {anchors.map((anchor) => (
+                    {anchors.map((anchor, i) => (
                         <a
-                            href={`#${anchor.toLowerCase().replace(/\s+/g, "-")}`}
+                            href={"#" + anchor}
                             key={anchor}
                             className="hover:bg-neutral-700 rounded-md py-1 px-2 transition-colors"
                         >
-                            {anchor}
+                            {titles[i]}
                         </a>
                     ))}
                 </div>
