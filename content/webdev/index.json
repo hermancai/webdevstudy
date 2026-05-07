@@ -1,11 +1,10 @@
 {
-    "title": "Web Development Topics",
+    "title": "Web Development",
     "folderType": "topic",
     "topics": [
         { "folder": "general", "title": "General" },
         { "folder": "git", "title": "Git" },
         { "folder": "javascript", "title": "JavaScript" },
-        { "folder": "leetcode", "title": "LeetCode" },
         { "folder": "typescript", "title": "TypeScript" }
     ]
 }
