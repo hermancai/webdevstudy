@@ -69,7 +69,7 @@ export default function Card({
             id={anchor}
         >
             <div
-                className="flex items-center justify-between gap-2 w-full p-4 border border-transparent hover:border-neutral-300 rounded-md cursor-pointer transition-colors"
+                className={`group relative flex items-center justify-between gap-2 w-full p-4 border border-transparent hover:border-neutral-300 rounded-md cursor-pointer transition-colors after:content-[''] after:absolute after:-bottom-px after:left-4 after:right-4 after:border-b after:hover:border-transparent after:transition-colors ${isOpen ? "after:border-neutral-600" : "after:border-transparent"}`}
                 onClick={handleExpandCard}
             >
                 {question}
