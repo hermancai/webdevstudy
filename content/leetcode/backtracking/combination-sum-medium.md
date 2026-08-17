@@ -13,25 +13,29 @@ The same number may be chosen from `candidates` an unlimited number of times. Tw
 ## answer
 
 ```py
-# Time complexity: O(N * 2^(M)) where N = length of currLi; M = sum of (target / candidate[i]) for all candidates
-# Space complexity: O(K) where K = length of longest combination
 def combinationSum(candidates: List[int], target: int) -> List[List[int]]:
+    candidates.sort()
     answer = []
-    helper(candidates, target, answer, [], 0, 0)
+
+    def dfs(index, currLi, currSum):
+        if currSum == target:
+            answer.append(currLi[:])
+            return
+
+        for i in range(index, len(candidates)):
+            # Done checking because all further values are greater
+            if candidates[i] + currSum > target:
+                break
+
+            currLi.append(candidates[i])
+            # Pass i instead of i + 1 because duplicates allowed
+            dfs(i, currLi, currSum + candidates[i])
+            currLi.pop()
+
+    dfs(0, [], 0)
     return answer
-
-def helper(candidates, target, answer, currLi, currSum, index):
-    if currSum > target:
-        return
-
-    if currSum == target:
-        answer.append(currLi[:])
-        return
-
-    # All solutions containing elements before index have been checked
-    for i in range(index, len(candidates)):
-        currLi.append(candidates[i])
-        # Recurse with same index because answer allows duplicates
-        helper(candidates, target, answer, currLi, currSum + candidates[i], i)
-        currLi.pop()
 ```
+
+Time: O(n<sup>t / m</sup>), n = len(candidates), t = target, m = min(candidates)
+
+Space: O(k \* t / m + t / m) or O(t / m) excluding output, k = number of valid combinations

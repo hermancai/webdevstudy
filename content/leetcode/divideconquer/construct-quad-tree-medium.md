@@ -36,40 +36,29 @@ Construct a Quad-Tree from a two-dimensional area using the following steps:
 ## answer
 
 ```py
-# Time complexity: O(n^2)
-# Space complexity: O(n^2)
 def construct(grid: List[List[int]]) -> 'Node':
-    return helper(grid, 0, len(grid) - 1, 0, len(grid) - 1)
+    def helper(rowStart, rowEnd, colStart, colEnd):
+        # Split grid into quadrants until base case of single square
+        if rowStart == rowEnd:
+            return Node(grid[rowStart][colStart], True)
 
-def helper(grid, rowStart, rowEnd, colStart, colEnd) -> 'Node':
-    # Reached a single element grid
-    if rowEnd == rowStart:
-        return Node(grid[rowStart][colStart], True, None, None, None, None)
+        rowMid = (rowStart + rowEnd) // 2
+        colMid = (colStart + colEnd) // 2
 
-    # Indices for recursing into smaller grids
-    topRowEnd = (rowStart + rowEnd) // 2
-    leftColEnd = (colStart + colEnd) // 2
+        topLeft = helper(rowStart, rowMid, colStart, colMid)
+        topRight = helper(rowStart, rowMid, colMid + 1, colEnd)
+        bottomLeft = helper(rowMid + 1, rowEnd, colStart, colMid)
+        bottomRight = helper(rowMid + 1, rowEnd, colMid + 1, colEnd)
 
-    node = Node(False, False, None, None, None, None)
-    topLeft = helper(grid, rowStart, topRowEnd, colStart, leftColEnd)
-    topRight = helper(grid, rowStart, topRowEnd, leftColEnd + 1, colEnd)
-    bottomLeft = helper(grid, topRowEnd + 1, rowEnd, colStart, leftColEnd)
-    bottomRight = helper(grid, topRowEnd + 1, rowEnd, leftColEnd + 1, colEnd)
+        # isLeaf condition: all children are leaves and have same val
+        if topLeft.isLeaf and topRight.isLeaf and bottomLeft.isLeaf and bottomRight.isLeaf:
+            if topLeft.val == topRight.val == bottomLeft.val == bottomRight.val:
+                return Node(topLeft.val, True)
+        return Node(False, False, topLeft, topRight, bottomLeft, bottomRight)
 
-    # Condition for current node to be leaf:
-    #   All children are leaves and have same val
-    isLeaf = (
-        (topLeft.isLeaf and topRight.isLeaf and bottomLeft.isLeaf and bottomRight.isLeaf) and
-        (topLeft.val == topRight.val == bottomLeft.val == bottomRight.val)
-    )
-
-    if isLeaf:
-        node.isLeaf = True
-        node.val = topLeft.val
-    else:
-        node.topLeft = topLeft
-        node.topRight = topRight
-        node.bottomLeft = bottomLeft
-        node.bottomRight = bottomRight
-    return node
+    return helper(0, len(grid) - 1, 0, len(grid) - 1)
 ```
+
+Time: O(n<sup>2</sup>)
+
+Space: O(n<sup>2</sup>)

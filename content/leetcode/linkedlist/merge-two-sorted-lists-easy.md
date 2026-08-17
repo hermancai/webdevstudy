@@ -15,13 +15,11 @@ Return the head of the merged linked list.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def mergeTwoLists(list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
     dummy = curr = ListNode()
 
     while list1 and list2:
-        if list1.val < list2.val:
+        if list1.val <= list2.val:
             curr.next = list1
             list1 = list1.next
         else:
@@ -32,3 +30,7 @@ def mergeTwoLists(list1: Optional[ListNode], list2: Optional[ListNode]) -> Optio
     curr.next = list1 or list2
     return dummy.next
 ```
+
+Time: O(n)
+
+Space: O(1)

@@ -13,8 +13,6 @@ Given the `root` of a binary tree, invert the tree, and return its root.
 Recursive:
 
 ```py
-# Time complexity: O(n), n = number of nodes
-# Space complexity: O(h), h = height of tree
 def invertTree(root: Node) -> Node:
     if not root:
         return root
@@ -25,13 +23,17 @@ def invertTree(root: Node) -> Node:
     return root
 ```
 
+Time: O(n)
+
+Space: O(h), h = tree height
+
+<br />
+
 Iterative:
 
 ```py
 from collections import deque
 
-# Time complexity: O(n)
-# Space complexity: O(n)
 def invertTree(root: Node) -> Node:
     if not root: return root
 
@@ -47,3 +49,7 @@ def invertTree(root: Node) -> Node:
             q.append(node.right)
     return root
 ```
+
+Time: O(n)
+
+Space: O(n)

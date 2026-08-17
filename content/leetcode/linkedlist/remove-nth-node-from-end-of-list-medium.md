@@ -11,20 +11,16 @@ Given the `head` of a linked list, remove the `n`<sup>th</sup> node from the end
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def removeNthFromEnd(head: Optional[ListNode], n: int) -> Optional[ListNode]:
-    # Delay slow pointer by n steps
     slow = fast = head
+    # Loop runs one extra time so that slow points to node before nth node
     for _ in range(n):
         fast = fast.next
 
-    # Reaching end of list means n points to head
+    # Reaching end of list means "nth node from end of list" = head
     if not fast:
         return head.next
 
-    # Checking fast.next means loop ends one node before
-    #   actual node to be removed (i.e. previous node)
     while fast.next:
         slow = slow.next
         fast = fast.next
@@ -32,3 +28,7 @@ def removeNthFromEnd(head: Optional[ListNode], n: int) -> Optional[ListNode]:
     slow.next = slow.next.next
     return head
 ```
+
+Time: O(n)
+
+Space: O(1)

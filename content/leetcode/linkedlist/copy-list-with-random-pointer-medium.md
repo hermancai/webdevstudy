@@ -17,63 +17,65 @@ Return the head of the copied linked list.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
-def copyRandomList(head: 'Optional[Node]') -> 'Optional[Node]':
-    # Key = original node; Value = new copy node
-    m = {}
-
-    # First loop to create map and new nodes
-    curr = head
-    while curr:
-        m[curr] = Node(curr.val)
-        curr = curr.next
-
-    # Second loop to create new list
-    dummy = curr = Node(0)
-    while head:
-        curr.next = m[head]
-        curr.next.random = m[head.random] if head.random else None
-
-        head = head.next
-        curr = curr.next
-
-    return dummy.next
-```
-
-Alternative solution:
-
-```py
 class Node:
     def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
         self.val = int(x)
         self.next = next
         self.random = random
 
-# Time complexity: O(n)
-# Space complexity: O(1) excluding output
 def copyRandomList(head: 'Optional[Node]') -> 'Optional[Node]':
-    # Insert duplicate nodes into original list
-    # old1 -> new1 -> old2 -> new2 ...
-    curr = head
-    while curr:
-        newNode = Node(curr.val, curr.next)
-        curr.next = newNode
-        curr = curr.next.next
+    m, curr = {}, head
 
-    # Assign random pointer to new nodes
-    curr = head
+    # Key: original node; Value: new node
     while curr:
-        if curr.random:
-            curr.next.random = curr.random.next
-        curr = curr.next.next
-
-    # Extract new nodes
-    dummy = curr = Node(0)
-    while head:
-        curr.next = head.next
+        m[curr] = Node(curr.val)
         curr = curr.next
-        head = head.next.next
 
-    return dummy.next
+    # Populate next and random pointers in new nodes
+    curr = head
+    while curr:
+        newNode = m[curr]
+        newNode.next = m[curr.next] if curr.next else None
+        newNode.random = m[curr.random] if curr.random else None
+        curr = curr.next
+
+    return m[head] if head else None
 ```
+
+Time: O(n)
+
+Space: O(n)
+
+<br />
+
+Alternative solution:
+
+```py
+def copyRandomList(head: 'Optional[Node]') -> 'Optional[Node]':
+    if not head:
+        return None
+
+    # Insert new nodes: old1 -> new1 -> old2 -> new2 ...
+    curr = head
+    while curr:
+        curr.next = Node(curr.val, curr.next)
+        curr = curr.next.next
+
+    # Assign random pointers
+    curr = head
+    while curr:
+        curr.next.random = curr.random.next if curr.random else None
+        curr = curr.next.next
+
+    # Remove old nodes
+    curr = head.next
+    while curr.next:
+        curr.next = curr.next.next
+        curr = curr.next
+
+    return head.next
+```
+
+Time: O(n)
+
+Space: O(n) including output

@@ -11,46 +11,52 @@ Given the `root` of a binary search tree, and an integer `k`, return the `k`<sup
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(h) where h = height of tree
 def kthSmallest(root: Optional[TreeNode], k: int) -> int:
-    # Simulate global variables in list. vals[1] will contain answer
-    vals = [k, 0]
-    helper(root, vals)
-    return vals[1]
+    # Iterative inorder traversal
+    curr, stack = root, []
 
-# Recursive inorder traversal
-def helper(node: Optional[TreeNode], vals: List[int]) -> None:
-    if not node or vals[0] < 0:
-        return
+    while stack or curr:
+        while curr:
+            stack.append(curr)
+            curr = curr.left
 
-    helper(node.left, vals)
+        node = stack.pop()
+        k -= 1
+        if k == 0:
+            return node.val
+        curr = node.right
 
-    vals[0] -= 1
-    if vals[0] == 0:
-        vals[1] = node.val
-
-    helper(node.right, vals)
+    return -1
 ```
+
+Time: O(n)
+
+Space: O(h), h = tree height
+
+<br />
 
 Alternative solution:
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
-# Iterative inorder traversal
 def kthSmallest(root: Optional[TreeNode], k: int) -> int:
-    stack = []
+    count, answer = 0, 0
 
-    while root or stack:
-        while root:
-            stack.append(root)
-            root = root.left
+    # Recursive inorder traversal, counting nodes
+    def helper(root):
+        if not root: return
 
-        root = stack.pop()
-        k -= 1
-        if k == 0:
-            return root.val
-        root = root.right
-    return -1
+        helper(root.left)
+        nonlocal count, answer
+        count += 1
+        if count == k:
+            answer = root.val
+            return
+        helper(root.right)
+
+    helper(root)
+    return answer
 ```
+
+Time: O(n)
+
+Space: O(h), h = tree height

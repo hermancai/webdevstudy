@@ -21,6 +21,7 @@ Implement the functions of the class such that each function works in average `O
 import random
 
 class RandomizedSet:
+
     def __init__(self):
         self.nums = []
         self.indexMap = {}
@@ -28,21 +29,22 @@ class RandomizedSet:
     def insert(self, val: int) -> bool:
         if val in self.indexMap:
             return False
-        self.indexMap[val] = len(self.nums)
+
         self.nums.append(val)
+        self.indexMap[val] = len(self.nums) - 1
         return True
 
     def remove(self, val: int) -> bool:
         if val not in self.indexMap:
             return False
-        # Swap val with last element in nums
-        valIndex = self.indexMap[val]
-        if valIndex < len(self.nums) - 1:
-            self.nums[valIndex] = self.nums[-1]
-            self.indexMap[self.nums[-1]] = valIndex
-        # Remove last element
-        self.nums.pop()
+
+        # Replace val with last element in nums
+        openIndex = self.indexMap[val]
+        self.indexMap[self.nums[-1]] = openIndex
+        self.nums[openIndex] = self.nums[-1]
+
         del self.indexMap[val]
+        self.nums.pop()
         return True
 
     def getRandom(self) -> int:

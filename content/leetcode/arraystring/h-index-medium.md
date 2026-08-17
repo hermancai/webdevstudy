@@ -13,23 +13,48 @@ The h-index is defined as the maximum value of `h` such that the given researche
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def hIndex(citations: List[int]) -> int:
+    citations.sort(reverse = True)
+
+    h = 0
+    for i in range(len(citations)):
+        if citations[i] >= i + 1:
+            h += 1
+        else:
+            return h
+
+    return h
+```
+
+Time: O(n log n)
+
+Space: O(1) or O(n) due to python built-in sort()
+
+<br />
+
+Alternative solution
+
+```py
+def hIndex(citations: List[int]) -> int:
+    # Get frequency
     buckets = [0] * (len(citations) + 1)
-    # Example: If current val = 2, increment buckets[2] by 1
-    # Essentially, buckets index tracks frequency
-    for val in citations:
-        if val >= len(citations):
+    for count in citations:
+        if count >= len(citations):
             buckets[-1] += 1
         else:
-            buckets[val] += 1
+            buckets[count] += 1
 
     count = 0
     for i in range(len(buckets) - 1, -1, -1):
         count += buckets[i]
-        # Example: count = i = 3 means at least 3 papers were cited 3 times
+
+        # Ex: count == i == 3 means at least 3 papers were cited 3 times
         if count >= i:
             return i
+
     return 0
 ```
+
+Time: O(n)
+
+Space: O(n)

@@ -19,49 +19,46 @@ Variables that do not occur in the list of equations are undefined, so the answe
 ## answer
 
 ```py
-# Time complexity: O(Q * (N + V)) where Q = queries, N = variables, V = values
-# Space complexity: O(N + V)
 def calcEquation(equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-    graph = makeGraph(equations, values)
-    return [getPath(graph, query) for query in queries]
-
-# Given ["x", "y"], [2] ->
-# Graph: { x: { y: 2 }, y: { x: 1/2 }}
-def makeGraph(equations: List[List[str]], values: List[float]):
-    g = {}
+    # Build weighted graph using nested map
+    # { val: { neighbor: weight } }
+    m = {}
     for i in range(len(equations)):
-        x = equations[i][0]
-        y = equations[i][1]
-        if x not in g:
-            g[x] = {}
-        if y not in g[x]:
-            g[x][y] = values[i]
-        if y not in g:
-            g[y] = {}
-        if x not in g[y]:
-            g[y][x] = 1 / values[i]
-    return g
+        x, y = equations[i]
+        if x not in m:
+            m[x] = { y: values[i] }
+        else:
+            m[x][y] = values[i]
+        # Include reciprocal as weight in opposite direction
+        if y not in m:
+            m[y] = { x: 1 / values[i] }
+        else:
+            m[y][x] = 1 / values[i]
 
-def getPath(graph, query: List[str]) -> float:
-    x, y = query
+    # Iterative depth first search
+    def findPath(start, end):
+        if start not in m or end not in m:
+            return -1
 
-    if x not in graph or y not in graph:
+        # Stack stores (value, product of current path)
+        # If (a / b = x) and (b / c = y) then (a / c = x * y)
+        visited, stack = set(), [(start, 1)]
+
+        while stack:
+            curr, product = stack.pop()
+            if curr == end:
+                return product
+
+            visited.add(curr)
+            for neighbor, weight in m[curr].items():
+                if neighbor not in visited:
+                    stack.append((neighbor, weight * product))
+
         return -1
 
-    visited = set()
-    q = deque()
-    q.append((x, 1))  # (node, product of current path)
-
-    # Iterative breadth-first search
-    while q:
-        curr, product = q.popleft()
-        if curr == y:  # Found end of path
-            return product
-        visited.add(curr)
-        # Add unvisited neighbors of current node to queue
-        for neighbor, weight in graph[curr].items():
-            if neighbor not in visited:
-                # Keep track of path's total product
-                q.append((neighbor, weight * product))
-    return -1
+    return [findPath(x, y) for x, y in queries]
 ```
+
+Time: O(Q \* (V + E)), Q = queries, V = vertices, E = edges
+
+Space: O(V + E)

@@ -17,19 +17,16 @@ Note that you don't need to modify `intervals` in-place. You can make a new arra
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1) excluding output
 def insert(intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-    answer = []
+    i, answer = 0, []
 
     # Add non-overlapping intervals
-    i = 0
     while i < len(intervals) and intervals[i][1] < newInterval[0]:
         answer.append(intervals[i])
         i += 1
 
     # Merge overlapping intervals
-    while i < len(intervals) and intervals[i][0] <= newInterval[1]:
+    while i < len(intervals) and newInterval[1] >= intervals[i][0]:
         newInterval[0] = min(newInterval[0], intervals[i][0])
         newInterval[1] = max(newInterval[1], intervals[i][1])
         i += 1
@@ -42,3 +39,7 @@ def insert(intervals: List[List[int]], newInterval: List[int]) -> List[List[int]
 
     return answer
 ```
+
+Time: O(n)
+
+Space: O(n) including output

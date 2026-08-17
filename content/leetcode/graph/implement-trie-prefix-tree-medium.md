@@ -20,44 +20,31 @@ Implement the Trie class:
 ```py
 class Trie:
     def __init__(self):
-        # Nested dictionaries to simulate a graph
-        # Example: "apple" -> {a: {p: {p: {l: {e: {"#": "#"}}}}}}
-        self.graph = {}
+        # Simulate graph nodes with nested maps. Use "#" to end word
+        # "apple" -> {a: {p: {p: {l: {e: {"#": True}}}}}}
+        self.head = {}
 
     def insert(self, word: str) -> None:
-        # Traverse nested levels, registering char if needed
-        level = self.graph
-        for c in word:
-            if c not in level:
-                level[c] = {}
-            level = level[c]
-        # Use "#" to signal end of a word
-        level["#"] = "#"
+        node = self.head
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        node["#"] = True
 
     def search(self, word: str) -> bool:
-        level = self.graph
-        for c in word:
-            if c not in level:
+        node = self.head
+        for char in word:
+            if char not in node:
                 return False
-            level = level[c]
-        return True if "#" in level else False
+            node = node[char]
+        return "#" in node
 
     def startsWith(self, prefix: str) -> bool:
-        level = self.graph
-        for c in prefix:
-            if c not in level:
+        node = self.head
+        for char in prefix:
+            if char not in node:
                 return False
-            level = level[c]
+            node = node[char]
         return True
-```
-
-Alternative solution:
-
-```py
-# Use a custom node class instead of nested dictionaries
-class TrieNode:
-    def __init__(self):
-        # children -> {"a": TrieNode, "b": TrieNode, ...}
-        self.children = {}
-        self.completeWord = False
 ```

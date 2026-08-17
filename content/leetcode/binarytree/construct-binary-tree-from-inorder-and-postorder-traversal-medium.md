@@ -13,32 +13,28 @@ Given two integer arrays `inorder` and `postorder` where `inorder` is the inorde
 The solution is similar to "Construct Binary Tree from Preorder and Inorder Traversal". Notice that the output of postorder traversal is similar to preorder traversal, except postorder starts with right subtrees and the output is reversed.
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def buildTree(inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-    # Convert inorder to map with indices
     m = {}
     for i in range(len(inorder)):
         m[inorder[i]] = i
 
-    return build(m, postorder, len(postorder) - 1, 0, len(inorder) - 1)
+    def helper(postI, inLeft, inRight):
+        if postI < 0 or inLeft > inRight:
+            return None
 
-# p: index of current node in postorder
-# l: starting index of subtree in inorder
-# r: ending index of subtree in inorder
-def build(inorder, postorder, p, l, r):
-    if p < 0 or l > r:
-        return None
+        inI = m[postorder[postI]]
+        node = TreeNode(postorder[postI])
 
-    # Position of current node in inorder
-    inIdx = inorder[postorder[p]]
+        # To get the current node's left child's index in postorder,
+        # Skip the length of the entire right subtree
+        # Right subtree length = inRight - inI + 1
+        node.left = helper(postI - (inRight - inI + 1), inLeft, inI - 1)
+        node.right = helper(postI - 1, inI + 1, inRight)
+        return node
 
-    node = TreeNode(postorder[p])
-    # In postorder, right child of node is always before
-    node.right = build(inorder, postorder, p - 1, inIdx + 1, r)
-
-    # In inorder, right subtree size == length of right subarray == r - inIdx
-    # To get index of left child in postorder, skip length of right subarray + 1
-    node.left = build(inorder, postorder, p - (r - inIdx + 1), l, inIdx - 1)
-    return node
+    return helper(len(postorder) - 1, 0, len(inorder) - 1)
 ```
+
+Time: O(n)
+
+Space: O(n)

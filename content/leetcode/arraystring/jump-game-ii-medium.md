@@ -15,19 +15,23 @@ Return the minimum number of jumps to reach `nums[n - 1]`. Assume there is alway
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def jump(nums: List[int]) -> int:
-    answer = currFarthest = currEnd = 0
+    count = 0
+    position = 0
+    farthest = 0
 
-    # Find max jumps and track jump count
+    # Exclude last index to prevent one extra count
     for i in range(len(nums) - 1):
-        currFarthest = max(currFarthest, nums[i] + i)
-        # Loop excludes last index because if currEnd >= end,
-        # this conditional will unnecessarily increment the answer
-        if i == currEnd:
-            answer += 1
-            # currEnd becomes max distance of previous jump
-            currEnd = currFarthest
-    return answer
+        farthest = max(farthest, i + nums[i])
+
+        # Reached biggest possible jump. Update position
+        if i == position:
+            position = farthest
+            count += 1
+
+    return count
 ```
+
+Time: O(n)
+
+Space: O(1)

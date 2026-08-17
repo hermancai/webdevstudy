@@ -17,39 +17,36 @@ A surrounded region is captured by replacing all `'O'`s with `'X'`s in the input
 ## answer
 
 ```py
-# Time complexity: O(n * m)
-# Space complexity: O(n * m)
 def solve(board: List[List[str]]) -> None:
-    # Check board border to mark all regions on edge of board
-    # Marking as "1" means revert to "O"
-    lastRow = len(board) - 1
-    for col in range(len(board[0])):
-        if board[0][col] == "O":
-            markRegion(board, 0, col)
-        if board[lastRow][col] == "O":
-            markRegion(board, lastRow, col)
-    lastCol = len(board[0]) - 1
-    for row in range(1, len(board) - 1):
-        if board[row][0] == "O":
-            markRegion(board, row, 0)
-        if board[row][lastCol] == "O":
-            markRegion(board, row, lastCol)
+    def dfs(row, col):
+        if not 0 <= row < len(board) or not 0 <= col < len(board[0]) or board[row][col] != "O":
+            return
 
-    # Revert "1" to "O", convert "O" to "X"
+        board[row][col] = "L"
+        dfs(row, col - 1)
+        dfs(row - 1, col)
+        dfs(row, col + 1)
+        dfs(row + 1, col)
+
+    # Regions on the border will not be surrounded. Mark them as safe
+    for row in (0, len(board) - 1):
+        for col in range(len(board[0])):
+            if board[row][col] == "O":
+                dfs(row, col)
+    for col in (0, len(board[0]) - 1):
+        for row in range(len(board)):
+            if board[row][col] == "O":
+                dfs(row, col)
+
+    # Revert marked regions and capture everything else
     for row in range(len(board)):
         for col in range(len(board[0])):
-            if board[row][col] == "1":
-                board[row][col] = "O"
-            elif board[row][col] == "O":
+            if board[row][col] == "O":
                 board[row][col] = "X"
-
-# Recursive depth-first traversal
-def markRegion(board: List[List[str]], row: int, col: int) -> None:
-    if row < 0 or row >= len(board) or col < 0 or col >= len(board[0]) or board[row][col] != "O":
-        return
-    board[row][col] = "1"
-    markRegion(board, row - 1, col)
-    markRegion(board, row, col + 1)
-    markRegion(board, row + 1, col)
-    markRegion(board, row, col - 1)
+            elif board[row][col] == "L":
+                board[row][col] = "O"
 ```
+
+Time: O(m \* n)
+
+Space: O(m \* n)

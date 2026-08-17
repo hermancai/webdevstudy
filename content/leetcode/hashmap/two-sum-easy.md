@@ -15,13 +15,16 @@ You can return the answer in any order.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def twoSum(nums: List[int], target: int) -> List[int]:
     m = {}
+
     for i in range(len(nums)):
-        comp = target - nums[i]
-        if comp in m:
-            return [i, m[comp]]
+        complement = target - nums[i]
+        if complement in m:
+            return [m[complement], i]
         m[nums[i]] = i
 ```
+
+Time: O(n)
+
+Space: O(n)

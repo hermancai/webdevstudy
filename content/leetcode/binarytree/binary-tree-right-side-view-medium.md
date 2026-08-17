@@ -11,46 +11,51 @@ Given the `root` of a binary tree, imagine yourself standing on the right side o
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(h) where h = height of tree
 def rightSideView(root: Optional[TreeNode]) -> List[int]:
-    return helper(root, 0, [])
+    if not root: return []
 
-# Reversed preorder traversal
-def helper(node: Optional[TreeNode], depth: int, answer: List[int]) -> List[int]:
-    if not node:
-        return answer
+    # Iterative breadth first traversal
+    currLvl, answer = [root], []
 
-    # Only add right-most node of new levels
-    if depth == len(answer):
-        answer.append(node.val)
+    while currLvl:
+        answer.append(currLvl[-1].val)
+        nextLvl = []
+        for node in currLvl:
+            if node.left:
+                nextLvl.append(node.left)
+            if node.right:
+                nextLvl.append(node.right)
+        currLvl = nextLvl
 
-    helper(node.right, depth + 1, answer)
-    helper(node.left, depth + 1, answer)
     return answer
 ```
 
-Alternative solution:
+Time: O(n)
+
+Space: O(n)
+
+<br />
+
+Alternative answer:
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
-# Iterative breadth-first traversal, adding last node of every level
 def rightSideView(root: Optional[TreeNode]) -> List[int]:
-    if not root:
-        return []
+    answer = []
 
-    answer = [root.val]
-    q = [root]
-    while q:
-        nextLevel = []
-        for node in q:
-            if node.left:
-                nextLevel.append(node.left)
-            if node.right:
-                nextLevel.append(node.right)
-        if nextLevel:
-            answer.append(nextLevel[-1].val)
-        q = nextLevel
+    # Reversed preorder traversal
+    def helper(root, depth: int) -> None:
+        if not root: return
+
+        if depth == len(answer):
+            answer.append(root.val)
+
+        helper(root.right, depth + 1)
+        helper(root.left, depth + 1)
+
+    helper(root, 0)
     return answer
 ```
+
+Time: O(n)
+
+Space: O(h), h = tree height

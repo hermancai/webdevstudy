@@ -13,8 +13,6 @@ Increment the large integer by one and return the resulting array of digits.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def plusOne(digits: List[int]) -> List[int]:
     for i in range(len(digits) - 1, -1, -1):
         if digits[i] < 9:
@@ -22,6 +20,10 @@ def plusOne(digits: List[int]) -> List[int]:
             return digits
         digits[i] = 0
 
-    # This will only run if there is carry-over
+    # Only reach this line if there is a carry
     return [1] + digits
 ```
+
+Time: O(n)
+
+Space: O(1)

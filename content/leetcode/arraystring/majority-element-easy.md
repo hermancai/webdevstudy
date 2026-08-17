@@ -8,13 +8,15 @@ Majority Element (Easy)
 
 Given an array `nums` of size `n`, return the majority element.
 
-The majority element is the element that appears more than `⌊n / 2⌋` times. You may assume that the majority element always exists in the array.
+The majority element is the element that appears more than `n / 2` times. You may assume that the majority element always exists in the array.
+
+<br />
+
+Follow-up: Solve the problem in linear time and constant space.
 
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def majorityElement(nums: List[int]) -> int:
     answer = nums[0]
     count = 0
@@ -32,3 +34,7 @@ def majorityElement(nums: List[int]) -> int:
 
     return answer
 ```
+
+Time: O(n)
+
+Space: O(1)

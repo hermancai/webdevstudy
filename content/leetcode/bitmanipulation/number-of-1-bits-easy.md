@@ -11,16 +11,17 @@ Write a function that takes the binary representation of a positive integer and 
 ## answer
 
 ```py
-# Time complexity: O(log(n))
-#   If n has a max number of bits, such as 32, time complexity is O(1).
-# Space complexity: O(1)
 def hammingWeight(n: int) -> int:
     count = 0
 
-    # Shift n in binary to right side while checking last bit
+    # Shift right while checking last bit
     while n > 0:
         if n & 1:
             count += 1
         n >>= 1
     return count
 ```
+
+Time: O(log n) or O(1) assuming 32 bits
+
+Space: O(1)

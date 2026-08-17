@@ -13,36 +13,34 @@ The solution set must not contain duplicate triplets.
 ## answer
 
 ```py
-# Time complexity: O(n^2)
-# Space complexity: O(n)
 def threeSum(nums: List[int]) -> List[List[int]]:
-    answer = set()
     nums.sort()
-    i = 0
+    answer = []
 
-    # Essentially 2Sum with an extra loop and dynamic target
-    while i < len(nums):
-        target = -1 * nums[i]
-        start, end = i + 1, len(nums) - 1
+    # Similar to 2Sum. Use sorted list and skip duplicates
+    for i in range(len(nums) - 2):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
 
-        while start < end:
-            currSum = nums[start] + nums[end]
-            if currSum > target:
-                end -= 1
-            elif currSum < target:
-                start += 1
+        left, right = i + 1, len(nums) - 1
+        while left < right:
+            tripleSum = nums[i] + nums[left] + nums[right]
+            if tripleSum > 0:
+                right -= 1
+            elif tripleSum < 0:
+                left += 1
             else:
-                triplet = tuple(sorted([nums[i], nums[start], nums[end]]))
-                answer.add(triplet)
-                # Skip duplicates from front and back
-                while start < end and nums[start] == triplet[1]:
-                    start += 1
-                while start < end and nums[end] == triplet[2]:
-                    end -= 1
+                answer.append([nums[i], nums[left], nums[right]])
+                while left < right and nums[left] == nums[left + 1]:
+                    left += 1
+                while left < right and nums[right] == nums[right - 1]:
+                    right -= 1
+                right -= 1
+                left += 1
 
-        # Skip duplicates of current integer
-        while i + 1 < len(nums) and nums[i + 1] == nums[i]:
-            i += 1
-        i += 1
     return answer
 ```
+
+Time: O(n<sup>2</sup>)
+
+Space: O(1)

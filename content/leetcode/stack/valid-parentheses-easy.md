@@ -17,24 +17,27 @@ An input string is valid if:
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def isValid(s: str) -> bool:
-    m = {
-            "(": ")",
-            "{": "}",
-            "[": "]"
-        }
-    stack = []
+    pairs = {
+        "(": ")",
+        "{": "}",
+        "[": "]"
+    }
 
-    for c in s:
-        if c in m:
-            stack.append(c)
+    stack = []
+    for char in s:
+        if char in pairs:
+            stack.append(char)
         else:
             if not stack:
                 return False
             pair = stack.pop()
-            if m[pair] != c:
+            if pairs[pair] != char:
                 return False
+
     return len(stack) == 0
 ```
+
+Time: O(n)
+
+Space: O(n)

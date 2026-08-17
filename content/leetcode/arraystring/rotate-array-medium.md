@@ -11,17 +11,22 @@ Given an integer array `nums`, rotate the array to the right by `k` steps, where
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def rotate(nums: List[int], k: int) -> None:
+    """
+    Do not return anything, modify nums in-place instead.
+    """
+    def reverseList(li, l, r):
+        while l < r:
+            li[l], li[r] = li[r], li[l]
+            l += 1
+            r -= 1
+
     k = k % len(nums)
     reverseList(nums, 0, len(nums) - 1)
     reverseList(nums, 0, k - 1)
     reverseList(nums, k, len(nums) - 1)
-
-def reverseList(li: List[int], start: int, end: int) -> None:
-    while start < end:
-        li[start], li[end] = li[end], li[start]
-        start += 1
-        end -= 1
 ```
+
+Time: O(n)
+
+Space: O(1)

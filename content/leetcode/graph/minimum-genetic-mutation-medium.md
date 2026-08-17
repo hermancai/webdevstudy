@@ -23,31 +23,33 @@ Note that the starting point is assumed to be valid, so it might not be included
 ```py
 from collections import deque
 
-# Time complexity: O(N^2 * M * K) where N = string length, M = mutations, K = bank size
-# Space complexity: O(N^2 * M * K)
 def minMutation(startGene: str, endGene: str, bank: List[str]) -> int:
-    bank = set(bank)
-    if endGene not in bank:
-        return -1
+    bank, visited, choices = set(bank), set(), ["A", "C", "G", "T"]
+    queue = deque([startGene])
+    mutations = 0
 
-    mutations = ["A", "C", "G", "T"]
-    # Track number of mutations to reach each string
-    visited = {startGene: 0}
-    q = deque()
-    q.append(startGene)
+    # Breadth first search
+    while queue:
+        for _ in range(len(queue)):
+            curr = queue.popleft()
 
-    while q:
-        curr = q.popleft()
-        # Try swapping every character with every mutation
-        for i in range(len(curr)):
-            for m in mutations:
-                newM = list(curr)
-                newM[i] = m
-                newM = "".join(newM)
-                if newM == endGene:
-                    return visited[curr] + 1
-                if newM in bank and newM not in visited:
-                    q.append(newM)
-                    visited[newM] = visited[curr] + 1
+            for i in range(8):
+                for choice in choices:
+                    newGene = curr[:i] + choice + curr[i + 1:]
+
+                    if newGene not in bank:
+                        continue
+                    if newGene == endGene:
+                        return mutations + 1
+
+                    if newGene not in visited:
+                        queue.append(newGene)
+                        visited.add(newGene)
+        mutations += 1
+
     return -1
 ```
+
+Time: O(N \* L<sup>2</sup>) or O(N), N = bank size, L = string length = 8
+
+Space: O(NL) or O(N)

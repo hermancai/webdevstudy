@@ -22,14 +22,41 @@ Assume methods `pop`, `top` and `getMin` will always be called on non-empty stac
 
 ```py
 class MinStack:
+    # Use another stack to store new min values
+    def __init__(self):
+        self.stack = []
+        self.minStack = []
+
+    def push(self, value: int) -> None:
+        self.stack.append(value)
+        if not self.minStack or value <= self.minStack[-1]:
+            self.minStack.append(value)
+
+    def pop(self) -> None:
+        val = self.stack.pop()
+        if val == self.minStack[-1]:
+            self.minStack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        return self.minStack[-1]
+```
+
+Alternative solution:
+
+```py
+class MinStack:
+    # Store every element as a tuple that includes the current min
     def __init__(self):
         self.stack = []
 
-    def push(self, val: int) -> None:
+    def push(self, value: int) -> None:
         if not self.stack:
-            self.stack.append((val, val))
+            self.stack.append((value, value))
         else:
-            self.stack.append((val, min(val, self.stack[-1][1])))
+            self.stack.append((value, min(value, self.stack[-1][1])))
 
     def pop(self) -> None:
         self.stack.pop()

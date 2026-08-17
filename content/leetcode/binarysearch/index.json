@@ -2,6 +2,7 @@
     "title": "Binary Search",
     "folderType": "card",
     "cards": [
+        "notes.md",
         "search-insert-position-easy.md",
         "search-a-2d-matrix-medium.md",
         "find-peak-element-medium.md",

@@ -11,18 +11,24 @@ Given a string `s`, find the length of the longest substring without repeating c
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def lengthOfLongestSubstring(s: str) -> int:
-    answer = start = end = 0
-    m = {} # char : index
+    cSet = set()
+    answer = 0
+    left = 0
 
-    while end < len(s):
-        # Decrease window size to exclude duplicate
-        if s[end] in m:
-            start = max(start, m[s[end]] + 1)
-        m[s[end]] = end
-        end += 1
-        answer = max(answer, end - start)
+    # Expand window
+    for right in range(len(s)):
+        # Shrink window if duplicate found
+        while s[right] in cSet:
+            cSet.remove(s[left])
+            left += 1
+
+        cSet.add(s[right])
+        answer = max(answer, right - left + 1)
+
     return answer
 ```
+
+Time: O(n)
+
+Space: O(n)

@@ -11,19 +11,19 @@ Given an array of `intervals` where `intervals[i] = [start<i>, end<i>]`, merge a
 ## answer
 
 ```py
-# Time complexity: O(n * log(n))
-# Space complexity: O(1) excluding output
 def merge(intervals: List[List[int]]) -> List[List[int]]:
     intervals.sort()
-    answer = []
-    curr = intervals[0]
+    answer = [intervals[0]]
 
-    for pair in intervals:
-        if pair[0] <= curr[1]:
-            curr[1] = max(pair[1], curr[1])
+    for i in range(1, len(intervals)):
+        if answer[-1][1] >= intervals[i][0]:
+            answer[-1][1] = max(answer[-1][1], intervals[i][1])
         else:
-            answer.append(curr)
-            curr = pair
-    answer.append(curr)
+            answer.append(intervals[i])
+
     return answer
 ```
+
+Time: O(n log n)
+
+Space: O(n) including output

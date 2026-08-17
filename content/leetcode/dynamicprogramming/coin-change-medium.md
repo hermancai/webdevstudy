@@ -15,21 +15,20 @@ You may assume that you have an infinite number of each kind of coin.
 ## answer
 
 ```py
-# Time complexity: O(n * m) where n = length of coins; m = amount
-# Space complexity: O(m)
 def coinChange(coins: List[int], amount: int) -> int:
-    coins.sort()
     memo = [float("inf")] * (amount + 1)
     memo[0] = 0
 
-    for i in range(1, amount + 1):
-        # Consider coin values as index differences
-        # For example, with current coin = 5, current amount = 8
-        #   (memo[8 - 5] + 1) is a potential answer to memo[8]
+    for amnt in range(1, amount + 1):
+        # Coin values are index differences
         for coin in coins:
-            if i - coin < 0:
-                break
-            memo[i] = min(memo[i], memo[i - coin] + 1)
+            # Boundary check
+            if amnt - coin >= 0:
+                memo[amnt] = min(memo[amnt], memo[amnt - coin] + 1)
 
     return memo[-1] if memo[-1] != float("inf") else -1
 ```
+
+Time: O(n \* m), n = len(coins), m = amount
+
+Space: O(m)

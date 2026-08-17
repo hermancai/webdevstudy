@@ -11,56 +11,62 @@ Given a string `s`, return the longest palindromic substring in `s`.
 ## answer
 
 ```py
-# Time complexity: O(n^2) where n = length of s
-# Space complexity: O(n^2)
 def longestPalindrome(s: str) -> str:
-    # 2D array using two indices as substring window
-    # If memo[j][i] is True, s[j:i + 1] is a palindrome
+    # 2D array representing substring window indices
+    # memo[left][right] = True --> s[left:right + 1] is palindrome
     memo = [[False for _ in s] for _ in s]
-    start = end = 0
+    answerStart = answerEnd = 0
 
-    # j = start index; i = end index
-    # inner loop is start index because j cannot be larger than i
-    for i in range(len(s)):
-        memo[i][i] = True  # Single char is a palindrome
-        for j in range(i):
-            # Check if current substring is a palindrome
-            # s[j] == s[i] means first and last chars of substring are equal
-            # (i - j <= 2) means substring is three or less chars (i.e. guaranteed palindrome)
-            # memo[j + 1][i - 1] uses memoization to check if substring without
-            #   first and last char is palindrome
-            if s[j] == s[i] and (i - j <= 2 or memo[j + 1][i - 1]):
-                memo[j][i] = True
-                if i - j > end - start:
-                    start, end = j, i
+    for right in range(len(s)):
+        # Single char is always palindrome
+        memo[right][right] = True
 
-    return s[start:end + 1]
+        for left in range(right):
+            # If outer chars are equal:
+            #   (right - left <= 2) string of 3 or less chars is always palindrome
+            #   OR check if substring without outer chars is palindrome
+            if s[left] == s[right] and (right - left <= 2 or memo[left + 1][right - 1]):
+                memo[left][right] = True
+
+                if right - left > answerEnd - answerStart:
+                    answerStart, answerEnd = left, right
+
+    return s[answerStart:answerEnd + 1]
 ```
+
+Time: O(n<sup>2</sup>)
+
+Space: O(n<sup>2</sup>)
+
+<br />
 
 Alternative solution:
 
 ```py
-# Time complexity: O(n^2) where n = length of s
-# Space complexity: O(1)
 def longestPalindrome(s: str) -> str:
-    start = end = 0
+    def expand(left, right):
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return left + 1, right - 1
 
-    # For each char in s, expand substring window to find largest palindrome
-    for i in range(len(s) - 1):
-        left, right = expandPalindrome(s, i, i)
-        if right - left > end - start:
-            start, end = left, right
+    answerStart = answerEnd = 0
 
-        # Center of a palindrome might be two chars
-        left, right = expandPalindrome(s, i, i + 1)
-        if right - left > end - start:
-            start, end = left, right
+    # Find largest palindrome using every char as center
+    for i in range(len(s)):
+        # single char center
+        oddL, oddR = expand(i, i)
+        if answerEnd - answerStart < oddR - oddL:
+            answerStart, answerEnd = oddL, oddR
 
-    return s[start:end + 1]
+        # two char center
+        evenL, evenR = expand(i, i + 1)
+        if answerEnd - answerStart < evenR - evenL:
+            answerStart, answerEnd = evenL, evenR
 
-def expandPalindrome(s: str, left: int, right: int) -> Tuple[int, int]:
-    while left >= 0 and right < len(s) and s[left] == s[right]:
-        left -= 1
-        right += 1
-    return left + 1, right - 1
+    return s[answerStart: answerEnd + 1]
 ```
+
+Time: O(n<sup>2</sup>)
+
+Space: O(1)

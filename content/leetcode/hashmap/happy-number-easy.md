@@ -19,22 +19,51 @@ Return `true` if `n` is a happy number, and `false` if not.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def isHappy(n: int) -> bool:
-    m = set()
+    s = set()
 
     while True:
-        if n in m:
-            return False
-        else:
-            m.add(n)
+        total = sum([int(c) * int(c) for c in str(n)])
 
-        li = list(str(n))
-        sum = 0
-        for c in li:
-            sum += int(c) ** 2
-        if sum == 1:
+        if total == 1:
             return True
-        n = sum
+        if total in s:
+            return False
+
+        n = total
+        s.add(total)
 ```
+
+Time: O(n)
+
+Space: O(n)
+
+<br />
+
+Alternative solution:
+
+```py
+def isHappy(self, n: int) -> bool:
+    def getTotal(n: int) -> int:
+        total = 0
+        while n > 0:
+            digit = n % 10
+            total += digit * digit
+            n = n // 10
+        return total
+
+    slow = fast = n
+
+    while True:
+        slow = getTotal(slow)
+        fast = getTotal(getTotal(fast))
+
+        if fast == 1:
+            return True
+        if slow == fast:
+            return False
+```
+
+Time: O(n)
+
+Space: O(1)

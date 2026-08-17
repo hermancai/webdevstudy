@@ -15,19 +15,25 @@ All occurrences of a character must be replaced with another character while pre
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def isIsomorphic(self, s: str, t: str) -> bool:
-    s2t, t2s = {}, {}
+    # Use two maps for s -> t and t -> s
+    sMap, tMap = {}, {}
+
     for i in range(len(s)):
-        # Characters must have the same mapping in both directions
-        if s[i] in s2t and s2t[s[i]] != t[i]:
+        charS, charT = s[i], t[i]
+        if charS in sMap and sMap[charS] != charT:
             return False
-        if t[i] in t2s and t2s[t[i]] != s[i]:
+        if charT in tMap and tMap[charT] != charS:
             return False
-        s2t[s[i]] = t[i]
-        t2s[t[i]] = s[i]
+
+        sMap[charS] = charT
+        tMap[charT] = charS
+
     return True
 ```
+
+Time: O(n)
+
+Space: O(n)
 
 NOTE: The solution for "Word Pattern" can also be used to solve this problem.

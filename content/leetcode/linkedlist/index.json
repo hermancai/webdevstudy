@@ -2,7 +2,7 @@
     "title": "Linked List",
     "folderType": "card",
     "cards": [
-        "linked-list.md",
+        "notes.md",
         "linked-list-cycle-easy.md",
         "merge-two-sorted-lists-easy.md",
         "add-two-numbers-medium.md",

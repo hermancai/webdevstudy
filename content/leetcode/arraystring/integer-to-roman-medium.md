@@ -21,8 +21,6 @@ Given an integer, convert it to a Roman numeral.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def intToRoman(num: int) -> str:
     pairs = [
         (1000, "M"),
@@ -39,12 +37,17 @@ def intToRoman(num: int) -> str:
         (4, "IV"),
         (1, "I")
     ]
+
     answer = []
 
-    for pair in pairs:
-        while num >= pair[0]:
-            answer.append(pair[1])
-            num -= pair[0]
+    for val, char in pairs:
+        while num >= val:
+            answer.append(char)
+            num -= val
 
     return "".join(answer)
 ```
+
+Time: O(n)
+
+Space: O(1)

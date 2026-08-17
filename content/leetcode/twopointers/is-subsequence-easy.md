@@ -13,15 +13,21 @@ A subsequence of a string is a new string that is formed from the original strin
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def isSubsequence(s: str, t: str) -> bool:
-    si = ti = 0
+    if not s:
+        return True
 
-    while si < len(s) and ti < len(t):
-        if s[si] == t[ti]:
-            si += 1
-        ti += 1
+    i = 0
 
-    return si == len(s)
+    for char in t:
+        if char == s[i]:
+            i += 1
+        if i == len(s):
+            return True
+
+    return False
 ```
+
+Time: O(n)
+
+Space: O(1)

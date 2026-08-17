@@ -2,6 +2,7 @@
     "title": "Array / String",
     "folderType": "card",
     "cards": [
+        "notes.md",
         "merge-sorted-array-easy.md",
         "remove-element-easy.md",
         "remove-duplicates-from-sorted-array-easy.md",

@@ -13,24 +13,24 @@ The lowest common ancestor is defined between two nodes `p` and `q` as the lowes
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(h) where h = height of tree
 def lowestCommonAncestor(root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-    # Return if p/q is found without searching deeper
-    #   because LCA cannot be in a lower level
-    if not root or root == p or root == q:
-        return root
+    if not root: return None
 
-    # Search whole tree for p and q
-    # If p/q is not in left/right, left/right = None
+    # Return early if p/q found because LCA cannot be lower
+    # If p/q is LCA, recursion will exit with p/q
+    if root == p or root == q: return root
+
     left = lowestCommonAncestor(root.left, p, q)
     right = lowestCommonAncestor(root.right, p, q)
 
-    # LCA is immediate parent when p and q are both found
+    # LCA is current node
     if left and right:
         return root
 
-    # When LCA is found, it will be carried up the stack
-    #   because either left or right would be None
+    # Answer will be carried up recursion stack
     return left or right
 ```
+
+Time: O(n)
+
+Space: O(h), h = tree height

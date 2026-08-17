@@ -14,25 +14,56 @@ Given the `root` of a binary tree, flatten the tree into a "linked list":
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(h) where h = height of tree
 def flatten(root: Optional[TreeNode]) -> None:
-    return helper(root, None)
+    if not root: return
 
-# Preorder traversal == reversed postorder starting with right subtrees
-# Preorder cannot be used here because left pointers get overwritten
-# Build list starting from tail with postorder starting with right subtrees
-def helper(curr, prev):
-    if not curr:
-        return prev
+    # Make preorder list of nodes, then update node pointers
+    nodes = []
 
-    # To understanding this solution, keep track of what prev points to
-    prev = helper(curr.right, prev)
-    # prev can potentially point to a node from a far subtree
-    prev = helper(curr.left, prev)
+    def helper(root):
+        if not root: return
 
-    # prev now points to the node after curr in preorder traversal
-    curr.right = prev
-    curr.left = None
-    return curr
+        nodes.append(root)
+        helper(root.left)
+        helper(root.right)
+
+    helper(root)
+    for i in range(len(nodes) - 1):
+        nodes[i].left = None
+        nodes[i].right = nodes[i + 1]
 ```
+
+Time: O(n)
+
+Space: O(n)
+
+<br />
+
+Follow-up: Use O(1) space.
+
+```py
+def flatten(root: Optional[TreeNode]) -> None:
+    # Remove the right subtree and attach to the rightmost node
+    # in the left subtree. This preserves preorder
+    curr = root
+
+    while curr:
+        if curr.left:
+            # Find rightmost node in left subtree
+            rightMostNode = curr.left
+            while rightMostNode.right:
+                rightMostNode = rightMostNode.right
+
+            # Attach right subtree
+            rightMostNode.right = curr.right
+
+            # Move left subtree to right side
+            curr.right = curr.left
+            curr.left = None
+
+        curr = curr.right
+```
+
+Time: O(n)
+
+Space: O(1)

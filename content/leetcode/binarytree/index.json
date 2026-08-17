@@ -2,15 +2,13 @@
     "title": "Binary Tree",
     "folderType": "card",
     "cards": [
-        "binary-tree.md",
+        "notes.md",
         "maximum-depth-of-binary-tree-easy.md",
         "same-tree-easy.md",
         "invert-binary-tree-easy.md",
         "symmetric-tree-easy.md",
         "path-sum-easy.md",
         "count-complete-tree-nodes-easy.md",
-        "average-of-levels-in-binary-tree-easy.md",
-        "minimum-absolute-difference-in-bst-easy.md",
         "construct-binary-tree-from-preorder-and-inorder-traversal-medium.md",
         "construct-binary-tree-from-inorder-and-postorder-traversal-medium.md",
         "populating-next-right-pointers-in-each-node-ii-medium.md",
@@ -18,9 +16,11 @@
         "sum-root-to-leaf-numbers-medium.md",
         "binary-search-tree-iterator-medium.md",
         "lowest-common-ancestor-of-a-binary-tree-medium.md",
+        "average-of-levels-in-binary-tree-easy.md",
         "binary-tree-right-side-view-medium.md",
         "binary-tree-level-order-traversal-medium.md",
         "binary-tree-zigzag-level-order-traversal-medium.md",
+        "minimum-absolute-difference-in-bst-easy.md",
         "kth-smallest-element-in-a-bst-medium.md",
         "validate-binary-search-tree-medium.md"
     ]

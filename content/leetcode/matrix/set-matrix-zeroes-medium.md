@@ -13,45 +13,47 @@ Modify the matrix in place.
 ## answer
 
 ```py
-# Time complexity: O(n * m)
-# Space complexity: O(1)
 def setZeroes(matrix: List[List[int]]) -> None:
+    # Use first row and column to track flags for entire matrix
+
     # Check first row and column for pre-existing 0
-    firstRowZero = False
-    for i in range(len(matrix[0])):
-        if matrix[0][i] == 0:
-            firstRowZero = True
+    zeroFirstRow = False
+    for val in matrix[0]:
+        if val == 0:
+            zeroFirstRow = True
             break
-    firstColumnZero = False
+    zeroFirstCol = False
     for i in range(len(matrix)):
         if matrix[i][0] == 0:
-            firstColumnZero = True
+            zeroFirstCol = True
             break
 
-    # Use first row and column for flagging
+    # Check entire matrix and set flags
     for row in range(1, len(matrix)):
         for col in range(1, len(matrix[0])):
             if matrix[row][col] == 0:
                 matrix[0][col] = 0
                 matrix[row][0] = 0
 
-    # Convert columns
-    for i in range(1, len(matrix[0])):
-        if matrix[0][i] == 0:
-            for j in range(1, len(matrix)):
-                matrix[j][i] = 0
+    # Use flags to set all rows and columns to 0 as needed
+    for row in range(1, len(matrix)):
+        if matrix[row][0] == 0:
+            for col in range(1, len(matrix[0])):
+                matrix[row][col] = 0
+    for col in range(1, len(matrix[0])):
+        if matrix[0][col] == 0:
+            for row in range(1, len(matrix)):
+                matrix[row][col] = 0
 
-    # Convert rows
-    for i in range(1, len(matrix)):
-        if matrix[i][0] == 0:
-            for j in range(1, len(matrix[0])):
-                matrix[i][j] = 0
-
-    # Convert first row and column if needed
-    if firstRowZero:
-        for i in range(len(matrix[0])):
-            matrix[0][i] = 0
-    if firstColumnZero:
-        for i in range(len(matrix)):
-            matrix[i][0] = 0
+    # Set first row and column to 0 if needed
+    if zeroFirstRow:
+        for col in range(len(matrix[0])):
+            matrix[0][col] = 0
+    if zeroFirstCol:
+        for row in range(len(matrix)):
+            matrix[row][0] = 0
 ```
+
+Time: O(n \* m)
+
+Space: O(1)

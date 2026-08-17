@@ -20,26 +20,55 @@ Write an algorithm that runs in `O(log n)` time.
 ## answer
 
 ```py
-# Time complexity: O(log n)
-# Space complexity: O(1)
 def findMin(nums: List[int]) -> int:
-    start, end = 0, len(nums) - 1
+    left, right = 0, len(nums) - 1
 
-    while start < end:
-        mid = (start + end) // 2
-        # If right side is rotated, answer is in right side
-        if nums[mid] > nums[end]:
-            # nums[mid] cannot be the answer, so mid is safe to skip
-            start = mid + 1
+    # Exit loop when left == right
+    while left < right:
+        mid = (left + right) // 2
+
+        # The rotated start is on the right side
+        if nums[mid] > nums[right]:
+            # Skip mid since it cannot be the answer
+            left = mid + 1
         else:
-            end = mid
-    return nums[start]
+            right = mid
 
-    # The following conditional does not work. If the left side is rotated,
-    #   it is possible that nums[mid] is the answer
-
-    # if nums[start] > nums[mid]:
-    #     end = mid - 1
-    # else:
-    #     start = mid
+    return nums[left]
 ```
+
+Time: O(log n)
+
+Space: O(1)
+
+<br />
+
+Alternative answer:
+
+```py
+def findMin(nums: List[int]) -> int:
+    left, right = 0, len(nums) - 1
+
+    # Exit loop when left == right
+    while left < right:
+        # Early check: range is sorted
+        if nums[left] < nums[right]:
+            return nums[left]
+
+        mid = (left + right) // 2
+
+        # The rotated start is on the left side -> go left
+        if nums[left] > nums[mid]:
+            # Cannot skip mid, which could be answer
+            right = mid
+        # The left side is sorted -> go right
+        # This is bad if the entire range is sorted
+        else:
+            left = mid + 1
+
+    return nums[left]
+```
+
+Time: O(log n)
+
+Space: O(1)

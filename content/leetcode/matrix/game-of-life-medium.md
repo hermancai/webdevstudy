@@ -20,33 +20,38 @@ The next state is created by applying the above rules simultaneously to every ce
 ## answer
 
 ```py
-# Time complexity: O(n * m)
-# Space complexity: O(1)
 def gameOfLife(self, board: List[List[int]]) -> None:
-    neighbors = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
+    directions = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
 
+    # 2 = is dead, will live; 3 = is live, will die
     for row in range(len(board)):
         for col in range(len(board[0])):
-            # Count live neighbors
-            count = 0
-            for coord in neighbors:
-                newRow = row + coord[0]
-                newCol = col + coord[1]
-                if newRow >= 0 and newRow < len(board) and newCol >= 0 and newCol < len(board[0]):
-                    if board[newRow][newCol] == 1 or board[newRow][newCol] == 2:
-                        count += 1
+            # Count live neighbors of current cell
+            liveNeighbors = 0
+            for d in directions:
+                r = row + d[0]
+                c = col + d[1]
+                if not 0 <= r < len(board) or not 0 <= c < len(board[0]):
+                    continue
+                if board[r][c] == 1 or board[r][c] == 3:
+                    liveNeighbors += 1
 
-            # 2 = currently live, will die
-            # 3 = currently dead, will live
-            if board[row][col] == 1:
-                if count < 2 or count > 3:
-                    board[row][col] = 2
-            elif board[row][col] == 0:
-                if count == 3:
+            # Apply rules to get next state without overwriting current state
+            if board[row][col] == 0:
+                board[row][col] = 2 if liveNeighbors == 3 else 0
+            else:
+                if liveNeighbors != 2 and liveNeighbors != 3:
                     board[row][col] = 3
 
-    # Convert 2 -> 0, 3 -> 1
+    # 2 -> 1; 3 -> 0
     for row in range(len(board)):
         for col in range(len(board[0])):
-            board[row][col] %= 2
+            if board[row][col] == 2:
+                board[row][col] = 1
+            elif board[row][col] == 3:
+                board[row][col] = 0
 ```
+
+Time: O(n \* m)
+
+Space: O(1)

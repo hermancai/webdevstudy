@@ -14,35 +14,33 @@ A subarray may only include each element of the fixed buffer `nums` at most once
 
 ## answer
 
-Solution logic:
-
-- The maximum sum subarray is either contiguous or wraps around the circular array.
-- Find the potentially contiguous subarray using Kadane's algorithm.
-- To find the wrapping subarray, get the contiguous minimum sum and subtract from the array total sum.
-    - total = min array + max array --> max array = total - min array
-- Note that only computing (total - min array) is not enough to find the maximum sum subarray. If the maximum sum subarray is contiguous, the minimum sum subarray wraps and will not be found by Kadane's algorithm.
-
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def maxSubarraySumCircular(nums: List[int]) -> int:
+    # Get contiguous mininum AND maximum subarrays for non-circular nums
+    # If the answer is contiguous, then the answer was found
+    #   Otherwise, the answer is wrapping:
+    #   total = minSum + wrapped max sum ---> wrapped max sum = total - minSum
+    #   Note that this equation only applies because nums is circular
     total = 0
-    maxSum = minSum = nums[0]
-    currMax = currMin = 0
+    currMin = minSum = float("inf")
+    currMax = maxSum = float("-inf")
 
-    # Use Kadane's algorithm to get both minimum and maximum sum subarrays
-    for n in nums:
-        total += n
+    for num in nums:
+        total += num
 
-        currMax = max(n, currMax + n)
-        maxSum = max(maxSum, currMax)
-
-        currMin = min(n, currMin + n)
+        currMin = min(currMin + num, num)
         minSum = min(minSum, currMin)
 
-    # Edge case: If all ints are negative, (total - minSum) == 0
-    #   and maxSum will be negative, resulting in a return of 0
+        currMax = max(currMax + num, num)
+        maxSum = max(maxSum, currMax)
+
+    # Edge case: If all nums are negative: (total - minSum == 0) and (maxSum < 0)
     if maxSum <= 0:
         return maxSum
+
     return max(maxSum, total - minSum)
 ```
+
+Time: O(n)
+
+Space: O(1)

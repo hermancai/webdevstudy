@@ -13,21 +13,21 @@ You can only move either down or right at any point in time.
 ## answer
 
 ```py
-# Time complexity: O(m * n) where m, n = lengths of grid
-# Space complexity: O(1)
 def minPathSum(grid: List[List[int]]) -> int:
-    # First row in grid can only move right
+    # First row and column only have one possible path
     for col in range(1, len(grid[0])):
         grid[0][col] += grid[0][col - 1]
-
     for row in range(1, len(grid)):
-        # First col in grid can only move down
         grid[row][0] += grid[row - 1][0]
 
-        # The current square has a minimum sum path by adding the lower value
-        #   between the square above or to the left
+    for row in range(1, len(grid)):
         for col in range(1, len(grid[0])):
+            # Current square can only be reached from left or top
             grid[row][col] += min(grid[row - 1][col], grid[row][col - 1])
 
     return grid[-1][-1]
 ```
+
+Time: O(m \* n)
+
+Space: O(1)

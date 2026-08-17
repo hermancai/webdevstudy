@@ -11,22 +11,24 @@ Given the `root` of a Binary Search Tree (BST), return the minimum absolute diff
 ## answer
 
 ```py
-# Inorder traversal using global variable to track answer
-# Time complexity: O(n), n = number of nodes
-# Space complexity: O(h), h = height of tree
-class Solution:
-    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
-        self.answer = float("inf")
-        self.prev = None
+def getMinimumDifference(root: Optional[TreeNode]) -> int:
+    answer, prev = float("inf"), None
 
-        def inorder(root):
-            if not root: return
-            inorder(root.left)
-            if self.prev != None:
-                self.answer = min(self.answer, root.val - self.prev)
-            self.prev = root.val
-            inorder(root.right)
+    # Inorder traversal, keep track of prev
+    def helper(root):
+        if not root: return
 
-        inorder(root)
-        return self.answer
+        helper(root.left)
+        nonlocal answer, prev
+        if prev:
+            answer = min(answer, root.val - prev.val)
+        prev = root
+        helper(root.right)
+
+    helper(root)
+    return answer
 ```
+
+Time: O(n)
+
+Space: O(h), h = tree height

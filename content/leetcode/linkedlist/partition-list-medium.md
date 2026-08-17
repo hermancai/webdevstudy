@@ -13,24 +13,24 @@ Preserve the original relative order of the nodes in each of the two partitions.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
-    # Use two lists to separate nodes
-    leftDummy = leftCurr = ListNode()
-    rightDummy = rightCurr = ListNode()
+    loDummy = loTail = ListNode()
+    hiDummy = hiTail = ListNode()
 
     while head:
         if head.val < x:
-            leftCurr.next = head
-            leftCurr = leftCurr.next
+            loTail.next = head
+            loTail = loTail.next
         else:
-            rightCurr.next = head
-            rightCurr = rightCurr.next
+            hiTail.next = head
+            hiTail = hiTail.next
         head = head.next
 
-    # Merge lists
-    rightCurr.next = None
-    leftCurr.next = rightDummy.next
-    return leftDummy.next
+    hiTail.next = None
+    loTail.next = hiDummy.next
+    return loDummy.next
 ```
+
+Time: O(n)
+
+Space: O(1)

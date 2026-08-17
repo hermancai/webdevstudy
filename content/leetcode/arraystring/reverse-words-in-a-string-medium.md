@@ -17,26 +17,28 @@ Note that `s` may contain leading or trailing spaces or multiple spaces between 
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def reverseWords(s: str) -> str:
     answer = []
-    start = end = len(s) - 1
+    left = right = len(s) - 1
 
-    while start >= 0:
-        # Skip whitespace
-        while s[start] == " ":
-            start -= 1
-            end -= 1
-        # In case string starts with whitespace
-        if start < 0:
+    # Loop backwards with two pointers. Find words, skip spaces
+    while left >= 0:
+        while left >= 0 and s[left] == " ":
+            left -= 1
+        right = left
+
+        if left < 0:
             break
-        # Find next word
-        while start >= 1 and s[start - 1] != " ":
-            start -= 1
-        answer.append(s[start:end + 1])
-        start -= 1
-        end = start
+
+        while left >= 0 and s[left] != " ":
+            left -= 1
+
+        answer.append(s[left + 1: right + 1])
+        right = left
 
     return " ".join(answer)
 ```
+
+Time: O(n)
+
+Space: O(n)

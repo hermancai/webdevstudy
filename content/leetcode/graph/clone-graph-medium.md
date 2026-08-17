@@ -22,49 +22,50 @@ class Node:
 ```py
 from collections import deque
 
-# Time complexity: O(V + E)
-# Space complexity: O(V) excluding output
-# Iterative breadth-first traversal
 def cloneGraph(node: Optional['Node']) -> Optional['Node']:
-    if not node:
-        return None
+    if not node: return None
 
-    # Key: old node; Value: new copy
-    visited = {}
-    newHead = Node(node.val)
-    visited[node] = newHead
+    # Key: old node; Value: new node
+    visited, d = { node: Node(node.val)}, deque([node])
 
-    q = deque()
-    q.append(node)
-    while q:
-        node = q.pop()
-        for n in node.neighbors:
-            if n not in visited:
-                visited[n] = Node(n.val)
-                q.append(n)
-            # Add neighbors to new copy node
-            visited[node].neighbors.append(visited[n])
+    # Iterative breadth first traversal
+    while d:
+        curr = d.popleft()
+        for neighbor in curr.neighbors:
+            if neighbor not in visited:
+                d.append(neighbor)
+                visited[neighbor] = Node(neighbor.val)
+            visited[curr].neighbors.append(visited[neighbor])
 
-    return newHead
+    return visited[node]
 ```
+
+Time: O(V + E), V = vertices, E = edges
+
+Space: O(V) excluding output
+
+<br />
 
 Alternative solution:
 
 ```py
-# Time complexity: O(V + E)
-# Space complexity: O(V) excluding output
-# Recursive depth-first traversal
 def cloneGraph(node: Optional['Node']) -> Optional['Node']:
-    return self.helper(node, {})
+    if not node: return None
 
-# visited - Key: old node; Value: new copy
-def helper(node: Optional['Node'], visited) -> Optional['Node']:
-    if not node:
-        return None
+    # Key: old node; Value: new node
+    visited = {}
 
-    if node not in visited:
-        visited[node] = Node(node.val)
-        for n in node.neighbors:
-            visited[node].neighbors.append(self.helper(n, visited))
-    return visited[node]
+    # Recursive depth first traversal
+    def dfs(node):
+        if node not in visited:
+            visited[node] = Node(node.val)
+            for neighbor in node.neighbors:
+                visited[node].neighbors.append(dfs(neighbor))
+        return visited[node]
+
+    return dfs(node)
 ```
+
+Time: O(V + E), V = vertices, E = edges
+
+Space: O(V) excluding output

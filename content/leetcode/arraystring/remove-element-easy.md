@@ -8,18 +8,25 @@ Remove Element (Easy)
 
 Given an integer array `nums` and an integer `val`, remove all occurrences of `val` in `nums` in-place. The order of the elements may be changed. Then return the number of elements in `nums` which are not equal to `val`.
 
+<br />
+
+Consider the number of elements in `nums` which are not equal to `val` be `k`. Change the array `nums` such that the first `k` elements of `nums` contain the elements which are not equal to `val`. The remaining elements of `nums` are not important as well as the size of `nums`. Return `k`.
+
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def removeElement(nums: List[int], val: int) -> int:
-    nonValIndex = 0
+    k = 0
 
-    # Swap values until all instances of target are at back of list
+    # Swap all non-vals to nums[k]
     for i in range(len(nums)):
         if nums[i] != val:
-            nums[i], nums[nonValIndex] = nums[nonValIndex], nums[i]
-            nonValIndex += 1
-    return nonValIndex
+            nums[i], nums[k] = nums[k], nums[i]
+            k += 1
+
+    return k
 ```
+
+Time: O(n)
+
+Space: O(1)

@@ -13,21 +13,24 @@ Given a string `s`, return `true` if it is a palindrome, or `false` otherwise.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def isPalindrome(s: str) -> bool:
-    start = 0
-    end = len(s) - 1
     s = s.lower()
-    while start < end:
-        if not s[start].isalnum():
-            start += 1
-        elif not s[end].isalnum():
-            end -= 1
-        elif s[start] == s[end]:
-            start += 1
-            end -= 1
-        else:
+    left, right = 0, len(s) - 1
+
+    while left < right:
+        if not s[left].isalnum():
+            left += 1
+        elif not s[right].isalnum():
+            right -= 1
+        elif s[left] != s[right]:
             return False
+        else:
+            left += 1
+            right -= 1
+
     return True
 ```
+
+Time: O(n)
+
+Space: O(1)

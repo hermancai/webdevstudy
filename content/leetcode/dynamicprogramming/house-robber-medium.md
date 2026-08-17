@@ -13,17 +13,21 @@ Given an integer array `nums` representing the amount of money of each house, re
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def rob(nums: List[int]) -> int:
-    # The solution only needs the previous two houses
-    oneBefore = 0
-    twoBefore = 0
-    # For any house, the two options are to steal and take from two before,
-    #   or not steal and take from one before
-    for n in nums:
-        curr = max(twoBefore + n, oneBefore)
-        twoBefore = oneBefore
-        oneBefore = curr
-    return oneBefore
+    # Track max stolen value up to previous two houses
+    oneBack = twoBack = 0
+
+    for num in nums:
+        # Two choices for current index:
+        # Ignore current house, keep oneBack value -OR-
+        # Steal from current house, add to twoBack
+        curr = max(num + twoBack, oneBack)
+        twoBack = oneBack
+        oneBack = curr
+
+    return curr
 ```
+
+Time: O(n)
+
+Space: O(1)

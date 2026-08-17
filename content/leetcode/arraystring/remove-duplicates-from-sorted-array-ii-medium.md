@@ -17,17 +17,18 @@ Do not allocate extra space for another array. You must do this by modifying the
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def removeDuplicates(nums: List[int]) -> int:
-    i = 0
+    k = 2
 
-    # Ignore first two elements
-    # i essentially tracks the next duplicate for replacing
-    # If current integer is valid, place in nums[i]
-    for n in range(len(nums)):
-        if i < 2 or nums[n] > nums[i - 2]:
-            nums[i] = nums[n]
-            i += 1
-    return i
+    # k = index of next duplicate to be replaced
+    for n in range(2, len(nums)):
+        if nums[n] > nums[k - 2]:
+            nums[k] = nums[n]
+            k += 1
+
+    return k
 ```
+
+Time: O(n)
+
+Space: O(1)

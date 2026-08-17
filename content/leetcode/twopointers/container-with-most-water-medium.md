@@ -17,22 +17,22 @@ Notice that you may not slant the container.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def maxArea(height: List[int]) -> int:
-    start, end = 0, len(height) - 1
+    left, right = 0, len(height) - 1
     answer = 0
 
-    while start < end:
-        answer = max(answer, (end - start) * min(height[start], height[end]))
-        # Keep the pointer with a greater value
-        if height[start] < height[end]:
-            start += 1
-        # In the case of height[start] == height[end],
-        #   the pointer to move does not matter because
-        #   regardless of the next pointer's value,
-        #   the calculated area will never be greater.
+    # Track max area while shrinking two pointers
+    while left < right:
+        answer = max(answer, min(height[left], height[right]) * (right - left))
+
+        if height[left] < height[right]:
+            left += 1
         else:
-            end -= 1
+            right -= 1
+
     return answer
 ```
+
+Time: O(n)
+
+Space: O(1)

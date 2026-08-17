@@ -14,18 +14,20 @@ A leaf is a node with no children.
 
 ```py
 def hasPathSum(root: Optional[TreeNode], targetSum: int) -> bool:
-    return self.helper(root, 0, targetSum)
+    def helper(node, target, total):
+        if not node:
+            return False
 
-# Time complexity: O(n), n = number of nodes
-# Space complexity: O(h), h = height of tree
-def helper(root, total, targetSum):
-    if not root: return False
-    if not root.left and not root.right:
-        return total + root.val == targetSum
+        if not node.left and not node.right:
+            return target == total + node.val
 
-    left = self.helper(root.left, total + root.val, targetSum)
-    if left: return True
+        left = helper(node.left, target, total + node.val)
+        right = helper(node.right, target, total + node.val)
+        return left or right
 
-    right = self.helper(root.right, total + root.val, targetSum)
-    return right
+    return helper(root, targetSum, 0)
 ```
+
+Time: O(n)
+
+Space: O(h), h = tree height

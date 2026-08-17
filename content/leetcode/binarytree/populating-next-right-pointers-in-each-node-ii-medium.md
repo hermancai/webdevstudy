@@ -21,41 +21,63 @@ Populate each next pointer to point to its next right node. If there is no next 
 
 Initially, all next pointers are set to `NULL`.
 
-Write a solution that uses constant space. Recursion using implicit stack space is fine.
-
 ## answer
 
-Solution logic:
+```py
+def connect(root: 'Node') -> 'Node':
+    if not root: return root
 
-- You are essentially trying to create a linked list for each level in the binary tree using the custom nodes.
-- After building a linked list for one level, that list can be used to build a list for the next level, and so on.
+    # Iterative breadth first traversal
+    currLevel = [root]
+
+    while currLevel:
+        nextLevel = []
+        for node in currLevel:
+            if node.left: nextLevel.append(node.left)
+            if node.right: nextLevel.append(node.right)
+
+        for i in range(len(nextLevel) - 1):
+            nextLevel[i].next = nextLevel[i + 1]
+
+        currLevel = nextLevel
+
+    return root
+```
+
+Time: O(n)
+
+Space: O(n)
+
+<br />
+
+Follow-up: Use only constant space. Recursion using implicit stack space is fine.
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def connect(root: 'Node') -> 'Node':
-    # levelDummy will be the head of each level's linked list
-    levelDummy = curr = Node()
-    originalRoot = root
+    # Treat each level as a linked list
+    curr = root
+    dummy = tail = Node()
 
-    while root:
-        # Build list for next level, using completed previous level list
-        if root.left:
-            curr.next = root.left
-            curr = curr.next
-        if root.right:
-            curr.next = root.right
-            curr = curr.next
-        root = root.next
+    while curr:
+        # Build pointers for next level
+        if curr.left:
+            tail.next = curr.left
+            tail = tail.next
+        if curr.right:
+            tail.next = curr.right
+            tail = tail.next
+        curr = curr.next
 
-        # Reached end of previous level list
-        if not root:
-            # Move on to next level
-            # levelDummy.next points to head of newly completed list
-            root = levelDummy.next
-            # Reset dummy pointers
-            curr = levelDummy
-            levelDummy.next = None
+        # Reached end of current level. Set pointers for next level
+        # dummy.next is first node of next level
+        if not curr:
+            curr = dummy.next
+            tail = dummy
+            dummy.next = None
 
-    return originalRoot
+    return root
 ```
+
+Time: O(n)
+
+Space: O(1)

@@ -20,23 +20,25 @@ Each range [a,b] in the list should be output as:
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1) excluding output
 def summaryRanges(nums: List[int]) -> List[str]:
-    result = []
-    i = 0
+    i, answer = 0, []
 
     while i < len(nums):
-        # Get consecutive range
-        end = i
-        while end + 1 < len(nums) and nums[end] + 1 == nums[end + 1]:
-            end += 1
-        # If equal, range did not expand
-        if end > i:
-            result.append(str(nums[i]) + "->" + str(nums[end]))
-        else:
-            result.append(str(nums[i]))
-        i = end + 1
+        start = nums[i]
+        while i + 1 < len(nums) and nums[i] + 1 == nums[i + 1]:
+            i += 1
+        end = nums[i]
 
-    return result
+        if start == end:
+            answer.append(str(start))
+        else:
+            answer.append(str(start) + "->" + str(end))
+
+        i += 1
+
+    return answer
 ```
+
+Time: O(n)
+
+Space: O(n) including output

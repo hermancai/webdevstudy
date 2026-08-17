@@ -11,16 +11,18 @@ Given an integer array `nums`, find the subarray with the largest sum, and retur
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def maxSubArray(nums: List[int]) -> int:
-    answer = float("-inf")
-    currSum = 0
+    # Kadane's algorithm
+    answer, currSum = float("-inf"), 0
 
-    for n in nums:
-        # If new value does not lead to larger currSum,
-        #   reset currSum and start new subarray
-        currSum = max(n, currSum + n)
+    for num in nums:
+        # num > currSum + num if currSum is negative
+        currSum = max(currSum + num, num)
         answer = max(answer, currSum)
+
     return answer
 ```
+
+Time: O(n)
+
+Space: O(1)

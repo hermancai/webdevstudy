@@ -22,21 +22,23 @@ Return the new path.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def simplifyPath(path: str) -> str:
     path = path.split("/")
-    final = []
+    stack = []
 
-    for s in path:
-        # path may contain empty strings after split()
-        if not s or s == ".":
+    for d in path:
+        # split() may include empty strings
+        if d == "" or d == ".":
             continue
-        if s == "..":
-            if final:
-                final.pop()
+        if d == "..":
+            if stack:
+                stack.pop()
         else:
-            final.append(s)
+            stack.append(d)
 
-    return "/" + "/".join(final)
+    return "/" + "/".join(stack)
 ```
+
+Time: O(n)
+
+Space: O(n)
