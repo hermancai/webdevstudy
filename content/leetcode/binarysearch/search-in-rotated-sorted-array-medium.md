@@ -17,29 +17,35 @@ Write an algorithm with `O(log n)` runtime complexity.
 ## answer
 
 ```py
-# Time complexity: O(log n)
-# Space complexity: O(1)
 def search(nums: List[int], target: int) -> int:
-    start, end = 0, len(nums) - 1
+    left, right = 0, len(nums) - 1
 
-    while start <= end:
-        mid = (start + end) // 2
+    while left <= right:
+        mid = (left + right) // 2
+
         if nums[mid] == target:
             return mid
 
-        # Logic: at most only one side is rotated
-        # If left side is not rotated
-        if nums[start] <= nums[mid]:  # Must use <= in case start == mid
-            if nums[start] <= target <= nums[mid]:
-                end = mid - 1
+        # One side must be sorted
+
+        # Left side is sorted
+        if nums[left] <= nums[mid]:
+            # Left side contains target
+            if nums[left] <= target < nums[mid]:
+                right = mid - 1
             else:
-                start = mid + 1
-        # Else right side is not rotated
+                left = mid + 1
+        # Right side is sorted
         else:
-            if nums[mid] <= target <= nums[end]:
-                start = mid + 1
+            # Right side contains target
+            if nums[mid] < target <= nums[right]:
+                left = mid + 1
             else:
-                end = mid - 1
+                right = mid - 1
 
     return -1
 ```
+
+Time: O(log n)
+
+Space: O(1)

@@ -19,24 +19,27 @@ Write an algorithm that runs in `O(log n)` time.
 ## answer
 
 ```py
-# Time complexity: O(log n)
-# Space complexity: O(1)
 def findPeakElement(nums: List[int]) -> int:
-    # Check ends of list now to prevent boundary checks later
+    # Check boundaries now and ignore later
     if len(nums) == 1 or nums[0] > nums[1]:
         return 0
     if nums[-1] > nums[-2]:
         return len(nums) - 1
 
-    start, end = 1, len(nums) - 2
-    while start <= end:
-        mid = (start + end) // 2
-        if nums[mid] > nums[mid - 1] and nums[mid] > nums[mid + 1]:
+    left, right = 1, len(nums) - 2
+
+    while left <= right:
+        mid = (left + right) // 2
+        prev, curr, nxt = nums[mid - 1], nums[mid], nums[mid + 1]
+        if prev < curr > nxt:
             return mid
-        # A peak is guaranteed to exist on the side that is higher,
-        #   either as a normal peak with two neighbors, or the end of the list.
-        elif nums[mid] < nums[mid - 1]:
-            end = mid - 1
+        # Peak is guaranteed to exist on side with larger num, given assumptions
+        elif prev > curr:
+            right = mid - 1
         else:
-            start = mid + 1
+            left = mid + 1
 ```
+
+Time: O(log n)
+
+Space: O(1)

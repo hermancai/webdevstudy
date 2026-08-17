@@ -15,17 +15,22 @@ Solve the problem without sorting.
 ## answer
 
 ```py
-# Time complexity: O(n * log(k))
-# Space complexity: O(k)
 def findKthLargest(nums: List[int], k: int) -> int:
     # Create a min heap containing at most k nodes
-    heap = nums[:k]
-    heapq.heapify(heap)
+    heap = []
+    for i in range(k):
+        heapq.heappush(heap, nums[i])
 
-    # After looping, the heap will contain the k largest values in nums
+    # Add remainder of nums into heap, maintaining k size
     for i in range(k, len(nums)):
         if nums[i] > heap[0]:
             heapq.heappop(heap)
             heapq.heappush(heap, nums[i])
+
+    # The heap will contain the k largest values in nums
     return heap[0]
 ```
+
+Time: O(n \* log k)
+
+Space: O(k)

@@ -13,16 +13,22 @@ Each letter in `magazine` can only be used once in `ransomNote`.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def canConstruct(ransomNote: str, magazine: str) -> bool:
-    m = {}
+    # Build frequency map
+    charMap = {}
     for c in magazine:
-        m[c] = m.get(c, 0) + 1
+        if c not in charMap:
+            charMap[c] = 0
+        charMap[c] += 1
 
     for c in ransomNote:
-        if c not in m or m[c] == 0:
+        if c not in charMap or charMap[c] == 0:
             return False
-        m[c] -= 1
+        charMap[c] -= 1
+
     return True
 ```
+
+Time: O(n)
+
+Space: O(n)

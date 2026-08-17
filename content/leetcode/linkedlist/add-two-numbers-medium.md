@@ -13,16 +13,17 @@ Assume the two numbers do not contain any leading zero, except the number 0 itse
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1) excluding output
 def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
     dummy = curr = ListNode()
     carry = 0
 
     while l1 or l2:
-        val = (l1.val if l1 else 0) + (l2.val if l2 else 0) + carry
-        carry = 1 if val > 9 else 0
-        curr.next = ListNode(val % 10)
+        v1 = l1.val if l1 else 0
+        v2 = l2.val if l2 else 0
+        total = v1 + v2 + carry
+        carry = 1 if total > 9 else 0
+        curr.next = ListNode(total % 10)
+
         curr = curr.next
         l1 = l1.next if l1 else None
         l2 = l2.next if l2 else None
@@ -31,3 +32,7 @@ def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[Li
         curr.next = ListNode(1)
     return dummy.next
 ```
+
+Time: O(n)
+
+Space: O(n) including output

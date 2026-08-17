@@ -11,16 +11,17 @@ Given an integer array `nums` and an integer `k`, return `true` if there are two
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def containsNearbyDuplicate(nums: List[int], k: int) -> bool:
     m = {}
+
     for i in range(len(nums)):
-        if nums[i] not in m:
-            m[nums[i]] = i
-        else:
-            if abs(i - m[nums[i]]) <= k:
-                return True
-            m[nums[i]] = i
+        if nums[i] in m and i - m[nums[i]] <= k:
+            return True
+        m[nums[i]] = i
+
     return False
 ```
+
+Time: O(n)
+
+Space: O(n)

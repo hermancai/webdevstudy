@@ -11,22 +11,24 @@ Given an array of positive integers `nums` and a positive integer `target`, retu
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def minSubArrayLen(target: int, nums: List[int]) -> int:
-    start = end = currSum = 0
     answer = float("inf")
+    left = right = 0
+    currSum = 0
 
-    while end < len(nums):
-        # Expand window size from end
-        currSum += nums[end]
-        end += 1
+    # Expand until target found. Shrink until target lost
+    while right < len(nums):
+        currSum += nums[right]
+        right += 1
 
-        # Decrease window size from start
         while currSum >= target:
-            answer = min(answer, end - start)
-            currSum -= nums[start]
-            start += 1
+            answer = min(answer, right - left)
+            currSum -= nums[left]
+            left += 1
 
     return 0 if answer == float("inf") else answer
 ```
+
+Time: O(n)
+
+Space: O(1)

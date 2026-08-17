@@ -13,33 +13,39 @@ The word can be constructed from letters of sequentially adjacent cells, where a
 ## answer
 
 ```py
-# Time complexity: O(n * m * 4^k) where n, m = board dimensions; k = length of word
-# Space complexity: O(k)
 def exist(board: List[List[str]], word: str) -> bool:
-    for r in range(len(board)):
-        for c in range(len(board[0])):
-            if board[r][c] != word[0]:
-                continue
-            if helper(board, word, 0, r, c):
+    ROWS, COLS = len(board), len(board[0])
+    directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+
+    # Can optimize by preprocessing input
+    # Create frequency map of board and word, compare and exit early
+
+    def dfs(index, row, col):
+        if not 0 <= row < ROWS or not 0 <= col < COLS or board[row][col] != word[index]:
+            return False
+
+        if index == len(word) - 1:
+            return True
+
+        # Mark as visited
+        char = board[row][col]
+        board[row][col] = ""
+
+        for r, c in directions:
+            if dfs(index + 1, row + r, col + c):
                 return True
+
+        board[row][col] = char
+        return False
+
+    for row in range(len(board)):
+        for col in range(len(board[0])):
+            if board[row][col] == word[0] and dfs(0, row, col):
+                return True
+
     return False
-
-def helper(board, word, index, row, col) -> bool:
-    if row < 0 or row >= len(board) or col < 0 or col >= len(board[0]):
-        return False
-    if board[row][col] != word[index]:
-        return False
-
-    if index == len(word) - 1:
-        return True
-
-    board[row][col] = ""  # Mark as visited
-    found = (
-        helper(board, word, index + 1, row - 1, col) or
-        helper(board, word, index + 1, row, col + 1) or
-        helper(board, word, index + 1, row + 1, col) or
-        helper(board, word, index + 1, row, col - 1)
-    )
-    board[row][col] = word[index]  # Revert visited
-    return found
 ```
+
+Time: O(m _ n _ 3<sup>L</sup>), L = word length
+
+Space: O(L)

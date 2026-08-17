@@ -11,25 +11,26 @@ Given the `head` of a sorted linked list, delete all nodes that have duplicate n
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def deleteDuplicates(head: Optional[ListNode]) -> Optional[ListNode]:
-    if not head or not head.next:
-        return head
-
-    dummy = prev = ListNode(0, head)
-    curr = head
+    dummy = ListNode(0, head)
+    prev, curr = dummy, head
 
     while curr:
-        val = curr.val
-        # Found duplicate. Remove all nodes with current value
-        if curr.next and curr.next.val == val:
-            while curr and curr.val == val:
-                prev.next = prev.next.next
-                curr = prev.next
-        else:
+        # Move forward only if duplicate value found
+        while curr.next and curr.val == curr.next.val:
+            curr = curr.next
+
+        # If curr did not move forward i.e. not duplicate value
+        if prev.next == curr:
             prev = curr
+            curr = curr.next
+        else:
+            prev.next = curr.next
             curr = curr.next
 
     return dummy.next
 ```
+
+Time: O(n)
+
+Space: O(1)

@@ -19,8 +19,6 @@ Given a roman numeral, convert it to an integer.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def romanToInt(s: str) -> int:
     m = {
         "I": 1,
@@ -33,14 +31,18 @@ def romanToInt(s: str) -> int:
     }
 
     answer = 0
-    end = len(s) - 1
 
-    # If current char is 'less' than next char,
-    # current char must be decremented from answer
-    for i in range(len(s)):
-        if i < end and m[s[i]] < m[s[i + 1]]:
+    # If the next char is greater than current char, subtract instead of add
+    for i in range(len(s) - 1):
+        if m[s[i]] < m[s[i + 1]]:
             answer -= m[s[i]]
         else:
             answer += m[s[i]]
+
+    answer += m[s[-1]]
     return answer
 ```
+
+Time: O(n)
+
+Space: O(1)

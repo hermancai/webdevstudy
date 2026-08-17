@@ -13,31 +13,33 @@ Assume `1 <= left <= right <= n` where `n` is the length of the linked list.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def reverseBetween(head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
     if not head.next or left == right:
         return head
 
-    # Go to node before start of swaps
-    dummy = beforeReverse = ListNode(0, head)
+    # Get to node before start of sublist
+    dummy = before = ListNode(0, head)
     for _ in range(1, left):
-        beforeReverse = beforeReverse.next
+        before = before.next
 
-    # Reverse list
-    tail = beforeReverse.next
-    for _ in range(right - left):
-        # Save head of currently reversed list
-        temp = beforeReverse.next
+    # start points to first node of sublist i.e. end of reversed sublist
+    start = before.next
 
-        # Move node after tail to front
-        beforeReverse.next = tail.next
+    # Reverse sublist
+    prev = None
+    curr = start
+    for _ in range(right - left + 1):
+        nextTemp = curr.next
+        curr.next = prev
+        prev = curr
+        curr = nextTemp
 
-        # Skip pointer of moved node
-        tail.next = tail.next.next
-
-        # Attach saved head to moved node (new head)
-        beforeReverse.next.next = temp
+    before.next = prev # before is node before sublist. prev is start of sublist
+    start.next = curr # start is end of sublist. curr is node after sublist
 
     return dummy.next
 ```
+
+Time: O(n)
+
+Space: O(1)

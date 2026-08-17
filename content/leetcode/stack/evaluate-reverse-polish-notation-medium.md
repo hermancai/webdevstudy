@@ -20,25 +20,29 @@ Evaluate the expression. Return an integer that represents the value of the expr
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def evalRPN(tokens: List[str]) -> int:
-    operator = set(["+", "-", "*", "/"])
-    s = []
+    operators = {"+", "-", "*", "/"}
+    stack = []
 
-    for t in tokens:
-        if t not in operator:
-            s.append(int(t))
+    for c in tokens:
+        if c not in operators:
+            stack.append(int(c))
+            continue
+
+        y = stack.pop()
+        x = stack.pop()
+        if c == "+":
+            stack.append(x + y)
+        elif c == "-":
+            stack.append(x - y)
+        elif c == "*":
+            stack.append(x * y)
         else:
-            second = s.pop()
-            first = s.pop()
-            if t == "+":
-                s.append(first + second)
-            elif t == "-":
-                s.append(first - second)
-            elif t == "*":
-                s.append(first * second)
-            else:
-                s.append(int(first / second))
-    return s[0]
+            stack.append(int(x / y))
+
+    return stack[-1]
 ```
+
+Time: O(n)
+
+Space: O(n)

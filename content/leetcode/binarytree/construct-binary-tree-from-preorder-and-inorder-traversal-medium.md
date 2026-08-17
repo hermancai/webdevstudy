@@ -13,32 +13,32 @@ Given two integer arrays `preorder` and `inorder` where `preorder` is the preord
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
+# In a preorder list, a node's left child is always the next element in the list
+# In an inorder list, left side elements are left subtree of current node. Same with right
 def buildTree(preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-    # Convert inorder to map with indices
+    # Map inorder indices for O(1) lookup
     m = {}
     for i in range(len(inorder)):
         m[inorder[i]] = i
 
-    return build(preorder, m, 0, 0, len(inorder) - 1)
+    # Recursively build left and right child nodes while shrinking list
+    def helper(preI, inLeft, inRight):
+        if preI >= len(preorder) or inLeft > inRight:
+            return None
 
-# p: index of current node in preorder
-# l: starting index of subtree in inorder
-# r: ending index of subtree in inorder
-def build(preorder, inorder, p, l, r) -> Optional[TreeNode]:
-    if p >= len(preorder) or l > r:
-        return None
+        inI = m[preorder[preI]]
+        node = TreeNode(preorder[preI])
 
-    # Position of current node in inorder
-    inIdx = inorder[preorder[p]]
+        node.left = helper(preI + 1, inLeft, inI - 1)
+        # To get the current node's right child's index in preorder,
+        # Skip the length of the entire left subtree
+        # Left subtree length = inI - inLeft + 1
+        node.right = helper(preI + inI - inLeft + 1, inI + 1, inRight)
+        return node
 
-    node = TreeNode(preorder[p])
-    # In preorder, left child of node is always next
-    node.left = build(preorder, inorder, p + 1, l, inIdx - 1)
-
-    # In inorder, left subtree size == length of left subarray == inIdx - l
-    # To get index of right child in preorder, skip length of left subarray + 1
-    node.right = build(preorder, inorder, p + inIdx - l + 1, inIdx + 1, r)
-    return node
+    return helper(0, 0, len(inorder) - 1)
 ```
+
+Time: O(n)
+
+Space: O(n)

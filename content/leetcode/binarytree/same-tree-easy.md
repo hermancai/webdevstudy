@@ -13,17 +13,18 @@ Two binary trees are considered the same if they are structurally identical, and
 ## answer
 
 ```py
-# Time complexity: O(n), n = number of nodes
-# Space complexity: O(h), h = height of tree
 def isSameTree(p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-    if not p and not q: return True
-    if not p or not q: return False
-    if p.val != q.val: return False
+    if not p and not q:
+        return True
+
+    if (not p or not q) or p.val != q.val:
+        return False
 
     left = self.isSameTree(p.left, q.left)
-    if not left: return False
     right = self.isSameTree(p.right, q.right)
-    if not right: return False
-
-    return p.val == q.val
+    return left and right
 ```
+
+Time: O(n)
+
+Space: O(h), h = tree height

@@ -13,22 +13,18 @@ If there is no common prefix, return an empty string `""`.
 ## answer
 
 ```py
-# Time complexity: O(n*m) where m is length of shortest word
-# Space complexity: O(1)
 def longestCommonPrefix(strs: List[str]) -> str:
-    answer = []
+    if len(strs) == 0:
+        return ""
 
-    # Find shortest word, which will contain answer
-    shortestWord = strs[0]
-    for word in strs:
-        if len(word) < len(shortestWord):
-            shortestWord = word
-
-    for i in range(len(shortestWord)):
+    for i in range(len(strs[0])):
         for word in strs:
-            if word[i] != shortestWord[i]:
-                return "".join(answer)
-        answer.append(shortestWord[i])
+            if i >= len(word) or word[i] != strs[0][i]:
+                return strs[0][:i]
 
-    return shortestWord
+    return strs[0]
 ```
+
+Time: O(n \* m) where m is length of shortest word
+
+Space: O(1)

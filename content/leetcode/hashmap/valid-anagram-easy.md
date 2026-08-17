@@ -13,13 +13,12 @@ An anagram is a word or phrase formed by rearranging the letters of a different 
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def isAnagram(s: str, t: str) -> bool:
     if len(s) != len(t):
         return False
 
     m = {}
+
     for c in s:
         m[c] = m.get(c, 0) + 1
 
@@ -27,5 +26,10 @@ def isAnagram(s: str, t: str) -> bool:
         if c not in m or m[c] == 0:
             return False
         m[c] -= 1
+
     return True
 ```
+
+Time: O(n)
+
+Space: O(n)

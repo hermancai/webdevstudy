@@ -15,22 +15,20 @@ Find and return the maximum profit you can achieve.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def maxProfit(prices: List[int]) -> int:
-    answer = 0
-    i = 1
+    profit = 0
+    buy = prices[0]
 
-    while i < len(prices):
-        # Buy at valley
-        while i < len(prices) and prices[i] <= prices[i - 1]:
-            i += 1
-        buy = prices[i - 1]
-        # Sell at peak
-        while i < len(prices) and prices[i] >= prices[i - 1]:
-            i += 1
-        sell = prices[i - 1]
-        answer += sell - buy
+    # If positive profit, sell
+    # Else update to new minimum buy price
+    for price in prices:
+        if price > buy:
+            profit += price - buy
+        buy = price
 
-    return answer
+    return profit
 ```
+
+Time: O(n)
+
+Space: O(1)

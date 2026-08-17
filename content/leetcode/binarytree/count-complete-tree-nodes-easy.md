@@ -17,20 +17,26 @@ Design an algorithm that runs in less than `O(n)` time complexity.
 ```py
 # Time complexity: O((log n)^2)
 # Space complexity: O(h), h = height of tree
-def getHeight(root) -> int:
-    if not root: return 0
-    return getHeight(root.left) + 1
+def countNodes(root: Optional[TreeNode]) -> int:
+    # getHeight() is O(log n) assuming complete binary tree
+    # In a complete binary tree, n = h^2
+    def getHeight(root):
+        if not root: return 0
+        return getHeight(root.left) + 1
 
-def countNodes(root) -> int:
     if not root: return 0
 
     left = getHeight(root.left)
     right = getHeight(root.right)
 
-    # Equal height means left subtree is perfect binary tree
+    # If equal subtree heights, left subtree is perfect binary tree
     if left == right:
         return countNodes(root.right) + 2**left
-    # Else the right subtree is perfect binary tree
+    # Else right subtree is perfect binary tree with one less height
     else:
         return countNodes(root.left) + 2**right
 ```
+
+Time: O(log<sup>2</sup>n) assuming complete binary tree
+
+Space: O(h), h = tree height

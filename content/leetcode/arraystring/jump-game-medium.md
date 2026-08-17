@@ -13,22 +13,45 @@ Return `true` if you can reach the last index, or `false` otherwise.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def canJump(nums: List[int]) -> bool:
-    if len(nums) <= 1:
+    if len(nums) < 2:
         return True
 
+    goal = len(nums) - 1
     farthest = 0
-    target = len(nums) - 1
 
-    # From start, update farthest possible index
     for i in range(len(nums)):
         if nums[i] == 0 and i == farthest:
             return False
-        farthest = max(farthest, i + nums[i])
-        if farthest >= target:
-            return True
 
-    return farthest >= target
+        farthest = max(farthest, i + nums[i])
+        if farthest >= goal:
+            return True
 ```
+
+Time: O(n)
+
+Space: O(1)
+
+<br />
+
+Alternative solution:
+
+```py
+def canJump(nums: List[int]) -> bool:
+    farthest = 0
+
+    for num in nums:
+        if farthest < 0:
+            return False
+
+        if num > farthest:
+            farthest = num
+        farthest -= 1
+
+    return True
+```
+
+Time: O(n)
+
+Space: O(1)

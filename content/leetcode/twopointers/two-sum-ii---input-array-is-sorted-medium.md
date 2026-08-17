@@ -15,16 +15,19 @@ Assume there is exactly one solution. Do not use the same element twice. The sol
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def twoSum(numbers: List[int], target: int) -> List[int]:
-    start, end = 0, len(numbers) - 1
-    while start < end:
-        currSum = numbers[start] + numbers[end]
-        if currSum == target:
-            return [start + 1, end + 1]
-        if currSum < target:
-            start += 1
+    left, right = 0, len(numbers) - 1
+
+    while left < right:
+        currSum = numbers[left] + numbers[right]
+        if currSum > target:
+            right -= 1
+        elif currSum < target:
+            left += 1
         else:
-            end -= 1
+            return [left + 1, right + 1]
 ```
+
+Time: O(n)
+
+Space: O(1)

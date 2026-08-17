@@ -17,50 +17,49 @@ A valid BST is defined as follows:
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
-# Iterative inorder traversal while tracking previous node
 def isValidBST(root: Optional[TreeNode]) -> bool:
-    stack = []
-    prev = None
+    stack, prev, curr = [], None, root
 
-    while root or stack:
-        while root:
-            stack.append(root)
-            root = root.left
+    # Iterative inorder traversal, tracking prev
+    while stack or curr:
+        while curr:
+            stack.append(curr)
+            curr = curr.left
 
-        root = stack.pop()
-        # Previous value must be less than current in inorder traversal of valid BST
-        if prev and root.val <= prev.val:
+        node = stack.pop()
+        if prev and prev.val >= node.val:
             return False
 
-        prev = root
-        root = root.right
+        prev = node
+        curr = node.right
+
     return True
 ```
+
+Time: O(n)
+
+Space: O(h), h = tree height
+
+<br />
 
 Alternative solution:
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(h) where h = height of tree
 def isValidBST(root: Optional[TreeNode]) -> bool:
+    # Recursive inorder traversal, updating valid value range
+    def helper(root, minV, maxV):
+        if not root: return True
+
+        if root.val <= minV or root.val >= maxV:
+            return False
+
+        left = helper(root.left, minV, root.val)
+        right = helper(root.right, root.val, maxV)
+        return left and right
+
     return helper(root, float("-inf"), float("inf"))
-
-# Recursive inorder traversal
-# Keep track of valid range for current value
-def helper(node: Optional[TreeNode], minV, maxV) -> bool:
-    if not node:
-        return True
-
-    if node.val <= minV or node.val >= maxV:
-        return False
-
-    left = helper(node.left, minV, node.val)
-    if not left:
-        return False
-
-    right = helper(node.right, node.val, maxV)
-
-    return left and right
 ```
+
+Time: O(n)
+
+Space: O(h), h = tree height

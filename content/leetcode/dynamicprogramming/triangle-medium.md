@@ -22,42 +22,43 @@ For each step, you may move to an adjacent number of the row below. More formall
 ## answer
 
 ```py
-# Time complexity: O(n^2)
-# Space complexity: O(1)
 def minimumTotal(triangle: List[List[int]]) -> int:
-    # Bottom-up DP
-    # Space optimization: modify triangle in-place instead of memoization
+    # Bottom-up DP, modify triangle in-place instead of memoizing
+    # Find path starting from bottom row up to root
+    # Starting from root is also possible, but must handle boundaries
+    for row in range(len(triangle) - 1, 0, -1):
+        # Current row index is used to loop through upper row
+        # Each element in upper row can choose from two elements in current row
+        for col in range(row):
+            triangle[row - 1][col] += min(triangle[row][col], triangle[row][col + 1])
 
-    # Start from last row in triangle, which is inherently already solved
-    for currRow in range(len(triangle) - 1, 0, -1):
-        # In the upper row, each value is a parent to two values in the current row
-        #   The lower of those two values is used to create a potential min path
-        upperRow = currRow - 1
-        for i in range(currRow):
-            triangle[upperRow][i] += min(triangle[currRow][i], triangle[currRow][i + 1])
     return triangle[0][0]
 ```
 
-Alternative solution:
+Time: O(n<sup>2</sup>)
+
+Space: O(1)
+
+<br />
+
+Follow-up: Solve using O(n) space, n = len(triangle)
 
 ```py
-# Time complexity: O(n^2)
-# Space complexity: O(1)
 def minimumTotal(triangle: List[List[int]]) -> int:
-    # Top-down DP
-    # Space optimization: modify triangle in-place instead of memoization
+    # Bottom-up DP, storing path sums in 1D array
+    # Can also just modify triangle in-place
+    memo = triangle[-1][:]
 
-    # Starting from second row, building from root
-    for currRow in range(1, len(triangle)):
-        # Modify the current row using the upper row
-        upperRow = currRow - 1
-        for i in range(len(triangle[currRow])):
-            # The first and last values in a row only have one path choice
-            if i == 0:
-                triangle[currRow][i] += triangle[upperRow][i]
-            elif i == currRow:
-                triangle[currRow][i] += triangle[upperRow][i - 1]
-            else:
-                triangle[currRow][i] += min(triangle[upperRow][i], triangle[upperRow][i - 1])
-    return min(triangle[-1])
+    for row in range(len(triangle) - 2, -1, -1):
+        for col in range(len(triangle[row])):
+            memo[col] = triangle[row][col] + min(memo[col], memo[col + 1])
+        # The last element in memo is discarded as rows move up
+        # This pop is unnecessary, but illustrates how memo is used
+        memo.pop()
+
+    return memo[0]
 ```
+
+Time: O(n<sup>2</sup>)
+
+Space: O(n)

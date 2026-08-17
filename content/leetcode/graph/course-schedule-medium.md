@@ -17,35 +17,32 @@ Return `true` if you can finish all courses. Otherwise, return `false`.
 ```py
 from collections import deque
 
-# Time complexity: O(V + E)
-# Space complexity: O(V + E)
-# Topological sort with breadth-first traversal
 def canFinish(numCourses: int, prerequisites: List[List[int]]) -> bool:
-    # Index refers to parent course. Nested list contains child courses
-    courses = [[] for n in range(numCourses)]
+    # { prereq: [courses with prereq] }
+    neighbors = defaultdict(list)
+    # Track how many prereqs a course has
+    indegree = {i: 0 for i in range(numCourses)}
 
-    # Index refers to child course. Value counts number of parents
-    degrees = [0 for _ in range(numCourses)]
-    # Note that this solution can use lists because nodes are 0-indexed
+    for node, prereq in prerequisites:
+        indegree[node] += 1
+        neighbors[prereq].append(node)
 
-    for parent, child in prerequisites:
-        courses[parent].append(child)
-        degrees[child] += 1
+    # Breadth first topological sort
+    queue = deque([c for c in range(numCourses) if indegree[c] == 0])
+    completed = 0
 
-    q = deque()
-    for i in range(numCourses):
-        # Degree of 0 means course has no prereqs
-        if degrees[i] == 0:
-            q.append(i)
+    while queue:
+        course = queue.popleft()
+        completed += 1
 
-    while q:
-        course = q.popleft()
-        numCourses -= 1
-        # Remove parent course as prereq from all child courses
-        for child in courses[course]:
-            degrees[child] -= 1
-            if degrees[child] == 0:
-                q.append(child)
+        for neighbor in neighbors[course]:
+            indegree[neighbor] -= 1
+            if indegree[neighbor] == 0:
+                queue.append(neighbor)
 
-    return numCourses == 0
+    return completed == numCourses
 ```
+
+Time: O(V + E), V = nodes, E = edges
+
+Space: O(V + E)

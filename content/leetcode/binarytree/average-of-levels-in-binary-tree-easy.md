@@ -11,21 +11,24 @@ Given the `root` of a binary tree, return the average value of the nodes on each
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def averageOfLevels(root: Optional[TreeNode]) -> List[float]:
-    answer = []
-    q = [root]
-    while q:
-        nextLevel = []
-        currentLevelSum = 0
-        for node in q:
-            currentLevelSum += node.val
+    currLvl, answer = [root],  []
+
+    while currLvl:
+        nextLvl, total = [], 0
+        for node in currLvl:
+            total += node.val
             if node.left:
-                nextLevel.append(node.left)
+                nextLvl.append(node.left)
             if node.right:
-                nextLevel.append(node.right)
-        answer.append(currentLevelSum / len(q))
-        q = nextLevel
+                nextLvl.append(node.right)
+
+        answer.append(total / len(currLvl))
+        currLvl = nextLvl
+
     return answer
 ```
+
+Time: O(n)
+
+Space: O(n)

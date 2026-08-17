@@ -15,40 +15,67 @@ Example: Input `pattern = "abba", s = "dog cat cat dog"` Output `true`
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
-
-# Example: "abba" -> (0, 1, 1, 0)
 def convertPatternToTuple(string: str) -> tuple:
-    m = {}
-    count = 0
-    result = []
+    # Example: "dog cat cat dog" -> (0, 1, 1, 0)
+    def wordsToTuple(words: str) -> tuple:
+        m, i, result = {}, 0, []
+        words = words.split()
 
-    for c in string:
-        if c in m:
-            result.append(m[c])
-        else:
-            m[c] = count
-            result.append(count)
-            count += 1
-    return tuple(result)
-
-# Example: "dog cat cat dog" -> (0, 1, 1, 0)
-def convertWordsToTuple(words: str) -> tuple:
-    m = {}
-    count = 0
-    result = []
-    words = words.split()
-
-    for word in words:
-        if word in m:
+        for word in words:
+            if word not in m:
+                m[word] = i
+                i += 1
             result.append(m[word])
-        else:
-            m[word] = count
-            result.append(count)
-            count += 1
-    return tuple(result)
 
-def wordPattern(pattern: str, s: str) -> bool:
-    return convertPatternToTuple(pattern) == convertWordsToTuple(s)
+        return tuple(result)
+
+    # Example: "abba" -> (0, 1, 1, 0)
+    def patternToTuple(pattern: str) -> tuple:
+        m, i, result = {}, 0, []
+
+        for c in pattern:
+            if c not in m:
+                m[c] = i
+                i += 1
+            result.append(m[c])
+
+        return tuple(result)
+
+    return patternToTuple(pattern) == wordsToTuple(s)
 ```
+
+Time: O(n)
+
+Space: O(n)
+
+<br />
+
+Alternative solution:
+
+```py
+def convertPatternToTuple(string: str) -> tuple:
+    # Use two maps for word -> char and char -> word
+    wordMap, charMap = {}, {}
+    words = s.split()
+
+    if len(pattern) != len(words):
+        return False
+
+    for i in range(len(pattern)):
+        char = pattern[i]
+        word = words[i]
+
+        if char in charMap and charMap[char] != word:
+            return False
+        if word in wordMap and wordMap[word] != char:
+            return False
+
+        charMap[char] = word
+        wordMap[word] = char
+
+    return True
+```
+
+Time: O(n)
+
+Space: O(n)

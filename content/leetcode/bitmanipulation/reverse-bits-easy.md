@@ -21,14 +21,12 @@ Output: `964176192 (00111001011110000010100101000000)`
 ## answer
 
 ```py
-# Time complexity: O(1)
-# Space complexity: O(1)
 def reverseBits(n: int) -> int:
     answer = 0
 
-    # Loop through every binary digit in n
+    # Build 32 bit answer
     for _ in range(32):
-        # Shift answer in binary to the left once
+        # Shift left once (add space for next bit)
         answer <<= 1
 
         # Last bit in answer is now 0 after shifting left
@@ -36,7 +34,11 @@ def reverseBits(n: int) -> int:
         if n & 1:
             answer += 1
 
-        # Shift n to the right once (i.e. remove last bit)
+        # Shift n right once (remove last bit)
         n >>= 1
     return answer
 ```
+
+Time: O(1)
+
+Space: O(1)

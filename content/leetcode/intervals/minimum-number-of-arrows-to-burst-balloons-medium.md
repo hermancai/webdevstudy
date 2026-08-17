@@ -15,21 +15,20 @@ Given the array `points`, return the minimum number of arrows that must be shot 
 ## answer
 
 ```py
-# Time complexity: O(n * log(n))
-# Space complexity: O(1)
 def findMinArrowShots(self, points: List[List[int]]) -> int:
     # Sort by x<end>
     points.sort(key=lambda x: x[1])
-    count = 1
-    currIdx = 0
+    currMax, answer = points[0][1], 1
 
-    # Shoot arrow at end of leftmost unpopped balloon
+    # Skip balloons with starts that overlap with current balloon end
     for i in range(1, len(points)):
-        # Skip all balloons that will be popped by current arrow
-        if points[i][0] <= points[currIdx][1]:
-            continue
-        count += 1
-        currIdx = i
+        if points[i][0] > currMax:
+            answer += 1
+            currMax = points[i][1]
 
-    return count
+    return answer
 ```
+
+Time: O(n log n)
+
+Space: O(1)

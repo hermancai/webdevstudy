@@ -17,28 +17,40 @@ Return the `k` pairs `(u1, v1), (u2, v2), ..., (uk, vk)` with the smallest sums.
 ## answer
 
 ```py
-# Time complexity: O(k * log(k))
-# Space complexity: O(k)
-def kSmallestPairs(nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
-    heap = []  # min heap, holds tuples (sum, index1, index2)
+# nums1 = [1, 2, 4], nums2 = [1, 3, 5]
+# Visualize the pair sums in a matrix
+#               nums2
+#            1    3    5
+# nums1  1  [2]  [4]  [6]
+#        2  [3]  [5]  [7]
+#        4  [5]  [7]  [9]
+#
+# Each row in the matrix is a sorted list
+# The goal is to merge every row into one sorted list, keeping the first k elements
 
-    # Add initial potential solution pairs to heap
-    #   using all of nums1 and first element in nums2
+def kSmallestPairs(nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+    # Min heap holding tuples: (sum, index1, index2)
+    heap, answer = [], []
+
+    # Add the first element of every row (up to k) in the sum matrix
+    # If k < len(nums1), remainder of nums1 can be ignored because
+    #   the values will never be part of the answer
+    # This only works because nums1 and nums2 are sorted
     for i in range(min(k, len(nums1))):
         heapq.heappush(heap, (nums1[i] + nums2[0], i, 0))
 
-    answer = []
-    # Add pairs to answer
-    # If nums2 has more elements after current index, add to heap
-    # All pairs are accounted for and lowest sum pairs are added first
-    # The next pair popped from the heap is always the lowest current sum
-    # The heap already contains all/k elements from nums1 due to the first loop
-    # The second loop incrementally considers all elements from nums2 per element in nums1
-    for _ in range(k):
-        val, i1, i2 = heapq.heappop(heap)
+    while len(answer) < k:
+        _, i1, i2 = heapq.heappop(heap)
+
         answer.append([nums1[i1], nums2[i2]])
+
+        # When element in a matrix row is processed, add next element in row
         if i2 + 1 < len(nums2):
             heapq.heappush(heap, (nums1[i1] + nums2[i2 + 1], i1, i2 + 1))
 
     return answer
 ```
+
+Time: O(k \* log k)
+
+Space: O(k)

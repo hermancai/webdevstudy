@@ -15,20 +15,24 @@ Given two integer arrays `gas` and `cost`, return the starting gas station's ind
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def canCompleteCircuit(gas: List[int], cost: List[int]) -> int:
-    if sum(gas) < sum(cost): return -1
+    if sum(gas) < sum(cost):
+        return -1
 
     # An answer is guaranteed at this point
-    net = idx = 0
+    net = 0
+    answer = 0
+
     for i in range(len(gas)):
         net += gas[i] - cost[i]
-        # If net becomes negative, the answer must be at least after i
-        # Essentially looking for largest net positive subarray
-        #   that includes last element
+        # If net becomes negative, answer must be at least after i
         if net < 0:
             net = 0
-            idx = i + 1
-    return idx
+            answer = i + 1
+
+    return answer
 ```
+
+Time: O(n)
+
+Space: O(1)

@@ -17,46 +17,36 @@ Implement the `WordDictionary` class:
 ## answer
 
 ```py
-class TrieNode:
-    def __init__(self):
-        self.children = {}
-        self.completeWord = False
-
 class WordDictionary:
     def __init__(self):
-        self.node = TrieNode()
+        # Simulate graph nodes with nested maps. Use "#" to end word
+        # "apple" -> {a: {p: {p: {l: {e: {"#": True}}}}}}
+        self.head = {}
 
-    # Time complexity: O(N) where N = length of word
     def addWord(self, word: str) -> None:
-        node = self.node
-        for c in word:
-            if c not in node.children:
-                node.children[c] = TrieNode()
-            node = node.children[c]
-        node.completeWord = True
+        node = self.head
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        node["#"] = {}
 
-    # Time complexity: O(M) where M = number of TrieNodes
     def search(self, word: str) -> bool:
-        return self.searchHelper(word, 0, self.node)
+        def dfs(i, charMap):
+            if i >= len(word):
+                return "#" in charMap
 
-    def searchHelper(self, word: str, i: int, node: Optional["TrieNode"]) -> bool:
-        # Note that len(word) is checked instead of len(word) - 1
-        # This functions checks if the next char is in the current node's children
-        if i == len(word):
-            # At end of word, node points to node for last char
-            return node.completeWord
+            char = word[i]
 
-        # Depth-first traversal
-        if word[i] == ".":
-            # Check all children
-            for child in node.children.values():
-                if self.searchHelper(word, i + 1, child):
-                    return True
-        else:
-            # Standard check for one char
-            if word[i] not in node.children:
+            if char != ".":
+                if char not in charMap:
+                    return False
+                return dfs(i + 1, charMap[char])
+            else:
+                for key in charMap:
+                    if dfs(i + 1, charMap[key]):
+                        return True
                 return False
-            return self.searchHelper(word, i + 1, node.children[word[i]])
 
-        return False
+        return dfs(0, self.head)
 ```

@@ -11,53 +11,45 @@ Given an integer array `nums`, return the length of the longest strictly increas
 ## answer
 
 ```py
-# Time complexity: O(n^2)
-# Space complexity: O(n)
 def lengthOfLIS(nums: List[int]) -> int:
-    memo = [1] * len(nums)
-    answer = 1
+    memo = [1] * (len(nums))
 
-    for i in range(len(nums)):
+    for i in range(1, len(nums)):
         for j in range(i):
-            # If nums[i] fits into subsequence containing nums[j],
-            #   (memo[j] + 1) is a potential answer
             if nums[j] < nums[i]:
                 memo[i] = max(memo[i], memo[j] + 1)
-                answer = max(answer, memo[i])
-    return answer
+
+    return max(memo)
 ```
+
+Time: O(n<sup>2</sup>)
+
+Space: O(n)
+
+<br />
 
 Alternative solution:
 
 ```py
-# Time complexity: O(n * log(n))
-# Space complexity: O(n)
 def lengthOfLIS(nums: List[int]) -> int:
-    # Build subsequence sub by looping through nums once
-    # If current val n does not fit into the subsequence,
-    #   search sub for the lowest value x >= n
-    #   Replace x with n in sub
-    # Even if sub no longer represents a valid subsequence,
-    #   sub will retain the length of the LIS.
-    #   Values are never removed from sub, and expanding sub
-    #   only involves checking the last value in sub
+    # Build longest subsequence
     sub = []
-    for n in nums:
-        if not sub or n > sub[-1]:
-            sub.append(n)
-        else:
-            i = getIndexOfLowestGreaterVal(sub, n)
-            sub[i] = n
-    return len(sub)
 
-def getIndexOfLowestGreaterVal(sub: List[int], n: int) -> int:
-    # Binary search. sub is guaranteed to be sorted
-    start, end = 0, len(sub) - 1
-    while start < end:
-        mid = (start + end) // 2
-        if sub[mid] < n:
-            start = mid + 1
+    for num in nums:
+        # Current num can be added to subsequence
+        if not sub or num > sub[-1]:
+            sub.append(num)
         else:
-            end = mid
-    return start
+            # Native function: bisect_left(sorted_list, val)
+            # Binary search to find leftmost index for inserting val
+            # Replace an element in subsequence instead of appending
+            sub[bisect_left(sub, num)] = num
+
+    # sub may no longer hold a valid subsequence. Does not matter because
+    # length is preserved and appending only requires checking last element
+    return len(sub)
 ```
+
+Time: O(n \* log n)
+
+Space: O(n)

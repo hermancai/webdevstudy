@@ -21,72 +21,77 @@ Write the code that will take a string and make this conversion given a number o
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def convert(s: str, numRows: int) -> str:
-    if numRows == 1 or numRows >= len(s):
+    if numRows == 1 or numRows == len(s):
         return s
 
-    # 2D matrix representing zigzag
-    answer = [[] for _ in range(numRows)]
+    # Create buckets per row and add chars in order
+    answer = [""] * numRows
+    row = 0
+    direction = -1
 
-    # Sequentially place characters into the appropriate row
-    i = 0
-    while i < len(s):
-        # Filling in columns
-        for idx in range(numRows):
-            if i >= len(s):
-                break
-            answer[idx].append(s[i])
-            i += 1
-        # Filling in diagonals
-        for idx in range(numRows - 2, 0, -1):
-            if i >= len(s):
-                break
-            answer[idx].append(s[i])
-            i += 1
+    for char in s:
+        answer[row] += char
 
-    return "".join(["".join(row) for row in answer])
-```
+        if row == 0 or row == numRows - 1:
+            direction *= -1
 
-Alternative solution:
-
-- This solution relies on finding the numerical pattern between indices per row.
-- To see the pattern, create the expected output and zigzag for cases `numRows = 3, 4, and 5`.
-
-```py
-# Time complexity: O(n)
-# Space complexity: O(n)
-def convert(s: str, numRows: int) -> str:
-    if numRows == 1 or numRows >= len(s):
-        return s
-
-    answer = []
-    # Index difference between columns in the same row
-    offset = numRows * 2 - 2
-
-    # Handle first row
-    i = 0
-    while i < len(s):
-        answer.append(s[i])
-        i += offset
-
-    for i in range(1, numRows - 1):
-        # Middle rows will have alternating index differences
-        flip = False
-        offset1 = (numRows - i - 1) * 2
-        offset2 = offset - offset1
-        idx = i
-        while idx < len(s):
-            answer.append(s[idx])
-            idx += offset2 if flip else offset1
-            flip = not flip
-
-    # Handle last row
-    i = numRows - 1
-    while i < len(s):
-        answer.append(s[i])
-        i += offset
+        row += direction
 
     return "".join(answer)
 ```
+
+Time: O(n)
+
+Space: O(n)
+
+<br />
+
+Alternative solution:
+
+```py
+# Draw outputs to find the pattern per row
+# rows = 3; gap = 4     rows = 4; gap = 6       rows = 5; gap = 8
+# 0   4   8    12       0     6       12        0       8
+# 1 3 5 7 9 11 13       1   5 7    11 13        1     7 9
+# 2   6   10            2 4   8 10              2   6   10
+#                       3     9                 3 5     11 13
+#                                               4       12
+def convert(s: str, numRows: int) -> str:
+    if numRows == 1 or numRows >= len(s):
+        return s
+
+    # Add chars per row
+    answer = []
+    gap = 2 * numRows - 2
+
+    # First row
+    i = 0
+    while i < len(s):
+        answer.append(s[i])
+        i += gap
+
+    # Middle rows have alternating index offsets
+    for i in range(1, numRows - 1):
+        currI = i
+        frontOffset = gap - i * 2
+        backOffset = gap - frontOffset
+        while currI < len(s):
+            answer.append(s[currI])
+            currI += frontOffset
+            if currI < len(s):
+                answer.append(s[currI])
+                currI += backOffset
+
+    # Last row
+    i = numRows - 1
+    while i < len(s):
+        answer.append(s[i])
+        i += gap
+
+    return "".join(answer)
+```
+
+Time: O(n)
+
+Space: O(n)

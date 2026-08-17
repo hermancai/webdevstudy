@@ -20,53 +20,65 @@ Note:
 ## answer
 
 ```py
-# Time complexity: O(1)
-# Space complexity: O(1)
 def isValidSudoku(board: List[List[str]]) -> bool:
-    rows = [set() for _ in range(10)]
-    columns = [set() for _ in range(10)]
-    grid = [[set() for _ in range(4)] for _ in range(4)]
+    rows = [set() for _ in range(9)]
+    cols = [set() for _ in range(9)]
+    grid = [[set() for _ in range(3)] for _ in range(3)]
 
-    for r in range(9):
-        for c in range(9):
-            val = board[r][c]
-            if val != ".":
-                if val in rows[r]:
-                    return False
-                rows[r].add(val)
+    for row in range(9):
+        for col in range(9):
+            val = board[row][col]
+            if val == ".":
+                continue
 
-                if val in columns[c]:
-                    return False
-                columns[c].add(val)
+            if val in rows[row]:
+                return False
+            rows[row].add(val)
 
-                gridR, gridC = r // 3, c // 3
-                if val in grid[gridR][gridC]:
-                    return False
-                grid[gridR][gridC].add(val)
+            if val in cols[col]:
+                return False
+            cols[col].add(val)
+
+            gridRow, gridCol = row // 3, col // 3
+            if val in grid[gridRow][gridCol]:
+                return False
+            grid[gridRow][gridCol].add(val)
+
     return True
 ```
+
+Time: O(1)
+
+Space: O(1)
+
+<br />
 
 Alternative solution:
 
 ```py
-# Time complexity: O(1)
-# Space complexity: O(1)
 def isValidSudoku(board: List[List[str]]) -> bool:
     visited = set()
 
-    for r in range(9):
-        for c in range(9):
-            val = board[r][c]
-            if val != ".":
-                # Example: val of 5 in board[2][4]
-                #   -> "r25", "c45", "g015"
-                row = "r" + str(r) + val
-                col = "c" + str(c) + val
-                grid = "g" + str(r // 3) + str(c // 3) + val
-                if row in visited or col in visited or grid in visited:
-                    return False
-                visited.add(row)
-                visited.add(col)
-                visited.add(grid)
+    for row in range(9):
+        for col in range(9):
+            val = board[row][col]
+            if val == ".":
+                continue
+
+            rowStr = "r" + str(row) + val
+            colStr = "c" + str(col) + val
+            gridStr = "g" + str(row // 3) + str(col // 3) + val
+
+            if rowStr in visited or colStr in visited or gridStr in visited:
+                return False
+
+            visited.add(rowStr)
+            visited.add(colStr)
+            visited.add(gridStr)
+
     return True
 ```
+
+Time: O(1)
+
+Space: O(1)

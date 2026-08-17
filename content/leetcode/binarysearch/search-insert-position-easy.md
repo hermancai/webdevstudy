@@ -13,20 +13,21 @@ Write an algorithm with `O(log n)` runtime complexity.
 ## answer
 
 ```py
-# Time complexity: O(log n)
-# Space complexity: O(1)
 def searchInsert(nums: List[int], target: int) -> int:
-    start, end = 0, len(nums) - 1
+    left, right = 0, len(nums) - 1
 
-    while start <= end:
-        mid = (start + end) // 2
+    while left <= right:
+        mid = (left + right) // 2
         if nums[mid] == target:
             return mid
         if nums[mid] > target:
-            end = mid - 1
+            right = mid - 1
         else:
-            start = mid + 1
+            left = mid + 1
 
-    # Start will be equivalent to mid or mid + 1 for insert position
-    return start
+    return left
 ```
+
+Time: O(log n)
+
+Space: O(1)

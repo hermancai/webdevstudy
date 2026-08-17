@@ -19,17 +19,20 @@ class TreeNode:
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(log(n)) excluding output
 def sortedArrayToBST(nums: List[int]) -> Optional[TreeNode]:
-    return helper(nums, 0, len(nums) - 1)
+    def helper(left, right):
+        if left > right:
+            return None
 
-def helper(nums, start, end):
-    if start > end: return None
+        mid = (left + right) // 2
+        node = TreeNode(nums[mid])
+        node.left = helper(left, mid - 1)
+        node.right = helper(mid + 1, right)
+        return node
 
-    mid = (start + end) // 2
-    node = TreeNode(nums[mid])
-    node.left = helper(nums, start, mid - 1)
-    node.right = helper(nums, mid + 1, end)
-    return node
+    return helper(0, len(nums) - 1)
 ```
+
+Time: O(n)
+
+Space: O(n) or O(log n) excluding output

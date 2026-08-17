@@ -11,22 +11,33 @@ Given two strings `needle` and `haystack`, return the index of the first occurre
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def strStr(haystack: str, needle: str) -> int:
-    i = 0
-    matchCount = 0
+    def isMatch(needle, haystack, start, end):
+        if len(needle) != (end - start + 1):
+            return False
 
-    while i < len(haystack):
-        if haystack[i] == needle[matchCount]:
-            matchCount += 1
-        else: # Reset search
-            i -= matchCount
-            matchCount = 0
+        for i in range(len(needle)):
+            if needle[i] != haystack[start]:
+                return False
+            start += 1
 
-        if matchCount == len(needle):
-            return i - len(needle) + 1
-        i += 1
+        return True
+
+    # check for match when sliding window is correct size
+    start = 0
+    for end in range(len(haystack)):
+        if (end - start + 1) == len(needle):
+            if isMatch(needle, haystack, start, end):
+                return start
+            start += 1
 
     return -1
 ```
+
+Time: O(n \* m) where n = len(haystack), m = len(needle)
+
+Space: O(1)
+
+<br />
+
+There is an alternative solution with O(n + m) time and O(m) space using the Knuth–Morris–Pratt algorithm.

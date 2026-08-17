@@ -15,38 +15,30 @@ Return the ordering of courses you should take to finish all courses. If there a
 ## answer
 
 ```py
-# The same solution for "Course Schedule" can be used.
-# Return a list that keeps track of processed nodes.
-```
-
-Alternative solution:
-
-```py
-# Time complexity: O(V + E)
-# Space complexity: O(V + E)
-# Topological sort with depth-first traversal
 def findOrder(numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-    courses = [[] for _ in range(numCourses)]
-    degrees = [0 for _ in range(numCourses)]
-    answer = []
+    # Breadth first topological sort
+    neighbors = defaultdict(list)
+    indegree = {i: 0 for i in range(numCourses)}
 
-    for child, parent in prerequisites:
-        courses[parent].append(child)
-        degrees[child] += 1
+    for course, prereq in prerequisites:
+        indegree[course] += 1
+        neighbors[prereq].append(course)
 
-    for i in range(numCourses):
-        if degrees[i] == 0:
-            dfs(i, courses, degrees, answer)
+    queue = deque([c for c in range(numCourses) if indegree[c] == 0])
+    result = []
 
-    if len(answer) != numCourses:
-        return []
-    return answer
+    while queue:
+        prereq = queue.popleft()
+        result.append(prereq)
 
-def dfs(current, courses, degrees, answer) -> None:
-    answer.append(current)
-    degrees[current] -= 1
-    for child in courses[current]:
-        degrees[child] -= 1
-        if degrees[child] == 0:
-            dfs(child, courses, degrees, answer)
+        for course in neighbors[prereq]:
+            indegree[course] -= 1
+            if indegree[course] == 0:
+                queue.append(course)
+
+    return result if len(result) == numCourses else []
 ```
+
+Time: O(V + E), V = nodes, E = edges
+
+Space: O(V + E)

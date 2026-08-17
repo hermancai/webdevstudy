@@ -11,28 +11,30 @@ Given the `head` of a linked list, rotate the list to the right by `k` places.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def rotateRight(head: Optional[ListNode], k: int) -> Optional[ListNode]:
-    if not head: return head
+    if not head:
+        return head
 
-    # Get list size and pointer to list tail
-    count = 1
-    tail = head
+    # Get list length and tail pointer
+    length, tail = 1, head
     while tail.next:
-        count += 1
+        length += 1
         tail = tail.next
+
+    k %= length
 
     # Create cycle
     tail.next = head
 
-    # Move to tail of final list
-    k %= count
-    for _ in range(count - k):
+    # Traverse to rotated list tail
+    for _ in range(length - k):
         tail = tail.next
 
-    # Break cycle
     newHead = tail.next
     tail.next = None
     return newHead
 ```
+
+Time: O(n)
+
+Space: O(1)

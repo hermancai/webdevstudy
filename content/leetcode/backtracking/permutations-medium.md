@@ -11,24 +11,29 @@ Given an array `nums` of distinct integers, return all the possible permutations
 ## answer
 
 ```py
-# Time complexity: O(n * n!)
-# Space complexity: O(n * n!)
 def permute(nums: List[int]) -> List[List[int]]:
-    answer = []
-    helper(nums, answer, [], set())
-    return answer
+    answer, visited = [], set([None])
 
-def helper(nums, answer, currLi, currSet) -> None:
-    if len(currLi) == len(nums):
-        answer.append(currLi[:])
-        return
+    def dfs(currVal, currLi):
+        if len(currLi) == len(nums):
+            answer.append(currLi[:])
+            return
 
-    for i in range(len(nums)):
-        # Loop through every element that isn't in currLi
-        if nums[i] not in currSet:
-            currLi.append(nums[i])
-            currSet.add(nums[i])
-            helper(nums, answer, currLi, currSet)
+        for val in nums:
+            # Tracking visited values only works if values are unique
+            # Track index instead if duplicate values
+            if val in visited:
+                continue
+            currLi.append(val)
+            visited.add(val)
+            dfs(val, currLi)
             currLi.pop()
-            currSet.remove(nums[i])
+            visited.remove(val)
+
+    dfs(None, [])
+    return answer
 ```
+
+Time: O(n \* n!)
+
+Space: O(n \* n!) or O(n) exluding output

@@ -18,82 +18,24 @@ class ListNode:
 ## answer
 
 ```py
-# Time complexity: O(n * log(n))
-# Space complexity: O(1)
 def sortList(head: Optional[ListNode]) -> Optional[ListNode]:
-    if not head: return head
+    def mergeSorted(head1, head2):
+        dummy = curr = ListNode()
+        while head1 and head2:
+            if head1.val <= head2.val:
+                curr.next = head1
+                head1 = head1.next
+            else:
+                curr.next = head2
+                head2 = head2.next
+            curr = curr.next
+        curr.next = head1 or head2
+        return dummy.next
 
-    dummy = ListNode(0, head)
-    length = getLength(head)
-    step = 1
-    while length > step:
-        curr = dummy.next
-        tail = dummy
-        # Process entire list, merging sections of step length
-        # Example:
-        #   list = 4 -> 2 -> 1 -> 3; step = 1
-        #   left = 4; right = 2. Merge into 2 -> 4
-        #   left = 1; right = 3. Merge into 1 -> 3
-        #   Reached end of list. Increase step
-        #   list = 2 -> 4 -> 1 -> 3; step = 2
-        #   left = 2 -> 4; right = 1 -> 3. Merge into 1 -> 2 -> 3 -> 4
-        while curr:
-            left = curr
-            right = split(left, step)  # right points to node after left's tail
-            curr = split(right, step)  # curr points to node after right's tail
-            tail = merge(left, right, tail)  # tail points to end of merged list
-        step *= 2
-    return dummy.next
-
-def getLength(head: Optional[ListNode]) -> int:
-    count = 0
-    while head:
-        count += 1
-        head = head.next
-    return count
-
-# Given head node, skip step nodes, cut at tail, return tail.next
-def split(head: Optional[ListNode], step: int):
-    # (step - 1) because prev node is needed to cut at tail
-    for _ in range(step - 1):
-        if head:
-            head = head.next
-
-    # In case steps reach end of original list
-    if not head: return None
-
-    cutoff = head.next
-    head.next = None
-    return cutoff
-
-# Merge two sorted lists, append to head, return tail of new list
-def merge(a, b, head) -> Optional[ListNode]:
-    curr = head
-    while a and b:
-        if a.val < b.val:
-            curr.next = a
-            a = a.next
-        else:
-            curr.next = b
-            b = b.next
-        curr = curr.next
-
-    curr.next = a or b
-    while curr.next:
-        curr = curr.next
-    return curr
-```
-
-Alternative solution:
-
-```py
-# Time complexity: O(n * log(n))
-# Space complexity: O(log(n))
-def sortList(head: Optional[ListNode]) -> Optional[ListNode]:
     if not head or not head.next:
         return head
 
-    # prev is needed to split list. Consider a list of length 2
+    # Split list in middle
     prev = slow = fast = head
     while fast and fast.next:
         prev = slow
@@ -101,22 +43,81 @@ def sortList(head: Optional[ListNode]) -> Optional[ListNode]:
         fast = fast.next.next
     prev.next = None
 
-    # Recurse until lists are length 1
+    # Recurse until len(list) == 1 i.e. sorted
     left = sortList(head)
     right = sortList(slow)
-    return merge(left, right)
+    return mergeSorted(left, right)
+```
 
-def merge(a, b) -> Optional[ListNode]:
-    dummy = curr = ListNode()
-    while a and b:
-        if a.val < b.val:
-            curr.next = a
-            a = a.next
-        else:
-            curr.next = b
-            b = b.next
+Time: O(n \* log n)
+
+Space: O(log n)
+
+<br />
+
+Follow-up: Sort the list in O(n \* log n) time and O(1) space.
+
+```py
+def sortList(head: Optional[ListNode]) -> Optional[ListNode]:
+    # Cut off list after step nodes. Return head of remaining list
+    def split(head, step: int):
+        curr = head
+        for _ in range(step - 1):
+            if curr:
+                curr = curr.next
+
+        if not curr: return None
+
+        newHead = curr.next
+        curr.next = None
+        return newHead
+
+    # Merge sorted lists. Return tail of merged list
+    def merge(l1, l2, head):
+        curr = head
+        while l1 and l2:
+            if l1.val <= l2.val:
+                curr.next = l1
+                l1 = l1.next
+            else:
+                curr.next = l2
+                l2 = l2.next
+            curr = curr.next
+        curr.next = l1 or l2
+
+        while curr.next:
+            curr = curr.next
+        return curr
+
+    # Get list size
+    size, curr = 0, head
+    while curr:
+        size += 1
         curr = curr.next
 
-    curr.next = a or b
+    # Split into lists of step length, then merge
+    # Example:
+    #   list = 4 -> 2 -> 1 -> 3; step = 1
+    #   left = 4; right = 2. Merge into 2 -> 4
+    #   left = 1; right = 3. Merge into 1 -> 3
+    #   Reached end of list. Increase step
+    #   list = 2 -> 4 -> 1 -> 3; step = 2
+    #   left = 2 -> 4; right = 1 -> 3. Merge into 1 -> 2 -> 3 -> 4
+    dummy = ListNode(0, head)
+    step = 1
+    while size > step:
+        unsortedHead, sortedTail = dummy.next, dummy
+        while unsortedHead:
+            # split() twice to create three lists. Merge first two lists
+            # split() returns head of new list
+            left = unsortedHead
+            right = split(left, step)
+            unsortedHead = split(right, step)
+            sortedTail = merge(left, right, sortedTail)
+        step *= 2
     return dummy.next
 ```
+
+Time: O(n \* log n)
+
+Space: O(1)

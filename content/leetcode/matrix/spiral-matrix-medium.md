@@ -11,35 +11,65 @@ Given an `m x n` `matrix`, return all elements of the `matrix` in spiral order.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def spiralOrder(matrix: List[List[int]]) -> List[int]:
     answer = []
-    rowStart, rowEnd = 0, len(matrix) - 1
-    colStart, colEnd = 0, len(matrix[0]) - 1
+    rows, cols = len(matrix), len(matrix[0])
+    row = col = 0
+    dRow, dCol = 0, 1 # Directions
 
-    while rowStart <= rowEnd and colStart <= colEnd:
-        # Top row
-        for j in range(colStart, colEnd + 1):
-            answer.append(matrix[rowStart][j])
-        rowStart += 1
+    for _ in range(rows * cols):
+        answer.append(matrix[row][col])
+        matrix[row][col] = None
 
-        # Right column
-        for j in range(rowStart, rowEnd + 1):
-            answer.append(matrix[j][colEnd])
-        colEnd -= 1
+        nextRow = row + dRow
+        nextCol = col + dCol
+        if not 0 <= nextRow < rows or not 0 <= nextCol < cols or matrix[nextRow][nextCol] == None:
+            dRow, dCol = dCol, -dRow # Change directions
 
-        # Bottom row, might be same as top row
-        if rowStart <= rowEnd:
-            for j in range(colEnd, colStart - 1, -1):
-                answer.append(matrix[rowEnd][j])
-        rowEnd -= 1
-
-        # Left column, might be same as right column
-        if colStart <= colEnd:
-            for j in range(rowEnd, rowStart - 1, -1):
-                answer.append(matrix[j][colStart])
-        colStart += 1
+        row += dRow
+        col += dCol
 
     return answer
 ```
+
+Time: O(n \* m)
+
+Space: O(n \* m) including output
+
+<br />
+
+Alternative solution:
+
+```py
+def spiralOrder(matrix: List[List[int]]) -> List[int]:
+    answer = []
+    rows, cols = len(matrix), len(matrix[0])
+    layers = -(-min(rows, cols) // 2)  # Number of spirals in matrix
+
+    for layer in range(layers):
+        rowStart = colStart = layer
+        rowEnd = rows - layer - 1
+        colEnd = cols - layer - 1
+
+        for i in range(colStart, colEnd + 1): # Right
+            answer.append(matrix[rowStart][i])
+
+        for i in range(rowStart + 1, rowEnd): # Down
+            answer.append(matrix[i][colEnd])
+
+        if rowStart == rowEnd:
+            continue
+        for i in range(colEnd, colStart - 1, -1): # Left
+            answer.append(matrix[rowEnd][i])
+
+        if colStart == colEnd:
+            continue
+        for i in range(rowEnd - 1, rowStart, -1): # Up
+            answer.append(matrix[i][colStart])
+
+    return answer
+```
+
+Time: O(n \* m)
+
+Space: O(n \* m) including output

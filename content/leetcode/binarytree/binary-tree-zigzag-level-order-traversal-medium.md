@@ -11,35 +11,31 @@ Given the `root` of a binary tree, return the zigzag level order traversal of it
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def zigzagLevelOrder(root: Optional[TreeNode]) -> List[List[int]]:
-    if not root:
-        return []
+    if not root: return []
 
-    answer = []
-    q = [root]
-    goRight = True
-    # Breadth-first traversal while adding values to answer
-    while q:
-        nextLevel = []
+    currLvl, answer, forward = [root], [], True
+
+    while currLvl:
         vals = []
-        for i in range(len(q)):
-            node = q[i]
-
-            # Get symmetric index depending on goRight
-            if goRight:
-                vals.append(node.val)
-            else:
-                vals.append(q[len(q) - i - 1].val)
-
-            if node.left:
-                nextLevel.append(node.left)
-            if node.right:
-                nextLevel.append(node.right)
-        goRight = not goRight
+        for node in currLvl:
+            vals.append(node.val)
+        if not forward:
+            vals.reverse()
         answer.append(vals)
-        q = nextLevel
+        forward = not forward
+
+        nextLvl = []
+        for node in currLvl:
+            if node.left:
+                nextLvl.append(node.left)
+            if node.right:
+                nextLvl.append(node.right)
+        currLvl = nextLvl
 
     return answer
 ```
+
+Time: O(n)
+
+Space: O(n)

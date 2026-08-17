@@ -13,18 +13,22 @@ You must not use any built-in exponent function or operator. For example, do not
 ## answer
 
 ```py
-# Time complexity: O(log n)
-# Space complexity: O(1)
 def mySqrt(x: int) -> int:
-    start, end = 0, x
     # Binary search
-    while True:
-        mid = (start + end) // 2
+    left, right = 1, x
+
+    while left <= right:
+        mid = (left + right) // 2
+
         if mid * mid > x:
-            end = mid - 1
+            right = mid - 1
         else:
-            # Square root is between mid and mid + 1
-            if (mid + 1) * (mid + 1) > x:
-                return mid
-            start = mid + 1
+            left = mid + 1
+
+    # right is the last candidate that was not too large
+    return right
 ```
+
+Time: O(log n)
+
+Space: O(1)

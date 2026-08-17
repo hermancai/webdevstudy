@@ -21,29 +21,29 @@ Implement `next()` and `hasNext()` to run in average `O(1)` time and use `O(h)` 
 ## answer
 
 ```py
-# Time complexity: average O(1)
-# Space complexity: O(h) where h = height of tree
 class BSTIterator:
-    # This solution is essentially iterative inorder traversal.
     def __init__(self, root: Optional[TreeNode]):
         self.stack = []
-        # The stack will be filled with all lefts nodes of the current node,
-        #   similar to recursive inorder traversal.
-        self.appendLeftNodes(root)
+        self.node = root
 
+    # Iterative inorder traversal
     def next(self) -> int:
-        node = self.stack.pop()
-        if node.right:
-            self.appendLeftNodes(node.right)
-        return node.val
+        # Get leftmost node
+        # This loop runs at most n times.
+        # If next() is called n times, average time complexity is O(1)
+        while self.node:
+            self.stack.append(self.node)
+            self.node = self.node.left
+        nextNode = self.stack.pop()
+
+        # If nextNode.right is None, get next node from stack
+        self.node = nextNode.right
+        return nextNode.val
 
     def hasNext(self) -> bool:
-        return len(self.stack) > 0
-
-    def appendLeftNodes(self, root: Optional[TreeNode]) -> None:
-        # The while loop will run at most n times.
-        # If next() is called n times, the average time complexity is O(1).
-        while root:
-            self.stack.append(root)
-            root = root.left
+        return bool(self.stack or self.node)
 ```
+
+Time: O(1) average
+
+Space: O(h), h = tree height

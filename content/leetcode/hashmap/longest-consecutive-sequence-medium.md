@@ -13,18 +13,50 @@ Write an algorithm that runs in `O(n)` time.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def longestConsecutive(nums: List[int]) -> int:
-    s = set(nums)
+    s = set(nums) # Remove duplicates and have O(1) lookup
     answer = 0
 
-    for n in nums:
-        # n is lowest value aka start of own sequence
-        if n - 1 not in s:
-            end = n + 1
+    for num in nums:
+        # Only check sequence if num is lowest value (start of new sequence)
+        if num - 1 not in s:
+            end = num + 1
             while end in s:
                 end += 1
-            answer = max(answer, end - n)
+            answer = max(answer, end - num)
+
     return answer
 ```
+
+Time: O(n)
+
+Space: O(n)
+
+<br />
+
+Alternative solution:
+
+```py
+def longestConsecutive(nums: List[int]) -> int:
+    nums = set(nums)
+    # Key: num
+    # Val: length of sequence using num as upper/lower bound
+    answer, m = 0, {}
+
+    for num in nums:
+        lower = m.get(num - 1, 0)
+        upper = m.get(num + 1, 0)
+
+        # Merge intervals
+        total = lower + upper + 1
+        m[num - lower] = total
+        m[num + upper] = total
+
+        answer = max(answer, total)
+
+    return answer
+```
+
+Time: O(n)
+
+Space: O(n)

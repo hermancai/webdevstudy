@@ -13,14 +13,15 @@ A binary tree's maximum depth is the number of nodes along the longest path from
 ## answer
 
 ```py
-# Time complexity: O(n), n = number of nodes
-# Space complexity: O(h), h = height of tree
 def maxDepth(root: Optional[TreeNode]) -> int:
     if not root:
         return 0
 
     left = self.maxDepth(root.left) + 1
     right = self.maxDepth(root.right) + 1
-
     return max(left, right)
 ```
+
+Time: O(n)
+
+Space: O(h), h = tree height

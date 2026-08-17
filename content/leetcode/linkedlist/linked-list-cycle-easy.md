@@ -15,18 +15,20 @@ Return `true` if there is a cycle in the linked list. Otherwise, return `false`.
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def hasCycle(head: ListNode) -> bool:
-    if not head:
-        return False
-
     slow = fast = head
-    # In a cycle, fast will always reach slow
-    while fast.next and fast.next.next:
+
+    while fast and fast.next:
         slow = slow.next
         fast = fast.next.next
+
+        # In a cycle, fast will always reach slow
         if slow == fast:
             return True
+
     return False
 ```
+
+Time: O(n)
+
+Space: O(1)

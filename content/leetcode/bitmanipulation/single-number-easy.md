@@ -13,15 +13,14 @@ Implement a solution with a linear runtime complexity and use only constant extr
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def singleNumber(nums: List[int]) -> int:
     answer = 0
     for n in nums:
         # Bitwise exclusive OR
-        # Given int a, (a ^ 0) = a
-        # (a ^ a) = 0
-        # Order does not matter: (a ^ b ^ a) = b
         answer ^= n
     return answer
 ```
+
+Time: O(n)
+
+Space: O(1)

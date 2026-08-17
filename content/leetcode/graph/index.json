@@ -2,6 +2,7 @@
     "title": "Graph",
     "folderType": "card",
     "cards": [
+        "notes.md",
         "number-of-islands-medium.md",
         "surrounded-regions-medium.md",
         "clone-graph-medium.md",

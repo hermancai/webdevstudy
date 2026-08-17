@@ -29,31 +29,28 @@ Output: `3`
 ## answer
 
 ```py
-# Time complexity: O(m * n) where m, n = length of word1, word2
-# Space complexity: O(m * n)
 def minDistance(word1: str, word2: str) -> int:
-    # Bottom-up DP: starting with empty strings
-    # 2D array where memo[i][j] = minimum operations for word1[:i] to word2[:j]
+    # memo[i][j] --> minimum operations for word1[:i] to word2[:j]
+    # memo can be collapsed into 1D array and temp variable
     memo = [[0 for _ in range(len(word2) + 1)] for _ in range(len(word1) + 1)]
 
-    # Handle first row and column
-    # When either word is empty string, operations = length of other string
+    # Handle first row (word1 always empty string)
     for col in range(1, len(memo[0])):
         memo[0][col] = col
+
     for row in range(1, len(memo)):
+        # Handle first column (word2 always empty string)
         memo[row][0] = row
 
-    # row for word1, col for word2
-    for row in range(1, len(memo)):
+        # row for word1, col for word2
         for col in range(1, len(memo[0])):
-            # If current chars are equal, no operation is needed
-            # word indices are -1 for memo index offset
+            # If matching char, no operation needed
             if word1[row - 1] == word2[col - 1]:
                 memo[row][col] = memo[row - 1][col - 1]
             else:
-                # Top square: delete
-                # Left square: insert
-                # Top-left square: replace
+                # Top: Delete
+                # Left: Insert
+                # Top-left: Replace
                 memo[row][col] = 1 + min(
                     memo[row - 1][col],
                     memo[row][col - 1],
@@ -63,42 +60,47 @@ def minDistance(word1: str, word2: str) -> int:
     return memo[-1][-1]
 ```
 
+Time: O(m \* n), m = len(word1), n = len(word2)
+
+Space: O(m \* n)
+
+<br />
+
 Alternative solution:
 
 ```py
-# Time complexity: O(m * n) where m, n = length of word1, word2
-# Space complexity: O(m * n)
 def minDistance(word1: str, word2: str) -> int:
     # Top-down recursive DP, starting with full strings
-    # memo is dictionary { tuple(int, int): int}
-    # keys are word indices representing subproblems
-    #   The indices are for the start of the string
-    #   i, j -> word1[i:], word2[j:]
-    # values are mininum operations for current subproblem
-    return helper(word1, word2, 0, 0, {})
+    # memo holds word1 and word2 indices { tuple(int, int): int }
+    # Value: (i1, i2) --> word1[i1:], word2[i2:]
+    # Key: minimum operations for current substrings
+    memo = {}
 
-def helper(word1, word2, i, j, memo):
-    # Reached end for both words
-    if i == len(word1) and j == len(word2):
-        return 0
+    def helper(i1, i2):
+        if (i1, i2) in memo:
+            return memo[(i1, i2)]
 
-    # If one word is empty, must use insert/delete for remaining chars
-    if i == len(word1):
-        return len(word2) - j
-    if j == len(word2):
-        return len(word1) - i
+        # If other word is equal/more chars left, must insert remainder
+        if i1 == len(word1):
+            return len(word2) - i2
+        if i2 == len(word2):
+            return len(word1) - i1
 
-    if (i, j) not in memo:
-        # No operation needed if current chars match
-        if word1[i] == word2[j]:
-            answer = helper(word1, word2, i + 1, j + 1, memo)
+        if word1[i1] == word2[i2]:
+            memo[(i1, i2)] = helper(i1 + 1, i2 + 1)
         else:
-            insert = 1 + helper(word1, word2, i, j + 1, memo)
-            delete = 1 + helper(word1, word2, i + 1, j, memo)
-            replace = 1 + helper(word1, word2, i + 1, j + 1, memo)
-            answer = min(insert, delete, replace)
-        memo[(i, j)] = answer
+            memo[(i1, i2)] = 1 + min(
+                helper(i1, i2 + 1),     # Insert
+                helper(i1 + 1, i2),     # Delete
+                helper(i1 + 1, i2 + 1)  # Replace
+            )
 
-    # The final answer is stored in memo[(0, 0)]
-    return memo[(i, j)]
+        return memo[(i1, i2)]
+
+    # Answer is stored in memo[(0, 0)]
+    return helper(0, 0)
 ```
+
+Time: O(m \* n), m = len(word1), n = len(word2)
+
+Space: O(m \* n)

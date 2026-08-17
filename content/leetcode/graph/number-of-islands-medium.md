@@ -13,55 +13,58 @@ An island is surrounded by water and is formed by connecting adjacent lands hori
 ## answer
 
 ```py
-# Time complexity: O(n * m)
-# Space complexity: O(n * m)
 def numIslands(grid: List[List[str]]) -> int:
-    count = 0
-    for row in range(len(grid)):
-        for col in range(len(grid[0])):
-            if grid[row][col] == "1":
-                markIsland(grid, row, col)
-                count += 1
-    return count
+    directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+    m, n, count = len(grid), len(grid[0]), 0
 
-# Iterative breadth-first traversal while marking visited spots
-def markIsland(grid: List[List[str]], row: int, col: int) -> None:
-    neighbors = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-    q = [(row, col)]
-    while q:
-        node = q.pop()
-        row = node[0]
-        col = node[1]
-        grid[row][col] = "2"
-        for n in neighbors:
-            newRow = row + n[0]
-            newCol = col + n[1]
-            if newRow >= 0 and newRow < len(grid) and newCol >= 0 and newCol < len(grid[0]):
-                if grid[newRow][newCol] == "1":
-                    q.append((newRow, newCol))
+    for row in range(m):
+        for col in range(n):
+            if grid[row][col] == "1":
+                count += 1
+                stack = [(row, col)]
+                # Iterative depth-first traversal, mark entire island as visited
+                while stack:
+                    r, c = stack.pop()
+                    for d in directions:
+                        newR, newC = r + d[0], c + d[1]
+                        if 0 <= newR < m and 0 <= newC < n and grid[newR][newC] == "1":
+                            grid[newR][newC] = "2"
+                            stack.append((newR, newC))
+
+    return count
 ```
+
+Time: O(m \* n)
+
+Space: O(m \* n)
+
+<br />
 
 Alternative solution:
 
 ```py
-# Time complexity: O(n * m)
-# Space complexity: O(n * m)
 def numIslands(grid: List[List[str]]) -> int:
+    def dfs(row, col):
+        if not 0 <= row < len(grid) or not 0 <= col < len(grid[0]) or grid[row][col] != "1":
+            return
+
+        grid[row][col] = "2"
+        dfs(row, col - 1)
+        dfs(row - 1, col)
+        dfs(row, col + 1)
+        dfs(row + 1, col)
+
     count = 0
+
     for row in range(len(grid)):
         for col in range(len(grid[0])):
             if grid[row][col] == "1":
-                markIsland(grid, row, col)
                 count += 1
-    return count
+                dfs(row, col)
 
-# Recursive depth-first traversal while marking visited spots
-def markIsland(grid: List[List[str]], row: int, col: int) -> None:
-    if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]) or grid[row][col] != "1":
-        return
-    grid[row][col] = "2"
-    markIsland(grid, row - 1, col)
-    markIsland(grid, row, col + 1)
-    markIsland(grid, row + 1, col)
-    markIsland(grid, row, col - 1)
+    return count
 ```
+
+Time: O(m \* n)
+
+Space: O(m \* n)

@@ -15,21 +15,25 @@ Return the total sum of all root-to-leaf numbers. A leaf node is a node with no 
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(h) where h = height of tree
 def sumNumbers(root: Optional[TreeNode]) -> int:
-    return helper(root, 0)
+    paths = []
 
-def helper(node: Optional[TreeNode], currVal: int) -> int:
-    if not node:
-        return 0
+    def helper(node, pathVal):
+        if not node: return
 
-    currVal = currVal * 10 + node.val
+        pathVal = pathVal * 10 + node.val
 
-    if not node.left and not node.right:
-        return currVal
+        if not node.left and not node.right:
+            paths.append(pathVal)
+            return
 
-    left = helper(node.left, currVal)
-    right = helper(node.right, currVal)
-    return left + right
+        helper(node.left, pathVal)
+        helper(node.right, pathVal)
+
+    helper(root, 0)
+    return sum(paths)
 ```
+
+Time: O(n)
+
+Space: O(h), h = tree height

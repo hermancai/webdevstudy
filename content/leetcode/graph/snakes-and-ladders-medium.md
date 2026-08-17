@@ -26,43 +26,50 @@ Return the least number of moves required to reach the square `n^2`. If it is no
 ```py
 from collections import deque
 
-# Time complexity: O(n^2)
-# Space complexity: O(n^2)
 def snakesAndLadders(board: List[List[int]]) -> int:
-    goal = len(board) * len(board)
-    steps = {1: 0}  # Track steps to current square. Also tracks if visited
-    q = deque()
-    q.append(1)
+    end = len(board) ** 2
 
-    while q:
-        step = q.popleft()
-        # Looping backwards from +6 to +1 is an optimization
-        # If square +6 is -1, squares +1 to +5 do not need to be checked
-        #   if that square is also -1
-        skipStep = False
-        for i in range(min(goal, step + 6), step, -1):
-            # Convert step to indices on board
-            row = (i - 1) // len(board)
-            col = (i - 1) % len(board)
-            # ~ means invert bits (e.g. ~3 -> -4; 011 -> 100)
-            # Used to get index from right. (~i) = -(i + 1)
-            nextStep = board[~row][col if row % 2 == 0 else ~col]
+    # Calculate coordinates now to avoid repeated work later
+    coords = [None] * (end + 1)
+    for square in range(1, end + 1):
+        i = square - 1
+        row = len(board) - (i // len(board)) - 1
+        col = i % len(board)
+        if (len(board) - row - 1) % 2 != 0:
+            col = len(board) - col - 1
+        coords[square] = (row, col)
 
-            # Found snake/ladder
-            if nextStep > 0:
-                i = nextStep
+    visited = [False] * (end + 1)
+    visited[1] = True
 
-            if i == goal:
-                return steps[step] + 1
+    queue = deque([1])
+    # Track number of rolls i.e. BFS level
+    moves = 0
 
-            # Found normal square. Can ignore lower normal squares
-            if nextStep < 0:
-                if skipStep:
-                    continue
-                skipStep = True
+    while queue:
+        for _ in range(len(queue)):
+            curr = queue.popleft()
+            for i in range(1, 7):
+                if curr + i > end: continue
 
-            if i not in steps:
-                steps[i] = steps[step] + 1
-                q.append(i)
+                row, col = coords[curr + i]
+                newPos = board[row][col] if board[row][col] != -1 else curr + i
+
+                # First time reaching square is guaranteed minimum moves
+                if newPos == end:
+                    return moves + 1
+
+                if not visited[newPos]:
+                    queue.append(newPos)
+                    visited[newPos] = True
+
+        # Increment after looping because value applies to
+        #   nodes in queue before popping
+        moves += 1
+
     return -1
 ```
+
+Time: O(n<sup>2</sup>)
+
+Space: O(n<sup>2</sup>)

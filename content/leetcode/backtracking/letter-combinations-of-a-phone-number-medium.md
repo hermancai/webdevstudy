@@ -19,14 +19,8 @@ A mapping of digits to letters (just like on the telephone buttons) is given bel
 ## answer
 
 ```py
-# Time complexity: O(N * 4^N) where N = length of digits
-# Space complexity: O(N * 4^N)
-#   The extra N is due to string contatenation.
 def letterCombinations(digits: str) -> List[str]:
-    if not digits:
-        return []
-
-    chars = {
+    m = {
         "2": "abc",
         "3": "def",
         "4": "ghi",
@@ -36,33 +30,38 @@ def letterCombinations(digits: str) -> List[str]:
         "8": "tuv",
         "9": "wxyz"
     }
-
     answer = []
-    dfs(digits, chars, answer, "")
+
+    def dfs(i, currStrList):
+        if i == len(digits):
+            answer.append("".join(currStrList))
+            return
+
+        for char in m[digits[i]]:
+            currStrList.append(char)
+            dfs(i + 1, currStrList)
+            currStrList.pop()
+
+    dfs(0, [])
     return answer
-
-def dfs(digits, chars, answer, currStr) -> None:
-    if len(currStr) >= len(digits):
-        answer.append(currStr)
-        return
-
-    # len(currStr) corresponds with current index of digits
-    for c in chars[digits[len(currStr)]]:
-        dfs(digits, chars, answer, currStr + c)
 ```
+
+Time: O(n \* 4<sup>n</sup>), n = digits length
+
+Space: O(n \* 4<sup>n</sup>) or O(n) excluding output
+
+<br />
 
 Alternative solution:
 
 ```py
 from collections import deque
 
-# Time complexity: O(N * 4^N) where N = length of digits
-# Space complexity: O(N * 4^N)
 def letterCombinations(digits: str) -> List[str]:
     if not digits:
         return []
 
-    chars = {
+    m = {
         "2": "abc",
         "3": "def",
         "4": "ghi",
@@ -73,17 +72,17 @@ def letterCombinations(digits: str) -> List[str]:
         "9": "wxyz"
     }
 
-    q = deque()
-    q.append("")
+    queue = deque([""])
 
-    # Incrementally add chars to each string in q
-    # Loop until q only contains strings with equal length to digits
-    while len(q[0]) != len(digits):
-        currStr = q.popleft()
-        # Length of currStr corresponds with current index of digits
-        # E.g. currStr = "d"; digits = "357" -> loop through chars[5]
-        for c in chars[digits[len(currStr)]]:
-            q.append(currStr + c)
+    # BFS, building strings until matching string length
+    while len(queue[0]) != len(digits):
+        curr = queue.popleft()
+        for char in m[digits[len(curr)]]:
+            queue.append(curr + char)
 
-    return q
+    return list(queue)
 ```
+
+Time: O(n \* 4<sup>n</sup>)
+
+Space: O(n \* 4<sup>n</sup>)

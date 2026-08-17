@@ -1,10 +1,10 @@
 ## title
 
-Heap
+Notes
 
 ## question
 
-Heap
+Notes
 
 ## answer
 
@@ -15,17 +15,19 @@ A heap is a complete binary tree that satisfies the heap property: a parent node
 
 Common heap operations:
 
-- `heapify()`: construct heap from list. Time complexity: `O(n)`
-- `heappop()`: remove root node. Time complexity: `O(log(n))`
-- `heappush()`: insert node. Time complexity: `O(log(n))`
+```py
+li = [1, 2, 3]
+
+heapq.heapify(li) # Construct heap from list. Time: O(n)
+heapq.heappush(li, 4) # Insert node. Time: O(log n)
+heapq.heappop(li) # Remove root node. Time: O(log n)
+```
+
+- Python's heapq module creates a min heap.
+- To implement a max heap, multiply the values by `-1`. (Newer versions of Python have a native max heap.)
 
 Common uses:
 
 - Implement priority queues (max/min value stays on top).
-- Heap sort: involves removing the root node from a min heap `n` times. Time complexity: `O(n * log(n))`
+- Heap sort: involves removing the root node from a min heap `n` times. Time: O(n \* log n)
 - For graphing algorithms (e.g. Dijkstra's algorithm)
-
-Python:
-
-- Python's heapq module creates a min heap.
-- To implement a max heap, multiply the values by `-1`.

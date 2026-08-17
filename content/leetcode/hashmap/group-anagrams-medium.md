@@ -13,38 +13,47 @@ An anagram is a word or phrase formed by rearranging the letters of a different 
 ## answer
 
 ```py
-# Time complexity: O(n * m * log(m))
-# Space complexity: O(n * m)
 def groupAnagrams(strs: List[str]) -> List[List[str]]:
-    answer = {}
+    m = {}
 
+    # Anagrams always result in same sorted string. Use as key
     for word in strs:
-        w = "".join(sorted(word))
-        if w in answer:
-            answer[w].append(word)
+        base = "".join(sorted(word))
+        if base not in m:
+            m[base] = [word]
         else:
-            answer[w] = [word]
-    return list(answer.values())
+            m[base].append(word)
+
+    return list(m.values())
 ```
+
+Time: O(n \* (k log k)) where n = len(strs), k = max(len(word))
+
+Space: O(n \* k)
+
+<br />
 
 Alternative solution:
 
 ```py
-# Time complexity: O(n * m)
-# Space complexity: O(n * m)
 def groupAnagrams(strs: List[str]) -> List[List[str]]:
     m = {}
-    for word in strs:
-        # Use list to count char frequency
-        chars = [0] * 26
-        for char in word:
-            chars[ord(char) - 97] += 1
-        # Use frequency as map key
-        tup = tuple(chars)
-        if tup in m:
-            m[tup].append(word)
-        else:
-            m[tup] = [word]
 
-    return [m[tup] for tup in m]
+    # Use char frequency as key
+    for word in strs:
+        buckets = [0] * 26
+        for char in word:
+            buckets[ord(char) - 97] += 1
+
+        tup = tuple(buckets)
+        if tup not in m:
+            m[tup] = [word]
+        else:
+            m[tup].append(word)
+
+    return list(m.values())
 ```
+
+Time: O(n \* k)
+
+Space: O(n \* k)

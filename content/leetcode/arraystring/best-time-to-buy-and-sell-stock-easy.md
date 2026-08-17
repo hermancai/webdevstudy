@@ -15,8 +15,6 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(1)
 def maxProfit(prices: List[int]) -> int:
     profit = 0
     minPrice = prices[0]
@@ -28,12 +26,15 @@ def maxProfit(prices: List[int]) -> int:
     return profit
 ```
 
-This problem is similar to finding a maximum subarray.
+Time: O(n)
+
+Space: O(1)
+
+<br />
+
+This problem is similar to finding a maximum subarray using Kadane's algorithm.
 
 ```py
-# Kadane's algorithm
-# Time complexity: O(n)
-# Space complexity: O(1)
 def maxSubarray(nums: List[int]) -> int:
     bestSum = currentSum = 0
 
@@ -46,3 +47,7 @@ def maxSubarray(nums: List[int]) -> int:
 
     return bestSum
 ```
+
+Time: O(n)
+
+Space: O(1)

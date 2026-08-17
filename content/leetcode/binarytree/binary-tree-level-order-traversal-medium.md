@@ -11,26 +11,25 @@ Given the `root` of a binary tree, return the level order traversal of its nodes
 ## answer
 
 ```py
-# Time complexity: O(n)
-# Space complexity: O(n)
 def levelOrder(root: Optional[TreeNode]) -> List[List[int]]:
-    if not root:
-        return []
+    if not root: return []
 
-    q = [root]
-    answer = []
-    # Breadth-first traversal while adding values to answer
-    while q:
-        nextLevel = []
-        vals = []
-        for node in q:
-            vals.append(node.val)
+    currLvl, answer = [root], []
+
+    while currLvl:
+        answer.append([])
+        nextLvl = []
+        for node in currLvl:
+            answer[-1].append(node.val)
             if node.left:
-                nextLevel.append(node.left)
+                nextLvl.append(node.left)
             if node.right:
-                nextLevel.append(node.right)
-        answer.append(vals)
-        q = nextLevel
+                nextLvl.append(node.right)
+        currLvl = nextLvl
 
     return answer
 ```
+
+Time: O(n)
+
+Space: O(n)
